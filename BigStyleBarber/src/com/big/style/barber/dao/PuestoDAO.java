@@ -8,26 +8,21 @@ import javax.faces.bean.ManagedBean;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
-import com.big.style.barber.dominio.PuestoBarberoDTO;
+import com.big.style.barber.dominio.PuestoDTO;
 
 import config.HibernateUtil;
 
 @ManagedBean
 public class PuestoDAO {
 
-	public static List<PuestoBarberoDTO> getPuestos() {
-        List<PuestoBarberoDTO> listaPuestos = new ArrayList<PuestoBarberoDTO>();
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();        
-        try {
-            session.beginTransaction();
-            Criteria criteria = session.createCriteria(PuestoBarberoDTO.class);
-            listaPuestos = criteria.list();
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-            System.out.println("error");
-            session.getTransaction().rollback();
-        }
+	GenericDAO generico = new GenericDAO();
+	
+	public List<PuestoDTO> getPuestos() {
+		
+        List<PuestoDTO> listaPuestos = new ArrayList<PuestoDTO>();
+        
+        listaPuestos = (List<PuestoDTO>) GenericDAO.buscarTodos(PuestoDTO.class);
+        
         return listaPuestos;
     }
 	

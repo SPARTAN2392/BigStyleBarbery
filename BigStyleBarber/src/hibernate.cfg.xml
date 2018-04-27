@@ -19,11 +19,15 @@
 	    
 	    <!-- Otras propiedades importantes -->
 	    <property name="show_sql">true</property>
-	    <property name="hbm2ddl.auto">create-drop</property>
+	    <!-- <property name="hbm2ddl.auto">create-drop</property> -->
 	    
 	    <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 	    
 	    <!-- Archivos de mapeo -->
-	    <mapping class="com.big.style.barber.dominio.PuestoBarberoDTO"/>
+	    <mapping class="com.big.style.barber.dominio.PuestoDTO"/>
+	    <mapping class="com.big.style.barber.dominio.BarberoDTO"/>
+	    <mapping class="com.big.style.barber.dominio.SucursalDTO"/>
+	    <mapping class="com.big.style.barber.dominio.ServicioDTO"/>
+	    <mapping class="com.big.style.barber.dominio.TipoServicioDTO"/>
 	</session-factory>
 </hibernate-configuration>

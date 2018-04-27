@@ -9,13 +9,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "bs_puesto_barbero_cat")
-public class PuestoBarberoDTO implements Serializable{
+public class PuestoDTO implements Serializable{
 	
 	@Id
-	@Column(name = "ID_PUESTO_PK")
+	@Column(name = "id_puesto_pk")
 	public Integer piIdPuesto;
 	
-	@Column(name = "PUESTO")
+	@Column(name = "puesto")
 	public String psPuesto;
 
 	public Integer getPiIdPuesto() {
