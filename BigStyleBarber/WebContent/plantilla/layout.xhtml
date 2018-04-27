@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Big Style Barbery</title>
+    </h:head>
+
+    <h:body>        
+        <div id="top">
+            <div id="menu_top" class="top_menu">
+                <p:tabMenu activeIndex="#{param.i}">
+					<p:menuitem value="NOSOTROS" outcome="/nosotros" icon="ui-icon-star"
+						id="idNosotros">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="SERVICIOS" outcome="/servicios"
+						icon="ui-icon-document" id="idServicios">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="GALERIA" outcome="/index" icon="ui-icon-star"
+						id="idGaleria">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="CITAS" outcome="/index" icon="ui-icon-search"
+						id="idCitas">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+					<p:menuitem value="CONTACTO" outcome="/index" icon="ui-icon-person"
+						id="idContacto">
+						<f:param name="i" value="0" />
+					</p:menuitem>
+				</p:tabMenu>
+            </div>
+        </div>
+        <div>
+            <p:growl id="growl" life="3200" autoUpdate="false" globalOnly="true"/>
+            <div id="content">
+                <ui:insert name="content">
+                    
+                </ui:insert>
+            </div>
+        </div>
+        
+    </h:body>
+
+</html>

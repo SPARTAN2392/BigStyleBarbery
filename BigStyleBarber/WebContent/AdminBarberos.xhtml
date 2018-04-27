@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/plantilla/layout.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:define name="content">
+        <h:form id="barberosForm" >
+			<p:fieldset style="margin-bottom:20px;height:95%  ">
+				<p:panel header="Barberos">
+                	<h:panelGrid columns="4" border="0">
+						<p:outputLabel value="Nombre" for="idNombre" />
+                    	<p:inputText id="idNombre" value="#{adminBarberosControlador.barberoVO.psNombre}" title="Nombre"/>
+                    	
+                    	<p:outputLabel value="Apellido Paterno" for="idAPaterno" />
+                    	<p:inputText id="idAPaterno" value="#{adminBarberosControlador.barberoVO.psAPaterno}" title="Apellido Paterno"/>
+                    	
+                    	<p:outputLabel value="Apellido Materno" for="idAMaterno" />
+                    	<p:inputText id="idAMaterno" value="#{adminBarberosControlador.barberoVO.psAMaterno}" title="Apellido Materno"/>
+                    	
+                    	<p:outputLabel value="Edad" for="idEdad" />
+                    	<p:inputText id="idEdad" value="#{adminBarberosControlador.barberoVO.piEdad}" title="Edad"/>
+                    	
+                    	<p:outputLabel value="Servicio" for="idServicio" />
+                    	<p:selectOneMenu id="idServicio" value="#{adminBarberosControlador.barberoVO.piServicio}" >
+                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+                    		<f:selectItems value="#{adminBarberosControlador.catServicio}" var="catalogo" itemLabel="#{catalogo.psNombreServicio}" itemValue="#{catalogo.piIdServicioPk}"/>
+                		</p:selectOneMenu>
+                    	
+                    	<p:outputLabel value="Sucursal" for="idSucursal" />
+                    	<p:selectOneMenu id="idSucursal" value="#{adminBarberosControlador.barberoVO.piSucursal}" >
+                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+                    		<f:selectItems value="#{adminBarberosControlador.catSucursal}" var="catalogo" itemLabel="#{catalogo.psNombreBarberia}" itemValue="#{catalogo.piIdSucursal}"/>
+                		</p:selectOneMenu>                		                	
+                		
+                		<p:outputLabel value="Puesto" for="idPuesto" />
+                    	<p:selectOneMenu id="idPuesto" value="#{adminBarberosControlador.barberoVO.piPuesto}" >
+                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+                    		<f:selectItems value="#{adminBarberosControlador.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"/>
+                		</p:selectOneMenu>
+                    	
+                    	<p:outputLabel for="horarioIni" value="Horario de" />
+        				<p:calendar id="horarioIni" value="#{adminBarberosControlador.barberoVO.ptHorarioIni}" />
+        				
+        				<p:outputLabel for="horarioFin" value="a" />
+        				<p:calendar id="horarioFin" value="#{adminBarberosControlador.barberoVO.ptHorarioFin}" />
+        				
+        				<p:outputLabel for="idDias" value="Dias" />
+        				<p:selectManyCheckbox id="idDias" value="#{adminBarberosControlador.barberoVO.dias}">
+					        <f:selectItem itemLabel="D" itemValue="1" />
+					        <f:selectItem itemLabel="L" itemValue="1" />
+					        <f:selectItem itemLabel="Ma" itemValue="1" />
+					        <f:selectItem itemLabel="Mi" itemValue="1" />
+					        <f:selectItem itemLabel="J" itemValue="1" />
+					        <f:selectItem itemLabel="V" itemValue="1" />
+					        <f:selectItem itemLabel="S" itemValue="1" />
+					    </p:selectManyCheckbox>
+				    </h:panelGrid>
+					
+					<p:commandButton value="Buscar" id="idBuscar" update=":growl, :barberosForm:carrouselBarbero" actionListener="#{adminBarberosControlador.consultaBarbero}" styleClass="ui-priority-primary" />
+                    	
+                    	<br />
+               	
+                    	<p:carousel id = "carrouselBarbero" value="#{adminBarberosControlador.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="height:200px;text-align:center" numVisible="3" easing="easeOutBounce" style="width:250px" cricular="true">
+					        <p:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+					            <!-- <f:facet name="header">
+					                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
+					            </f:facet> -->
+					 
+					            <h:outputText value="Nombre:" />
+					            <h:outputText value="#{barbero.psNombreBarbero}" />
+					 
+					            <h:outputText value="Sucursal:" />
+					            <h:outputText value="#{barbero.poSucursalFk.psNombreBarberia}" style="color:#{car.color}"/>
+					        </p:panelGrid>
+					 
+					     
+					    </p:carousel>
+                    	
+                    	<p:growl id="growl" life="2000" />
+                    	
+					</p:panel>
+								
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>	
