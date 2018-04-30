@@ -64,8 +64,11 @@
                     	
                     	<br />
                	
-                    	<p:carousel id = "carrouselBarbero" value="#{adminBarberosControlador.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="height:200px;text-align:center" numVisible="3" easing="easeOutBounce" style="width:250px" cricular="true">
-					        <p:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+               			<!-- <p:carousel id = "carrouselBarbero" value="#{adminBarberosControlador.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="text-align:center" responsive="true">
+       						<p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank"> -->
+               			
+                    	<p:carousel id = "carrouselBarbero" value="#{adminBarberosControlador.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="height:200px;text-align:center" numVisible="1" easing="easeOutBounce" style="width:300px" cricular="true">
+        					<h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
 					            <!-- <f:facet name="header">
 					                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
 					            </f:facet> -->
@@ -74,8 +77,9 @@
 					            <h:outputText value="#{barbero.psNombreBarbero}" />
 					 
 					            <h:outputText value="Sucursal:" />
-					            <h:outputText value="#{barbero.poSucursalFk.psNombreBarberia}" style="color:#{car.color}"/>
-					        </p:panelGrid>
+					            <h:outputText value="#{barbero.poSucursalFk.psNombreBarberia}"/>
+					        </h:panelGrid>
+					        <!-- </p:panelGrid> -->
 					 
 					     
 					    </p:carousel>

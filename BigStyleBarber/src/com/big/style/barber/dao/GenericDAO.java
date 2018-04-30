@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import config.HibernateUtil;
@@ -41,7 +42,13 @@ public class GenericDAO {
 	            
 	            for (Map.Entry<String, Object> entry : parametros.entrySet())
 	            {
-	            	criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+	            	
+	            	if(entry.getValue().getClass().getSimpleName().equals("String")) {
+	            		criteria.add(Restrictions.like(entry.getKey(), (String)entry.getValue(), MatchMode.ANYWHERE));
+	            	}else {
+	            		criteria.add(Restrictions.eq(entry.getKey(), entry.getValue()));
+	            	}
+	            	
 		            lista = criteria.list();
 	            }
 	            
