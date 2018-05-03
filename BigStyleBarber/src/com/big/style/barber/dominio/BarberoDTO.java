@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class BarberoDTO implements Serializable{
 	private static final long serialVersionUID = -67430180436373073L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_barbero_pk")
 	public Integer piIdBarbero;
 	
@@ -37,7 +40,7 @@ public class BarberoDTO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "puesto_fk")
-	public PuestoDTO poPuestoFK;
+	public PuestoDTO poPuestoFK = new PuestoDTO();
 	
 	@Column(name = "apellido_paterno")
 	public String psApellidoPaterno;
@@ -56,7 +59,7 @@ public class BarberoDTO implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "sucursal_fk")
-	public SucursalDTO poSucursalFk;
+	public SucursalDTO poSucursalFk = new SucursalDTO();
 	
 	@Column(name = "horario_inicio")
 	public Date ptHorarioInicio; 

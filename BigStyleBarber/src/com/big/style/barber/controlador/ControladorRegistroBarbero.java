@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 
 import org.primefaces.model.DualListModel;
 
@@ -16,7 +18,6 @@ import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
-import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
 
 @ManagedBean(name = "controladorRegistroBarberos")
@@ -29,7 +30,8 @@ public class ControladorRegistroBarbero implements Serializable{
 	DualListModel<ServicioDTO> catServicio;
 	List<BarberoDTO> resultConsultaBarbero;
 	BarberoDAO barberoDAO = new BarberoDAO();
-	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();;
+	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();
+	private List<SelectItem> dias;
 	
 	@PostConstruct
 	private void init() {
@@ -41,11 +43,11 @@ public class ControladorRegistroBarbero implements Serializable{
 	    catServicio = new DualListModel<ServicioDTO>(servicioSource, servicioTarget);	  
 	    catSucursal = catalogosDAO.getCatSucursales();
 		catPuesto = catalogosDAO.getCatPuestos();
-	    
 	}
 
 	public void registrarBarbero() {
 		System.out.println("registrar");
+		barberoDAO.insertarBarbero(registroBarberoVO);
 		
 	}
 	

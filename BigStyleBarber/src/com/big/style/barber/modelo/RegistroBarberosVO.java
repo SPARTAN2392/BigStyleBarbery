@@ -3,7 +3,10 @@ package com.big.style.barber.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.big.style.barber.dominio.BarberoDTO;
+
 public class RegistroBarberosVO implements Serializable{
+	public BarberoDTO barberoDTO = new BarberoDTO();
 	public String psNombre;
 	public String psAPaterno;
 	public String psAMaterno;
@@ -11,14 +14,20 @@ public class RegistroBarberosVO implements Serializable{
 	public Integer piServicio;
 	public Integer piSucursal;
 	public Integer piPuesto;
-	public Date ptHorarioIni;
-	public Date ptHorarioFin;
-	public String[] dias;
+	public String psHorarioIni;
+	public String psHorarioFin;
+	public Integer[] dias;
 	public String psTelefono;
 	public String psDireccion;
 	public String psBiografia;
 	public String psEmail;
 	
+	public BarberoDTO getBarberoDTO() {
+		return barberoDTO;
+	}
+	public void setBarberoDTO(BarberoDTO barberoDTO) {
+		this.barberoDTO = barberoDTO;
+	}
 	public String getPsEmail() {
 		return psEmail;
 	}
@@ -85,22 +94,30 @@ public class RegistroBarberosVO implements Serializable{
 	public void setPiPuesto(Integer piPuesto) {
 		this.piPuesto = piPuesto;
 	}
-	public Date getPtHorarioIni() {
-		return ptHorarioIni;
+	
+	public String getPsHorarioIni() {
+		return psHorarioIni;
 	}
-	public void setPtHorarioIni(Date ptHorarioIni) {
-		this.ptHorarioIni = ptHorarioIni;
+	public void setPsHorarioIni(String psHorarioIni) {
+		this.psHorarioIni = psHorarioIni;
 	}
-	public Date getPtHorarioFin() {
-		return ptHorarioFin;
+	public String getPsHorarioFin() {
+		return psHorarioFin;
 	}
-	public void setPtHorarioFin(Date ptHorarioFin) {
-		this.ptHorarioFin = ptHorarioFin;
+	public void setPsHorarioFin(String psHorarioFin) {
+		this.psHorarioFin = psHorarioFin;
 	}
-	public String[] getDias() {
+	//	public String[] getDias() {
+//		return dias;
+//	}
+//	public void setDias(String[] dias) {
+//		this.dias = dias;
+//	}
+	public Integer[] getDias() {
 		return dias;
 	}
-	public void setDias(String[] dias) {
+	public void setDias(Integer[] dias) {
 		this.dias = dias;
 	}
+	
 }
