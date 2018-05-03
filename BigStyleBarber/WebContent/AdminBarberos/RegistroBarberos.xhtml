@@ -1,0 +1,255 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/plantilla/layout.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:define name="content">
+        <h:form id="barberosForm" >
+			<p:fieldset style="margin-bottom:20px;height:95%  ">
+				<p:panel header="Alta Barberos">
+				
+					<!-- <h3>Grouping</h3>
+					<p:panelGrid style="margin-top:20px">
+					   
+					 
+					    <p:row>
+					        <p:column style="font-weight: bold;">Seattle</p:column>
+					        <p:column style="font-weight: bold;">4</p:column>
+					 
+					        <p:column rowspan="2" style="font-weight: bold;">Seattle</p:column>
+					        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
+					 
+					        <p:column rowspan="5">Seattle</p:column>
+					        <p:column rowspan="5">2</p:column>
+					 
+					        <p:column rowspan="11" style="font-weight: bold;">Chicago</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column>Houston</p:column>
+					        <p:column >0</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column colspan="4" styleClass="ui-widget-header">
+					            <p:spacer height="0"/>
+					        </p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column style="font-weight: bold;">Utah</p:column>
+					        <p:column style="font-weight: bold;">4</p:column>
+					 
+					        <p:column rowspan="2">Utah</p:column>
+					        <p:column rowspan="2">3</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column>San Antonio</p:column>
+					        <p:column >2</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column colspan="6" styleClass="ui-widget-header">
+					            <p:spacer height="0"/>
+					        </p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column style="font-weight: bold;">Chicago</p:column>
+					        <p:column style="font-weight: bold;">4</p:column>
+					 
+					        <p:column rowspan="2" style="font-weight: bold;">Chicago</p:column>
+					        <p:column rowspan="2" style="font-weight: bold;">4</p:column>
+					 
+					        <p:column rowspan="5" style="font-weight: bold;">Chicago</p:column>
+					        <p:column rowspan="5" style="font-weight: bold;">4</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column>New York</p:column>
+					        <p:column >1</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column colspan="4" styleClass="ui-widget-header">
+					            <p:spacer height="0"/>
+					        </p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column>Atlanta</p:column>
+					        <p:column >1</p:column>
+					 
+					        <p:column rowspan="2">Orlando</p:column>
+					        <p:column rowspan="2">0</p:column>
+					    </p:row>
+					 
+					    <p:row>
+					        <p:column style="font-weight: bold;">Orlando</p:column>
+					        <p:column style="font-weight: bold;">4</p:column>
+					    </p:row>
+					 
+					 
+					    <f:facet name="footer">
+					        <p:row>
+					            <p:column  colspan="4" style="text-align: right">
+					                Finals MVP
+					            </p:column>
+					            <p:column  colspan="3" rowspan="3">
+					                Michael Jordan (Chicago)
+					            </p:column>
+					        </p:row>
+					 
+					        <p:row>
+					            <p:column  colspan="4" style="text-align: right">
+					                Season MVP
+					            </p:column>
+					        </p:row>
+					        <p:row>
+					            <p:column  colspan="4" style="text-align: right">
+					                Top Scorer
+					            </p:column>
+					        </p:row>
+					    </f:facet>
+					</p:panelGrid> -->
+				
+                	<p:panelGrid border="1">               		                             		
+                		<p:row >                			
+                				<p:column>
+		                			<p:outputLabel value="Nombre" for="idNombre" />
+		                		</p:column>
+		                		<p:column>		                	
+		                    		<p:inputText id="idNombre" value="#{controladorRegistroBarberos.registroBarberoVO.psNombre}" title="Nombre"/>
+		                    	</p:column>		                    
+		                    		                    
+		                    	<p:column>
+		                    		<p:outputLabel value="Apellido Paterno" for="idAPaterno" />
+		                    	</p:column>
+		                    	<p:column>
+		                    		<p:inputText id="idAPaterno" value="#{controladorRegistroBarberos.registroBarberoVO.psAPaterno}" title="Apellido Paterno"/>
+		                    	</p:column>
+		                    
+		                    	<p:column>
+		                    		<p:outputLabel value="Apellido Materno" for="idAMaterno" />
+		                    	</p:column>
+		                    	<p:column>
+		                    		<p:inputText id="idAMaterno" value="#{controladorRegistroBarberos.registroBarberoVO.psAMaterno}" title="Apellido Materno"/>
+		                    	</p:column>
+		                    
+	                    </p:row>                    	                    	
+                    	
+                    	<p:row >
+                			<p:column>
+		                    	<p:outputLabel value="Edad" for="idEdad" />
+		                    </p:column>
+		                    <p:column>
+		                    	<p:inputText id="idEdad" value="#{controladorRegistroBarberos.registroBarberoVO.piEdad}" title="Edad"/>
+                    		</p:column>
+                    		
+                    		<p:column>
+		                    	<p:outputLabel value="Telefono" for="idTelefono" />
+		                    </p:column>
+		                    <p:column>
+		                    	<p:inputText id="idTelefono" value="#{controladorRegistroBarberos.registroBarberoVO.psTelefono}" title="Telefono"/>
+		                    </p:column>
+		                </p:row>                    	                    	
+                    	
+                    	<p:row>                    		
+                    			<p:column>
+		                    		<p:outputLabel value="Direccion" for="idDireccion" />
+			                    </p:column>
+		                    	<p:column>
+			                    	<p:inputText id="idDireccion" value="#{controladorRegistroBarberos.registroBarberoVO.psDireccion}" title="Direccion"/>
+		                    	</p:column>
+	                    		
+	                    		<p:column colspan = "4" rowspan="2">	                    	
+			                    	<h3 style="margin-top: 0">Basic PickList</h3>
+								    <p:pickList id="pickList" value="#{controladorRegistroBarberos.catServicio}" var="catalogo" itemLabel="#{catalogo.psNombreServicio}" itemValue="#{catalogo.piIdServicioPk}"/>
+							    </p:column>	                    			                    		             		                   				                    	
+					    </p:row>					   					 					   
+ 
+ 						<p:row>
+ 							<p:column>
+                    			<p:outputLabel value="Biografia" for="idBiografia" />
+                    		</p:column>
+                    		<p:column>
+                    			<p:inputTextarea id="idBiografia" value="#{controladorRegistroBarberos.registroBarberoVO.psBiografia}" rows="10" cols="50"/>
+	                    	</p:column>       
+ 						</p:row>
+ 
+ 						<p:row>
+ 							<p:column>
+	                    		<p:outputLabel value="Sucursal" for="idSucursal" />
+		                    </p:column>
+	                    	<p:column>
+		                    	<p:selectOneMenu id="idSucursal" value="#{controladorRegistroBarberos.registroBarberoVO.piSucursal}" >
+		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+		                    		<f:selectItems value="#{controladorRegistroBarberos.catSucursal}" var="catalogo" itemLabel="#{catalogo.psNombreBarberia}" itemValue="#{catalogo.piIdSucursal}"/>
+		                		</p:selectOneMenu>
+	                    	</p:column>
+	                    	<p:column>
+	                    		<p:outputLabel  value="Horario de" />
+	                    	</p:column>
+	                    	<p:column>		        				
+		        				<!-- <p:inputText id="horarioIni" value="#{controladorRegistroBarberos.registroBarberoVO.ptHorarioIni}" title="Horario">
+		        					<p:keyFilter regEx="^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"/>
+		        				</p:inputText> -->
+		        				<p:inputText id="text1">
+						            <!-- <p:keyFilter regEx="/[01]{1}[0-9]/g"/> -->
+						            <p:keyFilter regEx="/([0-23]):([0-59])/g"/>
+						        </p:inputText> 		        				
+		        			</p:column>
+		        			<p:column>
+		        				<p:outputLabel for="horarioFin" value="a" />
+		        			</p:column>
+		        			<p:column>
+		        				<!-- <p:calendar id="horarioFin" value="#{controladorRegistroBarberos.registroBarberoVO.ptHorarioFin}" /> -->
+		        				<p:inputMask id="horarioFin" value="#{controladorRegistroBarberos.registroBarberoVO.ptHorarioFin}" mask="/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/"/>
+	                    	</p:column>
+ 						</p:row>
+ 						<p:row>
+ 							<p:column>
+	 							<p:outputLabel value="Correo Electronico" for="idEmail"/>
+	 						</p:column>
+	 						<p:column>   
+						        <p:inputText id="idEmail" value="#{controladorRegistroBarberos.registroBarberoVO.psEmail}">
+						            <p:keyFilter mask="email"/>
+						        </p:inputText>
+						    </p:column>
+						    <p:column>
+						    	<p:outputLabel for="idDias" value="Dias" />
+						    </p:column>
+						   	<p:column>
+		        				<p:selectManyCheckbox id="idDias" value="#{controladorRegistroBarberos.registroBarberoVO.dias}">
+							        <f:selectItem itemLabel="D" itemValue="1" />
+							        <f:selectItem itemLabel="L" itemValue="1" />
+							        <f:selectItem itemLabel="Ma" itemValue="1" />
+							        <f:selectItem itemLabel="Mi" itemValue="1" />
+							        <f:selectItem itemLabel="J" itemValue="1" />
+							        <f:selectItem itemLabel="V" itemValue="1" />
+							        <f:selectItem itemLabel="S" itemValue="1" />
+							    </p:selectManyCheckbox>
+							</p:column>
+ 						</p:row>
+ 						<p:row>
+ 							<p:column>
+ 								<p:outputLabel value="Puesto" for="idPuesto" />
+ 							</p:column>
+ 							<p:column>
+		                    	<p:selectOneMenu id="idPuesto" value="#{controladorRegistroBarberos.registroBarberoVO.piPuesto}" >
+		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+		                    		<f:selectItems value="#{controladorRegistroBarberos.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"/>
+		                		</p:selectOneMenu>
+ 							</p:column>
+ 						</p:row>
+                	</p:panelGrid>
+                </p:panel>
+            </p:fieldset>
+        </h:form>
+    </ui:define>
+</ui:composition>

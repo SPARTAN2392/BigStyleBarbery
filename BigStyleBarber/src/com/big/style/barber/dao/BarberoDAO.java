@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.big.style.barber.dominio.BarberoDTO;
-import com.big.style.barber.modelo.AdministracionBarberosDTO;
+import com.big.style.barber.modelo.AdministracionBarberosVO;
 
 public class BarberoDAO {
 
 @SuppressWarnings("unchecked")
-public List<BarberoDTO> buscarBarberos(AdministracionBarberosDTO poAdminBarberos) {
+public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos) {
 	
 		Map<String, Object> mapa = generarMapa(poAdminBarberos);
 		
@@ -23,7 +23,7 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosDTO poAdminBarberos
     }
 	
 
-	public Map<String, Object> generarMapa(AdministracionBarberosDTO poAdminBarberos){
+	public Map<String, Object> generarMapa(AdministracionBarberosVO poAdminBarberos){
 		Map<String, Object> mapa = new HashMap<String, Object>();
 		
 		if(poAdminBarberos.getPsNombre() != null && !poAdminBarberos.getPsNombre().equals("")) {

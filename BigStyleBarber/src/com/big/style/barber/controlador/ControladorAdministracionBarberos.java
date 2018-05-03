@@ -9,12 +9,11 @@ import javax.faces.bean.ViewScoped;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
-import com.big.style.barber.dao.PuestoDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
-import com.big.style.barber.modelo.AdministracionBarberosDTO;
+import com.big.style.barber.modelo.AdministracionBarberosVO;
 
 @ManagedBean(name = "adminBarberosControlador")
 @ViewScoped
@@ -32,14 +31,14 @@ public class ControladorAdministracionBarberos implements Serializable{
 	List<BarberoDTO> resultConsultaBarbero;
 	
 	BarberoDAO barberoDAO = new BarberoDAO();
-	AdministracionBarberosDTO barberoVO;
+	AdministracionBarberosVO barberoVO;
 	
 	@PostConstruct
 	private void init() {
 		catSucursal = catalogosDAO.getCatSucursales();
 		catPuesto = catalogosDAO.getCatPuestos();
 		catServicio = catalogosDAO.getCatServicios();
-		barberoVO = new AdministracionBarberosDTO();
+		barberoVO = new AdministracionBarberosVO();
 	}
 	
 	public void consultaBarbero() {
@@ -63,11 +62,11 @@ public class ControladorAdministracionBarberos implements Serializable{
 		this.catPuesto = catPuesto;
 	}
 
-	public AdministracionBarberosDTO getBarberoVO() {
+	public AdministracionBarberosVO getBarberoVO() {
 		return barberoVO;
 	}
 
-	public void setBarberoVO(AdministracionBarberosDTO barberoVO) {
+	public void setBarberoVO(AdministracionBarberosVO barberoVO) {
 		this.barberoVO = barberoVO;
 	}
 

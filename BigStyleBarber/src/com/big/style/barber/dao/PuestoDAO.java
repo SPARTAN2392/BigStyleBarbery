@@ -5,12 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
 import com.big.style.barber.dominio.PuestoDTO;
-
-import config.HibernateUtil;
 
 @ManagedBean
 public class PuestoDAO {
