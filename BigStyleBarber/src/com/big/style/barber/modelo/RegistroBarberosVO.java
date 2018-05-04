@@ -7,6 +7,8 @@ import com.big.style.barber.dominio.BarberoDTO;
 
 public class RegistroBarberosVO implements Serializable{
 	public BarberoDTO barberoDTO = new BarberoDTO();
+	public Date ptHorarioIni;
+	public Date ptHorarioFin;
 	public String psNombre;
 	public String psAPaterno;
 	public String psAMaterno;
@@ -22,6 +24,18 @@ public class RegistroBarberosVO implements Serializable{
 	public String psBiografia;
 	public String psEmail;
 	
+	public Date getPtHorarioIni() {
+		return ptHorarioIni;
+	}
+	public void setPtHorarioIni(Date ptHorarioIni) {
+		this.ptHorarioIni = ptHorarioIni;
+	}
+	public Date getPtHorarioFin() {
+		return ptHorarioFin;
+	}
+	public void setPtHorarioFin(Date ptHorarioFin) {
+		this.ptHorarioFin = ptHorarioFin;
+	}
 	public BarberoDTO getBarberoDTO() {
 		return barberoDTO;
 	}

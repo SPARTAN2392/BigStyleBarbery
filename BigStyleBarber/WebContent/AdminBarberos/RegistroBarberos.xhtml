@@ -18,21 +18,24 @@
 		                			<p:outputLabel value="Nombre" for="idNombre" />
 		                		</p:column>
 		                		<p:column>		                	
-		                    		<p:inputText id="idNombre" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psNombreBarbero}" title="Nombre"/>
+		                    		<p:inputText id="idNombre" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psNombreBarbero}" title="Nombre"
+		                    			required="true"/>
 		                    	</p:column>		                    
 		                    		                    
 		                    	<p:column>
 		                    		<p:outputLabel value="Apellido Paterno" for="idAPaterno" />
 		                    	</p:column>
 		                    	<p:column>
-		                    		<p:inputText id="idAPaterno" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psApellidoPaterno}" title="Apellido Paterno"/>
+		                    		<p:inputText id="idAPaterno" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psApellidoPaterno}" title="Apellido Paterno"
+		                    			required="true"/>
 		                    	</p:column>
 		                    
 		                    	<p:column>
 		                    		<p:outputLabel value="Apellido Materno" for="idAMaterno" />
 		                    	</p:column>
 		                    	<p:column>
-		                    		<p:inputText id="idAMaterno" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psApellidoMaterno}" title="Apellido Materno"/>
+		                    		<p:inputText id="idAMaterno" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psApellidoMaterno}" title="Apellido Materno"
+		                    			required="true"/>
 		                    	</p:column>
 		                    
 	                    </p:row>                    	                    	
@@ -63,7 +66,8 @@
 	                    		
 	                    		<p:column colspan = "4" rowspan="2">	                    	
 			                    	<h3 style="margin-top: 0">Basic PickList</h3>
-								    <p:pickList id="pickList" value="#{controladorRegistroBarberos.catServicio}" var="catalogo" itemLabel="#{catalogo.psNombreServicio}" itemValue="#{catalogo.piIdServicioPk}"/>
+								    <p:pickList id="pickList" value="#{controladorRegistroBarberos.catServicio}" var="catalogo" itemLabel="#{catalogo.psNombreServicio}" itemValue="#{catalogo.piIdServicioPk}"
+								    	required="true"/>
 							    </p:column>	                    			                    		             		                   				                    	
 					    </p:row>					   					 					   
  
@@ -72,7 +76,8 @@
                     			<p:outputLabel value="Biografia" for="idBiografia" />
                     		</p:column>
                     		<p:column>
-                    			<p:inputTextarea id="idBiografia" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psBiografia}" rows="10" cols="50"/>
+                    			<p:inputTextarea id="idBiografia" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psBiografia}" rows="10" cols="50"
+                    				required="true"/>
 	                    	</p:column>       
  						</p:row>
  
@@ -81,23 +86,25 @@
 	                    		<p:outputLabel value="Sucursal" for="idSucursal" />
 		                    </p:column>
 	                    	<p:column>
-		                    	<p:selectOneMenu id="idSucursal" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.poSucursalFk.piIdSucursal}" >
+		                    	<p:selectOneMenu id="idSucursal" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.poSucursalFk.piIdSucursal}" required="true">
 		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
 		                    		<f:selectItems value="#{controladorRegistroBarberos.catSucursal}" var="catalogo" itemLabel="#{catalogo.psNombreBarberia}" itemValue="#{catalogo.piIdSucursal}"/>
 		                		</p:selectOneMenu>
-	                    	</p:column>
-	                    	<p:column>
-	                    		<p:outputLabel  value="Horario de" for="idHoraIni"/>
-	                    	</p:column>
-	                    	<p:column>		  
-		        				<p:inputText id="idHoraIni" value="#{controladorRegistroBarberos.registroBarberoVO.psHorarioIni}" title="Hora Inicio"/>        				
-		        			</p:column>
-		        			<p:column>
-		        				<p:outputLabel for="idHorarioFin" value="a" />
-		        			</p:column>
-		        			<p:column>
-		        				<p:inputText id="idHorarioFin" value="#{controladorRegistroBarberos.registroBarberoVO.psHorarioFin}" title="Hora Inicio"/>
-	                    	</p:column>
+	                    	</p:column>	                    	
+	                    	<p:column colspan="4">
+	                    		<p:panelGrid>
+	                    			<p:column>
+			                    		<p:outputLabel  value="Horario de" for = "idHoraIni"/>			                    			 
+			                    		<pe:timePicker id = "idHoraIni" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.ptHorarioInicio}" mode="popup" widgetVar="popupTimeWidget"  
+		                   					label="Popup time picker" required="true"/>		        				        			
+				        			</p:column>
+				        			<p:column>
+				        				<p:outputLabel value="a" />
+				        				<pe:timePicker id = "idHorarioFin" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.ptHorarioFin}" mode="popup" widgetVar="popupTimeWidget"  
+		                   					label="Popup time picker" required="true"/> 		        			
+			                    	</p:column>
+	                    		</p:panelGrid>
+	                    	</p:column>	                    	
  						</p:row>
  						<p:row>
  							<p:column>
@@ -105,16 +112,42 @@
 	 						</p:column>
 	 						<p:column>   
 						        <p:inputText id="idEmail" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psEmail}"/>
-						            <!-- <p:keyFilter mask="email"/>
-						        </p:inputText> -->
 						    </p:column>
-						    <!-- <p:column>
-						    	<p:outputLabel value="Dias" />
-						    </p:column>
-						   	<p:column>
-						   		<p:outputLabel value="D" for="idDomingo"/>
-						   		<p:selectBooleanCheckbox id = "idDomingo" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaDomingo}" />
-							</p:column> -->
+						    <!-- <p:column colspan="4">
+						    	<p:panelGrid border="1">
+						    		<p:column>
+						    			<p:outputLabel value="Días"/>
+						    		</p:column>
+						    		<p:column>						    	
+								   		<p:outputLabel value="D" for="idDomingo"/>
+								   		<p:selectBooleanCheckbox id = "idDomingo" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaDomingo}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="L" for="idLunes"/>
+								   		<p:selectBooleanCheckbox id = "idLunes" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaLunes}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="Ma" for="idMartes"/>
+								   		<p:selectBooleanCheckbox id = "idMartes" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaMartes}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="Mi" for="idMiercoles"/>
+								   		<p:selectBooleanCheckbox id = "idMiercoles" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaMiercoles}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="J" for="idJueves"/>
+								   		<p:selectBooleanCheckbox id = "idJueves" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaJueves}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="V" for="idViernes"/>
+								   		<p:selectBooleanCheckbox id = "idViernes" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaViernes}" />
+							   		</p:column>
+							   		<p:column>
+								   		<p:outputLabel value="S" for="idSabado"/>
+								   		<p:selectBooleanCheckbox id = "idSabado" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piDiaSabado}" />
+								   	</p:column>											    
+						    	</p:panelGrid>
+						    </p:column>	 -->					    						    						   	
  						</p:row>
  						<p:row>
  							<p:column>
@@ -123,13 +156,14 @@
  							<p:column>
 		                    	<p:selectOneMenu id="idPuesto" value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.poPuestoFK.piIdPuesto}" >
 		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
-		                    		<f:selectItems value="#{controladorRegistroBarberos.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"/>
+		                    		<f:selectItems value="#{controladorRegistroBarberos.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"
+		                    			required="true"/>
 		                		</p:selectOneMenu>
  							</p:column>
  						</p:row>
                 	</p:panelGrid>
                 </p:panel>
-                <p:commandButton value="Insertar" id="idInsertar" update=":growl" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
+                <p:commandButton value="Insertar" id="idInsertar" update="growl" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
             </p:fieldset>
         </h:form>
     </ui:define>
