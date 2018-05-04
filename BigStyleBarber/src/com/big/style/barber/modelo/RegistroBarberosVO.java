@@ -3,9 +3,12 @@ package com.big.style.barber.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.primefaces.model.UploadedFile;
+
 import com.big.style.barber.dominio.BarberoDTO;
 
 public class RegistroBarberosVO implements Serializable{
+	public UploadedFile foto;
 	public BarberoDTO barberoDTO = new BarberoDTO();
 	public Date ptHorarioIni;
 	public Date ptHorarioFin;
@@ -24,6 +27,12 @@ public class RegistroBarberosVO implements Serializable{
 	public String psBiografia;
 	public String psEmail;
 	
+	public UploadedFile getFoto() {
+		return foto;
+	}
+	public void setFoto(UploadedFile foto) {
+		this.foto = foto;
+	}
 	public Date getPtHorarioIni() {
 		return ptHorarioIni;
 	}

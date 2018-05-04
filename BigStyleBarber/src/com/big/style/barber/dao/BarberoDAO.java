@@ -39,12 +39,7 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos)
 	
 	public void insertarBarbero(RegistroBarberosVO poRegistroBarbero) {
 		try {
-//			SimpleDateFormat formato = new SimpleDateFormat(
-//					"HH:mm");
-//			Date ltHorarioInicio = formato.parse(poRegistroBarbero.getPsHorarioIni());
-//			Date ltHorarioFin = formato.parse(poRegistroBarbero.getPsHorarioFin());
-//			poRegistroBarbero.getBarberoDTO().setPtHorarioInicio(ltHorarioInicio);
-//			poRegistroBarbero.getBarberoDTO().setPtHorarioFin(ltHorarioFin);
+			poRegistroBarbero.getBarberoDTO().setPoFoto(poRegistroBarbero.getFoto().getContents());
 			poRegistroBarbero.getBarberoDTO().setPiEstado(1);
 			GenericDAO.GuardarObjeto(poRegistroBarbero.getBarberoDTO());
 		}catch(Exception ex) {

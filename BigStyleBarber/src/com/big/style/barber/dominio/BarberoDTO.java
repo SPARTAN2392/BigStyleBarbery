@@ -33,7 +33,8 @@ public class BarberoDTO implements Serializable{
 	@Column(name = "biografia")
 	public String psBiografia;
 	
-//	@Column(name = "fotografia")
+	@Column(name = "fotografia")
+	public byte[] poFoto;
 	
 	@Column(name = "estado")
 	public Integer piEstado; 
@@ -90,6 +91,14 @@ public class BarberoDTO implements Serializable{
 	
 	@Column(name = "dia_sabado")
 	public Integer piDiaSabado;
+
+	public byte[] getPoFoto() {
+		return poFoto;
+	}
+
+	public void setPoFoto(byte[] poFoto) {
+		this.poFoto = poFoto;
+	}
 
 	public Integer getPiIdBarbero() {
 		return piIdBarbero;

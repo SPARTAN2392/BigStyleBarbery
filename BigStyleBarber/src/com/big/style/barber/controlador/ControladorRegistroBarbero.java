@@ -8,9 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
-import javax.faces.model.SelectItemGroup;
 
 import org.primefaces.model.DualListModel;
+import org.primefaces.model.UploadedFile;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
@@ -31,10 +31,10 @@ public class ControladorRegistroBarbero implements Serializable{
 	List<BarberoDTO> resultConsultaBarbero;
 	BarberoDAO barberoDAO = new BarberoDAO();
 	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();
-	private List<SelectItem> dias;
 	
 	@PostConstruct
 	private void init() {
+		
 		List<ServicioDTO> servicioSource = new ArrayList<ServicioDTO>();
 	    List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
 	    
@@ -47,8 +47,8 @@ public class ControladorRegistroBarbero implements Serializable{
 
 	public void registrarBarbero() {
 		System.out.println("registrar");
+		System.out.println(registroBarberoVO.getFoto().getFileName());
 		barberoDAO.insertarBarbero(registroBarberoVO);
-		
 	}
 	
 	public List<SucursalDTO> getCatSucursal() {
