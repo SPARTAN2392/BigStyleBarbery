@@ -8,7 +8,8 @@ import org.primefaces.model.UploadedFile;
 import com.big.style.barber.dominio.BarberoDTO;
 
 public class RegistroBarberosVO implements Serializable{
-	public UploadedFile foto;
+	public String nombreFoto;
+	public byte[] foto;
 	public BarberoDTO barberoDTO = new BarberoDTO();
 	public Date ptHorarioIni;
 	public Date ptHorarioFin;
@@ -21,17 +22,109 @@ public class RegistroBarberosVO implements Serializable{
 	public Integer piPuesto;
 	public String psHorarioIni;
 	public String psHorarioFin;
-	public Integer[] dias;
 	public String psTelefono;
 	public String psDireccion;
 	public String psBiografia;
 	public String psEmail;
+	public boolean pbDiaDomingo;
+	public boolean pbDiaLunes;
+	public boolean pbDiaMartes;
+	public boolean pbDiaMiercoles;
+	public boolean pbDiaJueves;
+	public boolean pbDiaViernes;
+	public boolean pbDiaSabado;
 	
-	public UploadedFile getFoto() {
+	
+	public byte[] getFoto() {
 		return foto;
 	}
-	public void setFoto(UploadedFile foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+	public boolean isPbDiaDomingo() {
+		if(this.barberoDTO.getPiDiaDomingo() != null && this.barberoDTO.getPiDiaDomingo() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaDomingo(boolean pbDiaDomingo) {
+		this.barberoDTO.setPiDiaDomingo(pbDiaDomingo ? 1 : 0);
+	}
+	public boolean isPbDiaLunes() {
+		if(this.barberoDTO.getPiDiaDomingo() != null && this.barberoDTO.getPiDiaDomingo() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaLunes(boolean pbDiaLunes) {
+		this.barberoDTO.setPiDiaLunes(pbDiaLunes ? 1 : 0);
+	}
+	public boolean isPbDiaMartes() {
+		if(this.barberoDTO.getPiDiaMartes() != null && this.barberoDTO.getPiDiaMartes() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaMartes(boolean pbDiaMartes) {
+		this.barberoDTO.setPiDiaMartes(pbDiaMartes ? 1 : 0);
+	}
+	public boolean isPbDiaMiercoles() {
+		if(this.barberoDTO.getPiDiaMiercoles() != null && this.barberoDTO.getPiDiaMiercoles() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaMiercoles(boolean pbDiaMiercoles) {
+		this.barberoDTO.setPiDiaMiercoles(pbDiaMiercoles ? 1 : 0);
+	}
+	public boolean isPbDiaJueves() {
+		if(this.barberoDTO.getPiDiaJueves() != null && this.barberoDTO.getPiDiaJueves() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaJueves(boolean pbDiaJueves) {
+		this.barberoDTO.setPiDiaJueves(pbDiaJueves ? 1 : 0);
+	}
+	public boolean isPbDiaViernes() {
+		if(this.barberoDTO.getPiDiaViernes() != null && this.barberoDTO.getPiDiaViernes() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaViernes(boolean pbDiaViernes) {
+		this.barberoDTO.setPiDiaViernes(pbDiaViernes ? 1 : 0);
+	}
+	public boolean isPbDiaSabado() {
+		if(this.barberoDTO.getPiDiaSabado() != null && this.barberoDTO.getPiDiaSabado() != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void setPbDiaSabado(boolean pbDiaSabado) {
+		this.barberoDTO.setPiDiaSabado(pbDiaSabado ? 1 : 0);
+	}
+	
+	
+	public String getNombreFoto() {
+		return nombreFoto;
+	}
+	public void setNombreFoto(String nombreFoto) {
+		this.nombreFoto = nombreFoto;
 	}
 	public Date getPtHorarioIni() {
 		return ptHorarioIni;
@@ -129,18 +222,6 @@ public class RegistroBarberosVO implements Serializable{
 	}
 	public void setPsHorarioFin(String psHorarioFin) {
 		this.psHorarioFin = psHorarioFin;
-	}
-	//	public String[] getDias() {
-//		return dias;
-//	}
-//	public void setDias(String[] dias) {
-//		this.dias = dias;
-//	}
-	public Integer[] getDias() {
-		return dias;
-	}
-	public void setDias(Integer[] dias) {
-		this.dias = dias;
 	}
 	
 }

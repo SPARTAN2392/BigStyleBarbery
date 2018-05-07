@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.model.SelectItem;
+import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
-import org.primefaces.model.UploadedFile;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
@@ -45,9 +46,18 @@ public class ControladorRegistroBarbero implements Serializable{
 		catPuesto = catalogosDAO.getCatPuestos();
 	}
 
+	public void handleFileUpload(FileUploadEvent event) {
+		System.out.println("archivo");
+		System.out.println(event.getFile().getFileName());
+		registroBarberoVO.setNombreFoto(event.getFile().getFileName());
+		registroBarberoVO.setFoto(event.getFile().getContents());
+//        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+//        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+	
 	public void registrarBarbero() {
 		System.out.println("registrar");
-		System.out.println(registroBarberoVO.getFoto().getFileName());
+//		System.out.println(registroBarberoVO.getFoto().getFileName());
 		barberoDAO.insertarBarbero(registroBarberoVO);
 	}
 	

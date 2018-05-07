@@ -39,7 +39,7 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos)
 	
 	public void insertarBarbero(RegistroBarberosVO poRegistroBarbero) {
 		try {
-			poRegistroBarbero.getBarberoDTO().setPoFoto(poRegistroBarbero.getFoto().getContents());
+			poRegistroBarbero.getBarberoDTO().setPoFoto(poRegistroBarbero.getFoto());
 			poRegistroBarbero.getBarberoDTO().setPiEstado(1);
 			GenericDAO.GuardarObjeto(poRegistroBarbero.getBarberoDTO());
 		}catch(Exception ex) {
