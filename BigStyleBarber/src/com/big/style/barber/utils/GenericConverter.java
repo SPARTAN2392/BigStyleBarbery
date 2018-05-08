@@ -1,44 +1,48 @@
 package com.big.style.barber.utils;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.WeakHashMap;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.primefaces.component.picklist.PickList;
+import org.primefaces.model.DualListModel;
+
+import com.big.style.barber.dominio.ServicioDTO;
+
 @FacesConverter(value = "genericConverter")
 public class GenericConverter implements Converter {
+	
+	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
+	    Object ret = null;
+	    if (arg1 instanceof PickList) {
+	        Object dualList = ((PickList) arg1).getValue();
+	        DualListModel dl = (DualListModel) dualList;
+	        for (Object o : dl.getSource()) {
+	            String id = "" + ((ServicioDTO) o).getPiIdServicioPk();
+	            if (arg2.equals(id)) {
+	                ret = o;
+	                break;
+	            }
+	        }
+	        if (ret == null)
+	            for (Object o : dl.getTarget()) {
+	                String id = "" + ((ServicioDTO) o).getPiIdServicioPk();
+	                if (arg2.equals(id)) {
+	                    ret = o;
+	                    break;
+	                }
+	            }
+	    }
+	    return ret;
+	}
 
-    private static Map<Object, String> entities = new WeakHashMap<Object, String>();
-
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object entity) {
-        synchronized (entities) {
-            if (!entities.containsKey(entity)) {
-                String uuid = UUID.randomUUID().toString();
-                entities.put(entity, uuid);
-                return uuid;
-            } else {
-                return entities.get(entity);
-            }
-        }
-    }
-
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String uuid) {
-    	System.out.println("converter" + " " + uuid);
-        for (Entry<Object, String> entry : entities.entrySet()) {
-        	System.out.println(entry.getValue() + " " + entry.getKey());
-            if (entry.getValue().equals(uuid)) {
-            	System.out.println("if");
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
+	@Override
+	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
+	    String str = "";
+	    if (arg2 instanceof ServicioDTO) {
+	        str = "" + ((ServicioDTO) arg2).getPiIdServicioPk();
+	    }
+	    return str;
+	}
 }

@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
@@ -20,6 +18,7 @@ import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
+import com.sun.istack.internal.NotNull;
 
 @ManagedBean(name = "controladorRegistroBarberos")
 @ViewScoped
@@ -32,6 +31,10 @@ public class ControladorRegistroBarbero implements Serializable{
 	List<BarberoDTO> resultConsultaBarbero;
 	BarberoDAO barberoDAO = new BarberoDAO();
 	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();
+	private List<String> dias;
+	
+	@NotNull
+	private String[] selectedDias;
 	
 	@PostConstruct
 	private void init() {
@@ -40,6 +43,15 @@ public class ControladorRegistroBarbero implements Serializable{
 	    List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
 	    
 	    servicioSource = catalogosDAO.getCatServicios(); 
+	    
+	    dias = new ArrayList<String>();
+        dias.add("D");
+        dias.add("L");
+        dias.add("Ma");
+        dias.add("Mi");
+        dias.add("J");
+        dias.add("V");
+        dias.add("S");
 	    
 	    catServicio = new DualListModel<ServicioDTO>(servicioSource, servicioTarget);	  
 	    catSucursal = catalogosDAO.getCatSucursales();
@@ -58,7 +70,7 @@ public class ControladorRegistroBarbero implements Serializable{
 	public void registrarBarbero() {
 		System.out.println("registrar");
 //		System.out.println(registroBarberoVO.getFoto().getFileName());
-		barberoDAO.insertarBarbero(registroBarberoVO);
+//		barberoDAO.insertarBarbero(registroBarberoVO);
 	}
 	
 	public List<SucursalDTO> getCatSucursal() {
@@ -107,6 +119,22 @@ public class ControladorRegistroBarbero implements Serializable{
 
 	public void setCatServicio(DualListModel<ServicioDTO> catServicio) {
 		this.catServicio = catServicio;
+	}
+
+	public List<String> getDias() {
+		return dias;
+	}
+
+	public void setDias(List<String> dias) {
+		this.dias = dias;
+	}
+
+	public String[] getSelectedDias() {
+		return selectedDias;
+	}
+
+	public void setSelectedDias(String[] selectedDias) {
+		this.selectedDias = selectedDias;
 	}
 	
 	

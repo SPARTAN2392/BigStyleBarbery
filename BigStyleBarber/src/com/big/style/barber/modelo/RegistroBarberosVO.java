@@ -1,13 +1,16 @@
 package com.big.style.barber.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-
-import org.primefaces.model.UploadedFile;
+import java.util.List;
 
 import com.big.style.barber.dominio.BarberoDTO;
+import com.sun.istack.internal.NotNull;
 
 public class RegistroBarberosVO implements Serializable{
+	@NotNull
+	public List<String> dias = new ArrayList<String>();
 	public String nombreFoto;
 	public byte[] foto;
 	public BarberoDTO barberoDTO = new BarberoDTO();
@@ -35,6 +38,12 @@ public class RegistroBarberosVO implements Serializable{
 	public boolean pbDiaSabado;
 	
 	
+	public List<String> getDias() {
+		return dias;
+	}
+	public void setDias(List<String> dias) {
+		this.dias = dias;
+	}
 	public byte[] getFoto() {
 		return foto;
 	}
@@ -50,6 +59,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaDomingo(boolean pbDiaDomingo) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaDomingo(pbDiaDomingo ? 1 : 0);
 	}
 	public boolean isPbDiaLunes() {
@@ -61,6 +71,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaLunes(boolean pbDiaLunes) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaLunes(pbDiaLunes ? 1 : 0);
 	}
 	public boolean isPbDiaMartes() {
@@ -72,6 +83,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaMartes(boolean pbDiaMartes) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaMartes(pbDiaMartes ? 1 : 0);
 	}
 	public boolean isPbDiaMiercoles() {
@@ -83,6 +95,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaMiercoles(boolean pbDiaMiercoles) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaMiercoles(pbDiaMiercoles ? 1 : 0);
 	}
 	public boolean isPbDiaJueves() {
@@ -94,6 +107,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaJueves(boolean pbDiaJueves) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaJueves(pbDiaJueves ? 1 : 0);
 	}
 	public boolean isPbDiaViernes() {
@@ -105,6 +119,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaViernes(boolean pbDiaViernes) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaViernes(pbDiaViernes ? 1 : 0);
 	}
 	public boolean isPbDiaSabado() {
@@ -116,6 +131,7 @@ public class RegistroBarberosVO implements Serializable{
 		}
 	}
 	public void setPbDiaSabado(boolean pbDiaSabado) {
+		dias.add("1");
 		this.barberoDTO.setPiDiaSabado(pbDiaSabado ? 1 : 0);
 	}
 	
