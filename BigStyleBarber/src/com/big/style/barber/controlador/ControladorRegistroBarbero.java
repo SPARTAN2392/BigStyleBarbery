@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -18,6 +19,7 @@ import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
 import com.big.style.barber.servicio.ServicioRegistroBarbero;
+import com.big.style.barber.utils.MessageFactory;
 
 @ManagedBean(name = "controladorRegistroBarberos")
 @ViewScoped
@@ -31,14 +33,16 @@ public class ControladorRegistroBarbero implements Serializable{
 	List<BarberoDTO> resultConsultaBarbero;	
 	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();
 	private List<String> dias;
+	List<ServicioDTO> servicioSource;
+	List<ServicioDTO> servicioTarget;
 	
 	private String[] selectedDias;
 	
 	@PostConstruct
 	private void init() {
 		
-		List<ServicioDTO> servicioSource = new ArrayList<ServicioDTO>();
-	    List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
+		servicioSource = new ArrayList<ServicioDTO>();
+	    servicioTarget = new ArrayList<ServicioDTO>();
 	    
 	    servicioSource = catalogosDAO.getCatServicios(); 
 	    
@@ -61,19 +65,20 @@ public class ControladorRegistroBarbero implements Serializable{
 		System.out.println(event.getFile().getFileName());
 		registroBarberoVO.setNombreFoto(event.getFile().getFileName());
 		registroBarberoVO.setFoto(event.getFile().getContents());
-//        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-//        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 	
 	public void limpiarCamposBarbero() {
-		catServicio.setTarget(new ArrayList<ServicioDTO>());
+		System.out.println("limpiar");
+		catServicio = new DualListModel<ServicioDTO>(servicioSource, servicioTarget);
 		registroBarberoVO = new RegistroBarberosVO();
 		selectedDias = new String[] {};
 	}		
 	
 	public void registrarBarbero() {
 		System.out.println("registrar");
-		poServicioBarbero.insertarBarbero(registroBarberoVO, selectedDias, catServicio);		
+		poServicioBarbero.insertarBarbero(registroBarberoVO, selectedDias, catServicio);
+		limpiarCamposBarbero();
+		MessageFactory.addMessage(FacesMessage.SEVERITY_INFO, "global_msg_creado", "Barbero");
 	}		
 	
 	public List<SucursalDTO> getCatSucursal() {
