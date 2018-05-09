@@ -58,6 +58,7 @@
 											<p:inputText id="idEdad"
 												value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.piEdad}"
 												title="Edad" />
+												<p:message for="idEdad"/>
 										</p:column>
 
 										<p:column>
@@ -67,6 +68,7 @@
 											<p:inputText id="idTelefono"
 												value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psTelefono}"
 												title="Telefono" />
+												<p:message for="idTelefono"/>
 										</p:column>
 										<p:column>
 											<p:fileUpload label="#{msg.RegistroBarbero_Foto}"
@@ -167,50 +169,12 @@
 							</p:column>
 							<p:column>
 								<p:inputText id="idEmail"
-									value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psEmail}" />
+									value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.psEmail}" >
+									<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+								</p:inputText>
+								<p:message for="idEmail"/>
 							</p:column>
-							<p:column colspan="4">								
-								<p:panelGrid border="1">
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Dias}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Domingo}" for="idDomingo" />
-										<p:selectBooleanCheckbox id="idDomingo"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaDomingo}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Lunes}" for="idLunes" />
-										<p:selectBooleanCheckbox id="idLunes"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaLunes}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Martes}" for="idMartes" />
-										<p:selectBooleanCheckbox id="idMartes"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaMartes}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Miercoles}" for="idMiercoles" />
-										<p:selectBooleanCheckbox id="idMiercoles"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaMiercoles}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Jueves}" for="idJueves" />
-										<p:selectBooleanCheckbox id="idJueves"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaJueves}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Viernes}" for="idViernes" />
-										<p:selectBooleanCheckbox id="idViernes"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaViernes}" />
-									</p:column>
-									<p:column>
-										<p:outputLabel value="#{msg.RegistroBarbero_Sabado}" for="idSabado" />
-										<p:selectBooleanCheckbox id="idSabado"
-											value="#{controladorRegistroBarberos.registroBarberoVO.pbDiaSabado}" />
-									</p:column>
-									
-								</p:panelGrid>
+							<p:column colspan="4">																
 								<p:panelGrid border="1">
 									<p:column>
 										<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
@@ -242,8 +206,17 @@
 								<p:message for="idPuesto"/>
 							</p:column>
 						</p:row>
+						<p:row>
+							<p:column>
+								<p:commandButton value="Insertar" id="idInsertar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
+							</p:column>
+							<p:column>
+								<p:commandButton value="Limpiar" id="idLimpiar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.limpiarCamposBarbero}" styleClass="ui-priority-primary" />
+							</p:column>
+						</p:row>
 					</p:panelGrid>
-					<p:commandButton value="Insertar" id="idInsertar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
+					
+					
 				</p:panel>
                 
             </p:fieldset>

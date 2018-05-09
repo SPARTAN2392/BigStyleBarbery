@@ -11,29 +11,27 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
 
-import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
-import com.sun.istack.internal.NotNull;
+import com.big.style.barber.servicio.ServicioRegistroBarbero;
 
 @ManagedBean(name = "controladorRegistroBarberos")
 @ViewScoped
 public class ControladorRegistroBarbero implements Serializable{
 
+	ServicioRegistroBarbero poServicioBarbero = new ServicioRegistroBarbero();
 	CatalogoDAO catalogosDAO = new CatalogoDAO();
 	List<SucursalDTO> catSucursal;
 	List<PuestoDTO> catPuesto;
 	DualListModel<ServicioDTO> catServicio;
-	List<BarberoDTO> resultConsultaBarbero;
-	BarberoDAO barberoDAO = new BarberoDAO();
+	List<BarberoDTO> resultConsultaBarbero;	
 	RegistroBarberosVO registroBarberoVO = new RegistroBarberosVO();
 	private List<String> dias;
 	
-	@NotNull
 	private String[] selectedDias;
 	
 	@PostConstruct
@@ -67,11 +65,16 @@ public class ControladorRegistroBarbero implements Serializable{
 //        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 	
+	public void limpiarCamposBarbero() {
+		catServicio.setTarget(new ArrayList<ServicioDTO>());
+		registroBarberoVO = new RegistroBarberosVO();
+		selectedDias = new String[] {};
+	}		
+	
 	public void registrarBarbero() {
 		System.out.println("registrar");
-//		System.out.println(registroBarberoVO.getFoto().getFileName());
-//		barberoDAO.insertarBarbero(registroBarberoVO);
-	}
+		poServicioBarbero.insertarBarbero(registroBarberoVO, selectedDias, catServicio);		
+	}		
 	
 	public List<SucursalDTO> getCatSucursal() {
 		return catSucursal;
@@ -107,11 +110,7 @@ public class ControladorRegistroBarbero implements Serializable{
 
 	public void setRegistroBarberoVO(RegistroBarberosVO registroBarberoVO) {
 		this.registroBarberoVO = registroBarberoVO;
-	}
-
-	public void setBarberoDAO(BarberoDAO barberoDAO) {
-		this.barberoDAO = barberoDAO;
-	}
+	}	
 
 	public DualListModel<ServicioDTO> getCatServicio() {
 		return catServicio;

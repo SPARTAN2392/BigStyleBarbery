@@ -62,12 +62,13 @@ public class GenericDAO {
 	        return lista;
     }
 	
-	public static void GuardarObjeto(Object poObject) {
+	public static Object GuardarObjeto(Object poObject) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
 		try {
 			session.beginTransaction();
-			session.save(poObject);
+			Object insert = session.save(poObject);
 			session.getTransaction().commit();
+			return insert;
 		}catch(Exception ex) {
 			session.getTransaction().rollback();
 			throw ex;

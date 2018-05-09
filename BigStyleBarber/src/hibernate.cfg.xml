@@ -29,5 +29,6 @@
 	    <mapping class="com.big.style.barber.dominio.SucursalDTO"/>
 	    <mapping class="com.big.style.barber.dominio.ServicioDTO"/>
 	    <mapping class="com.big.style.barber.dominio.TipoServicioDTO"/>
+	    <mapping class="com.big.style.barber.dominio.ServicioBarberoDTO"/>
 	</session-factory>
 </hibernate-configuration>
