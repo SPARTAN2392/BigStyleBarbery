@@ -3,6 +3,8 @@ package com.big.style.barber.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.big.style.barber.dominio.BarberoDTO;
+
 public class AdministracionBarberosVO implements Serializable{
 
 	public String psNombre;
@@ -15,6 +17,7 @@ public class AdministracionBarberosVO implements Serializable{
 	public Date ptHorarioIni;
 	public Date ptHorarioFin;
 	public String[] dias;
+	public BarberoDTO barberoDTO = new BarberoDTO();
 	
 	public String getPsNombre() {
 		return psNombre;
@@ -76,7 +79,11 @@ public class AdministracionBarberosVO implements Serializable{
 	public void setDias(String[] dias) {
 		this.dias = dias;
 	}
-	
-	
+	public BarberoDTO getBarberoDTO() {
+		return barberoDTO;
+	}
+	public void setBarberoDTO(BarberoDTO barberoDTO) {
+		this.barberoDTO = barberoDTO;
+	}
 	
 }

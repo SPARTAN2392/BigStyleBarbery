@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -33,6 +34,26 @@ public class GenericDAO {
         return lista;
     }
 	
+	public static List<? extends Object> buscarQuery(Class entidad, Map<String, Object> parametros, String hql){
+		 List<? extends Object> lista = null;
+	        Session session = HibernateUtil.getSessionFactory().getCurrentSession();        
+	        try {
+	            session.beginTransaction();
+	            Query query = session.createQuery(hql);
+	            for (Map.Entry<String, Object> entry : parametros.entrySet())
+	            {
+	            	query.setParameter(entry.getKey(), entry.getValue());
+	            }
+	            lista = query.list();
+	            
+	        }catch(Exception ex) {
+	        	ex.printStackTrace();
+	            System.out.println("error");
+	            session.getTransaction().rollback();
+	        }
+	        return lista;
+	}
+	
 	public static List<? extends Object> buscarFiltro(Class clase, Map<String, Object> parametros) {
 		 List<? extends Object> lista = null;
 	        Session session = HibernateUtil.getSessionFactory().getCurrentSession();        
@@ -42,7 +63,6 @@ public class GenericDAO {
 	            
 	            for (Map.Entry<String, Object> entry : parametros.entrySet())
 	            {
-	            	
 	            	if(entry.getValue().getClass().getSimpleName().equals("String")) {
 	            		criteria.add(Restrictions.like(entry.getKey(), (String)entry.getValue(), MatchMode.ANYWHERE));
 	            	}else {
