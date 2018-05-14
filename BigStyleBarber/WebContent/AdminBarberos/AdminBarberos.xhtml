@@ -130,25 +130,32 @@
                     	
 					</p:panel>
 								
-					<p:carousel id = "carrouselBarbero" value="#{controladorAdminBarberos.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="text-align:center" responsive="true">
-       						<!-- <p:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank"> -->
-               			
-                    	<!-- <p:carousel id = "carrouselBarbero" value="#{controladorAdminBarberos.resultConsultaBarbero}" headerText="Resultados" var="barbero" itemStyle="height:200px;text-align:center" numVisible="4" easing="easeOutBounce" style="width:300px" cricular="true">
-        					<p:panelGrid columns="2" style="width:100%" columnClasses="label,value"> -->
-					            <!-- <f:facet name="header">
-					                <p:graphicImage name="demo/images/car/#{car.brand}.gif"/> 
-					            </f:facet> -->
+					
+			</p:fieldset>
+				<p:carousel id = "carrouselBarbero" value="#{controladorAdminBarberos.barberoVO.resultados}" headerText="Resultados" var="barbero" itemStyle="text-align:center" responsive="true">
+       						<h:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">         						
+       							<c:choose >
+       								<c:when test="#{empty barbero.renderFoto}">
+       									<f:facet name="header">
+							                <p:graphicImage url="/images/FotoDefault.png" />
+							            </f:facet>
+       								</c:when>
+       								<c:otherwise>
+       									<f:facet name="header">
+							                <p:graphicImage value="#{barbero.renderFoto}" stream="false"/> 
+							            </f:facet>
+       								</c:otherwise>
+       							</c:choose>         			                    					            
 					 
-					            <!-- <h:outputText value="Nombre:" />
-					            <h:outputText value="#{barbero.psNombreBarbero}" />
+					             <h:outputText value="Nombre:" />
+					            <h:outputText value="#{barbero.barberoRes.psNombreBarbero}" />
 					 
 					            <h:outputText value="Sucursal:" />
-					            <h:outputText value="#{barbero.poSucursalFk.psNombreBarberia}"/>
-					        </p:panelGrid> -->
+					            <h:outputText value="#{barbero.barberoRes.poSucursalFk.psNombreBarberia}"/>
+					        </h:panelGrid>
 					 
 					     
 					    </p:carousel>
-			</p:fieldset>
 		</h:form>
 	</ui:define>
-</ui:composition>	
+</ui:composition>

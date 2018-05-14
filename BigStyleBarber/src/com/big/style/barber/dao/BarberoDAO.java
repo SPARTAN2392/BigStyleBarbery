@@ -7,12 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
 import com.big.style.barber.servicio.ServicioTareaServicios;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
+import com.big.style.barber.utils.Utilerias;
 import com.sun.org.apache.bcel.internal.generic.IUSHR;
 
 public class BarberoDAO {
@@ -28,7 +32,7 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos,
         
         System.out.println(hql);
         
-        lista = (List<BarberoDTO>) GenericDAO.buscarQuery(BarberoDTO.class, mapa, hql);
+        lista = (List<BarberoDTO>) GenericDAO.buscarQuery(BarberoDTO.class, mapa, hql);               
         
         return lista;
     }

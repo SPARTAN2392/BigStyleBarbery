@@ -1,5 +1,6 @@
 package com.big.style.barber.controlador;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DualListModel;
+import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
@@ -17,6 +20,8 @@ import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
+import com.big.style.barber.modelo.ResultadosBarberoVista;
+import com.big.style.barber.utils.Utilerias;
 
 @ManagedBean(name = "controladorAdminBarberos")
 @ViewScoped
@@ -30,7 +35,7 @@ public class ControladorAdministracionBarberos implements Serializable{
 	CatalogoDAO catalogosDAO = new CatalogoDAO();
 	List<SucursalDTO> catSucursal;
 	List<PuestoDTO> catPuesto;
-	List<BarberoDTO> resultConsultaBarbero;
+	
 	List<ServicioDTO> servicioSource;
 	List<ServicioDTO> servicioTarget;
 	DualListModel<ServicioDTO> catServicio;
@@ -61,13 +66,24 @@ public class ControladorAdministracionBarberos implements Serializable{
         dias.add("S");
 	    
 		barberoVO = new AdministracionBarberosVO();
-	}
+	}		
 	
 	public void consultaBarbero() {
 		System.out.println("entro controlador");
-		resultConsultaBarbero = barberoDAO.buscarBarberos(barberoVO, catServicio.getTarget());
+		barberoVO.setResultConsultaBarbero(barberoDAO.buscarBarberos(barberoVO, catServicio.getTarget()));
+		barberoVO.setResultados((new ArrayList<ResultadosBarberoVista>()));
+		for(BarberoDTO barbero : barberoVO.getResultConsultaBarbero()) {
+			ResultadosBarberoVista res = new ResultadosBarberoVista();
+			res.setBarberoRes(barbero);
+			if(barbero.getPoFoto() != null) {
+				res.setRenderFoto(new DefaultStreamedContent(new ByteArrayInputStream(barbero.getPoFoto())));
+			}
+			barberoVO.getResultados().add(res);
+		}
+			
+        System.out.println(barberoVO.getResultados().size());
 	}
-
+	
 	public List<SucursalDTO> getCatSucursal() {
 		return catSucursal;
 	}
@@ -90,14 +106,6 @@ public class ControladorAdministracionBarberos implements Serializable{
 
 	public void setBarberoVO(AdministracionBarberosVO barberoVO) {
 		this.barberoVO = barberoVO;
-	}
-
-	public List<BarberoDTO> getResultConsultaBarbero() {
-		return resultConsultaBarbero;
-	}
-
-	public void setResultConsultaBarbero(List<BarberoDTO> resultConsultaBarbero) {
-		this.resultConsultaBarbero = resultConsultaBarbero;
 	}
 
 	public List<ServicioDTO> getServicioSource() {

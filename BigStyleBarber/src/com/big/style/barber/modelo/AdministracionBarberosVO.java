@@ -2,6 +2,9 @@ package com.big.style.barber.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dominio.BarberoDTO;
 
@@ -18,6 +21,18 @@ public class AdministracionBarberosVO implements Serializable{
 	public Date ptHorarioFin;
 	public String[] dias;
 	public BarberoDTO barberoDTO = new BarberoDTO();
+	List<BarberoDTO> resultConsultaBarbero;
+	
+	List<ResultadosBarberoVista> resultados;
+	
+	
+	public List<ResultadosBarberoVista> getResultados() {
+		return resultados;
+	}
+
+	public void setResultados(List<ResultadosBarberoVista> resultados) {
+		this.resultados = resultados;
+	}
 	
 	public String getPsNombre() {
 		return psNombre;
@@ -84,6 +99,12 @@ public class AdministracionBarberosVO implements Serializable{
 	}
 	public void setBarberoDTO(BarberoDTO barberoDTO) {
 		this.barberoDTO = barberoDTO;
+	}
+	public List<BarberoDTO> getResultConsultaBarbero() {
+		return resultConsultaBarbero;
+	}
+	public void setResultConsultaBarbero(List<BarberoDTO> resultConsultaBarbero) {
+		this.resultConsultaBarbero = resultConsultaBarbero;
 	}
 	
 }
