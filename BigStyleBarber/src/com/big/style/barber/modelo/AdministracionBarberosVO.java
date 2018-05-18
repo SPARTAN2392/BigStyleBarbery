@@ -22,10 +22,28 @@ public class AdministracionBarberosVO implements Serializable{
 	public String[] dias;
 	public BarberoDTO barberoDTO = new BarberoDTO();
 	List<BarberoDTO> resultConsultaBarbero;
+	public String nombreFoto;
+	public byte[] foto;
 	
 	List<ResultadosBarberoVista> resultados;
 	
 	
+	public String getNombreFoto() {
+		return nombreFoto;
+	}
+
+	public void setNombreFoto(String nombreFoto) {
+		this.nombreFoto = nombreFoto;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
+
 	public List<ResultadosBarberoVista> getResultados() {
 		return resultados;
 	}

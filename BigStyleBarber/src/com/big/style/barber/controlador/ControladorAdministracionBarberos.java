@@ -8,10 +8,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DualListModel;
-import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
@@ -20,8 +20,8 @@ import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
+import com.big.style.barber.modelo.RegistroBarberosVO;
 import com.big.style.barber.modelo.ResultadosBarberoVista;
-import com.big.style.barber.utils.Utilerias;
 
 @ManagedBean(name = "controladorAdminBarberos")
 @ViewScoped
@@ -44,9 +44,10 @@ public class ControladorAdministracionBarberos implements Serializable{
 	
 	BarberoDAO barberoDAO = new BarberoDAO();
 	AdministracionBarberosVO barberoVO;
+	ResultadosBarberoVista barberoSeleccionado;
 	
 	@PostConstruct
-	private void init() {
+	private void init() {		
 		catSucursal = catalogosDAO.getCatSucursales();
 		catPuesto = catalogosDAO.getCatPuestos();
 		
@@ -66,6 +67,7 @@ public class ControladorAdministracionBarberos implements Serializable{
         dias.add("S");
 	    
 		barberoVO = new AdministracionBarberosVO();
+		barberoSeleccionado = new ResultadosBarberoVista();
 	}		
 	
 	public void consultaBarbero() {
@@ -77,6 +79,10 @@ public class ControladorAdministracionBarberos implements Serializable{
 			res.setBarberoRes(barbero);
 			if(barbero.getPoFoto() != null) {
 				res.setRenderFoto(new DefaultStreamedContent(new ByteArrayInputStream(barbero.getPoFoto())));
+			}else {
+				res.setRenderFoto(new DefaultStreamedContent(FacesContext.getCurrentInstance()
+				.getExternalContext()
+				.getResourceAsStream("images/FotoDefault.png")));
 			}
 			barberoVO.getResultados().add(res);
 		}
@@ -147,6 +153,14 @@ public class ControladorAdministracionBarberos implements Serializable{
 	public void setSelectedDias(String[] selectedDias) {
 		this.selectedDias = selectedDias;
 	}
-	
-	
+
+	public ResultadosBarberoVista getBarberoSeleccionado() {
+		return barberoSeleccionado;
+	}
+
+	public void setBarberoSeleccionado(ResultadosBarberoVista barberoSeleccionado) {
+		this.barberoSeleccionado = barberoSeleccionado;
+	}
+
+
 }

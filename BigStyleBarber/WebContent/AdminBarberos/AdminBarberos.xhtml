@@ -131,31 +131,30 @@
 					</p:panel>
 								
 					
-			</p:fieldset>
+			</p:fieldset>			
 				<p:carousel id = "carrouselBarbero" value="#{controladorAdminBarberos.barberoVO.resultados}" headerText="Resultados" var="barbero" itemStyle="text-align:center" responsive="true">
-       						<h:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">         						
-       							<c:choose >
-       								<c:when test="#{empty barbero.renderFoto}">
-       									<f:facet name="header">
-							                <p:graphicImage url="/images/FotoDefault.png" />
-							            </f:facet>
-       								</c:when>
-       								<c:otherwise>
-       									<f:facet name="header">
-							                <p:graphicImage value="#{barbero.renderFoto}" stream="false"/> 
-							            </f:facet>
-       								</c:otherwise>
-       							</c:choose>         			                    					            
-					 
+       						<h:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">   
+       							<f:facet name="header">    							       							     						
+     								<p:graphicImage value="#{barbero.renderFoto}" stream="false" height="225px" width="225px"/>     												                	
+					        	</f:facet>
+					        	
 					             <h:outputText value="Nombre:" />
 					            <h:outputText value="#{barbero.barberoRes.psNombreBarbero}" />
 					 
 					            <h:outputText value="Sucursal:" />
 					            <h:outputText value="#{barbero.barberoRes.poSucursalFk.psNombreBarberia}"/>
+					            
+					            <f:facet name="footer">
+					                <p:commandButton oncomplete="PF('EditarBarberoDialog').show()" icon="ui-icon-search" update = ":EditarBarberoForm">
+					                	<f:setPropertyActionListener value="#{barbero}" target="#{controladorAdminBarberos.barberoSeleccionado}" />
+					                </p:commandButton>
+					                
+					            </f:facet>
 					        </h:panelGrid>
 					 
 					     
 					    </p:carousel>
 		</h:form>
+		<ui:include src="EditarBarberos.xhtml" />
 	</ui:define>
 </ui:composition>
