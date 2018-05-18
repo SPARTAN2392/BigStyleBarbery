@@ -1,0 +1,213 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:func="http://bigstyle.com/funciones">
+                
+	<p:dialog id="EditarBarberoDlg" widgetVar="EditarBarberoDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ModificacionBarbero_Header}">
+        <h:form id="EditarBarberoForm" >
+
+					<p:panelGrid id="editarBarberoForm">
+						<p:row>
+							<p:column colspan="6">
+								<p:panelGrid>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_Nombre}" for="idNombre" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idNombre"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psNombreBarbero}"
+												title="Nombre" required="#{not empty param[guardar.clientId]}"
+												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Nombre)}" />
+											<p:message for="idNombre"/>
+										</p:column>
+
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_APaterno}" for="idAPaterno" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idAPaterno"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoPaterno}"
+												title="Apellido Paterno" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_APaterno)}"/>
+											<p:message for="idAPaterno"/>
+										</p:column>
+
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_AMaterno}" for="idAMaterno" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idAMaterno"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoMaterno}"
+												title="Apellido Materno" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_AMaterno)}"/>
+											<p:message for="idAMaterno"/>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_Edad}" for="idEdad" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idEdad"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.piEdad}"
+												title="Edad" />
+												<p:message for="idEdad"/>
+										</p:column>
+
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_Telefono}" for="idTelefono" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idTelefono"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psTelefono}"
+												title="Telefono" />
+												<p:message for="idTelefono"/>
+										</p:column>
+										<p:column>
+											<p:fileUpload label="#{msg.RegistroBarbero_Foto}"
+												fileUploadListener="#{controladorAdminBarberos.handleFileUpload}"
+												mode="advanced" dragDropSupport="false" fileLimit="1"
+												allowTypes="/(\.|\/)(jpe?g|png)$/" auto="true"
+												update="idNombreFoto" />
+										</p:column>
+										<p:column>
+											<p:outputLabel id="idNombreFoto"
+												value="#{controladorAdminBarberos.barberoSeleccionado.nombreFoto}" />
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:column>
+						</p:row>
+
+						<!-- <p:row>
+							<p:column colspan="6">
+								<p:panelGrid>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_Direccion}" for="idDireccion" />
+										</p:column>
+										<p:column>
+											<p:inputText id="idDireccion"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psDireccion}"
+												title="Direccion" />
+										</p:column>
+
+										<p:column colspan="4" rowspan="2">
+											<h3 style="margin-top: 0"><p:outputLabel value="#{msg.RegistroBarbero_Servicios}" /></h3>
+											<p:pickList id="idServicios"
+												value="#{controladorAdminBarberos.catServicio}"
+												var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
+												itemValue="#{servicioCat}" 
+												converter="genericConverter"
+												required="#{not empty param[guardar.clientId]}"
+												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Servicios)}"/>
+												<p:message for = "idServicios"/>
+										</p:column>
+									</p:row>
+									<p:row>
+										<p:column>
+											<p:outputLabel value="#{msg.RegistroBarbero_Biografia}" for="idBiografia" />
+										</p:column>
+										<p:column>
+											<p:inputTextarea id="idBiografia"
+												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psBiografia}"
+												rows="10" cols="50" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Biografia)}"/>
+												<p:message for="idBiografia"/>
+										</p:column>
+									</p:row>
+								</p:panelGrid>
+							</p:column>
+						</p:row>
+
+						<p:row>
+							<p:column>
+								<p:outputLabel value="#{msg.RegistroBarbero_Sucursal}" for="idSucursal" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu id="idSucursal"
+									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.poSucursalFk.piIdSucursal}"
+									required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Sucursal)}">
+									<f:selectItem itemLabel="#{msg.global_msg_ElijaOpcion}" itemValue="" />
+									<f:selectItems
+										value="#{controladorAdminBarberos.catSucursal}"
+										var="sucursalCat" itemLabel="#{sucursalCat.psNombreBarberia}"
+										itemValue="#{sucursalCat.piIdSucursal}" />
+								</p:selectOneMenu>
+								<p:message for="idSucursal"/>
+							</p:column>
+							<p:column colspan="4">
+								<p:panelGrid>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioDe}" for="idHoraIni" />
+										<pe:timePicker id="idHoraIni"
+											value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.ptHorarioInicio}"
+											mode="popup" widgetVar="popupTimeWidget"
+											label="Popup time picker" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioInicio)}"/>
+											<p:message for="idHoraIni"/>
+									</p:column>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
+										<pe:timePicker id="idHorarioFin"
+											value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.ptHorarioFin}"
+											mode="popup" widgetVar="popupTimeWidget"
+											label="Popup time picker" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioFin)}"/>
+											<p:message for="idHorarioFin"/>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:outputLabel value="#{msg.RegistroBarbero_Email}" for="idEmail" />
+							</p:column>
+							<p:column>
+								<p:inputText id="idEmail"
+									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psEmail}" >
+									<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{empty param[guardar.clientId]}"/>
+								</p:inputText>
+								<p:message for="idEmail"/>
+							</p:column>
+							<p:column colspan="4">																
+								<p:panelGrid border="1">
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
+									</p:column>
+									<p:column colspan="4">
+										<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
+										requiredMessage="#{msg.RegistroBarbero_Validacion_Dias}">
+									        <f:selectItems value="#{controladorAdminBarberos.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
+									    </p:selectManyCheckbox>
+									    <p:message for="diasBoxes"/>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+							
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:outputLabel value="#{msg.RegistroBarbero_Puesto}" for="idPuesto" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu id="idPuesto"
+									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.poPuestoFK.piIdPuesto}"
+									required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Puesto)}">
+									<f:selectItem itemLabel="#{msg.global_msg_ElijaOpcion}" itemValue="" />
+									<f:selectItems value="#{controladorAdminBarberos.catPuesto}"
+										var="puestoCat" itemLabel="#{puestoCat.psPuesto}"
+										itemValue="#{puestoCat.piIdPuesto}" />
+								</p:selectOneMenu>
+								<p:message for="idPuesto"/>
+							</p:column>
+						</p:row>						 -->
+					</p:panelGrid>
+					
+                
+        </h:form>
+    </p:dialog>
+                
+                
+                
+</ui:composition>
