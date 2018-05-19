@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.primefaces.model.StreamedContent;
-
 
 @Entity
 @Table(name = "bs_barbero_tab")

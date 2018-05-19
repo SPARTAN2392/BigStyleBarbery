@@ -82,7 +82,7 @@
 							</p:column>
 						</p:row>
 
-						<!-- <p:row>
+						 <p:row>
 							<p:column colspan="6">
 								<p:panelGrid>
 									<p:row>
@@ -98,7 +98,7 @@
 										<p:column colspan="4" rowspan="2">
 											<h3 style="margin-top: 0"><p:outputLabel value="#{msg.RegistroBarbero_Servicios}" /></h3>
 											<p:pickList id="idServicios"
-												value="#{controladorAdminBarberos.catServicio}"
+												value="#{controladorAdminBarberos.barberoSeleccionado.catServicio}"
 												var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
 												itemValue="#{servicioCat}" 
 												converter="genericConverter"
@@ -122,7 +122,7 @@
 							</p:column>
 						</p:row>
 
-						<p:row>
+						<!--<p:row>
 							<p:column>
 								<p:outputLabel value="#{msg.RegistroBarbero_Sucursal}" for="idSucursal" />
 							</p:column>

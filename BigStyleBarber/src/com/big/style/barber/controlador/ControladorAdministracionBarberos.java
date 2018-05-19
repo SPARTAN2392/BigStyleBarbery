@@ -15,6 +15,7 @@ import org.primefaces.model.DualListModel;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
+import com.big.style.barber.dao.ServicioBarberoDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
@@ -45,6 +46,8 @@ public class ControladorAdministracionBarberos implements Serializable{
 	BarberoDAO barberoDAO = new BarberoDAO();
 	AdministracionBarberosVO barberoVO;
 	ResultadosBarberoVista barberoSeleccionado;
+	
+	ServicioBarberoDAO servicioBarberoDAO = new ServicioBarberoDAO();
 	
 	@PostConstruct
 	private void init() {		
@@ -159,6 +162,14 @@ public class ControladorAdministracionBarberos implements Serializable{
 	}
 
 	public void setBarberoSeleccionado(ResultadosBarberoVista barberoSeleccionado) {
+		barberoSeleccionado.setServicioTarget(servicioBarberoDAO.buscarServiciosBarbero(barberoSeleccionado.getBarberoRes().getPiIdBarbero()));
+		List<ServicioDTO> serTarSel = new ArrayList<ServicioDTO>();
+		for(ServicioDTO ser :barberoSeleccionado.getServicioTarget()) {
+			if(!servicioSource.contains(ser)) {
+				serTarSel.add(ser);
+			}
+		}
+		barberoSeleccionado.setServicioSource(serTarSel);
 		this.barberoSeleccionado = barberoSeleccionado;
 	}
 

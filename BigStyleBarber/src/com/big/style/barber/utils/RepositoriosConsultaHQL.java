@@ -12,5 +12,7 @@ public interface RepositoriosConsultaHQL {
 	public static final String BUSQUEDA_BARBERO_HORARIO_INI = " bar.";
 	public static final String BUSQUEDA_BARBERO_HORARIO_FIN = "";
 	public static final String BUSQUEDA_BARBERO_WHERE_SERVICIO = " bar.piIdBarbero IN (FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk IN (";
-	
+
+	public static final String BUSQUEDA_SERVICIOS_BARBERO = "SELECT ser FROM ServicioDTO ser, ServicioBarberoDTO serBar WHERE"
+			+ " ser.piIdServicioPk = serBar.piIdServicioBarbero AND serBar.poBarbero.piIdBarbero = :piBarbero ";
 }

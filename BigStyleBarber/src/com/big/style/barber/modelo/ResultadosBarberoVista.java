@@ -1,15 +1,42 @@
 package com.big.style.barber.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.primefaces.model.DualListModel;
 import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dominio.BarberoDTO;
+import com.big.style.barber.dominio.ServicioDTO;
 
 public class ResultadosBarberoVista{
 	private BarberoDTO barberoRes;
 	private StreamedContent renderFoto;
 	public String nombreFoto;
 	public byte[] foto;
+	List<ServicioDTO> servicioSource = new ArrayList<ServicioDTO>();;
+	List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
+	DualListModel<ServicioDTO> catServicio;	
 	
+	public List<ServicioDTO> getServicioSource() {
+		return servicioSource;
+	}
+	public void setServicioSource(List<ServicioDTO> servicioSource) {
+		this.servicioSource = servicioSource;
+	}
+	public List<ServicioDTO> getServicioTarget() {
+		return servicioTarget;
+	}
+	public void setServicioTarget(List<ServicioDTO> servicioTarget) {
+		this.servicioTarget = servicioTarget;
+	}
+	public DualListModel<ServicioDTO> getCatServicio() {
+		catServicio = new DualListModel<>(servicioSource, servicioTarget);
+		return catServicio;
+	}
+	public void setCatServicio(DualListModel<ServicioDTO> catServicio) {
+		this.catServicio = catServicio;
+	}
 	public BarberoDTO getBarberoRes() {
 		return barberoRes;
 	}
