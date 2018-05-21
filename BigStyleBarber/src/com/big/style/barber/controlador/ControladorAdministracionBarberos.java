@@ -164,9 +164,12 @@ public class ControladorAdministracionBarberos implements Serializable{
 	public void setBarberoSeleccionado(ResultadosBarberoVista barberoSeleccionado) {
 		barberoSeleccionado.setServicioTarget(servicioBarberoDAO.buscarServiciosBarbero(barberoSeleccionado.getBarberoRes().getPiIdBarbero()));
 		List<ServicioDTO> serTarSel = new ArrayList<ServicioDTO>();
-		for(ServicioDTO ser :barberoSeleccionado.getServicioTarget()) {
-			if(!servicioSource.contains(ser)) {
-				serTarSel.add(ser);
+		
+		for(ServicioDTO serSour : servicioSource) {
+			for(ServicioDTO serTar :barberoSeleccionado.getServicioTarget()) {
+				if(serSour.getPiIdServicioPk() != serTar.getPiIdServicioPk()) {
+					serTarSel.add(serSour);
+				}
 			}
 		}
 		barberoSeleccionado.setServicioSource(serTarSel);

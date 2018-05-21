@@ -10,7 +10,7 @@ import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 
 public class ResultadosBarberoVista{
-	private BarberoDTO barberoRes;
+	private BarberoDTO barberoRes = new BarberoDTO();
 	private StreamedContent renderFoto;
 	public String nombreFoto;
 	public byte[] foto;
