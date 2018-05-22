@@ -18,8 +18,7 @@ public class AdministracionBarberosVO implements Serializable{
 	public Integer piSucursal;
 	public Integer piPuesto;
 	public Date ptHorarioIni;
-	public Date ptHorarioFin;
-	public String[] dias;
+	public Date ptHorarioFin;	
 	public BarberoDTO barberoDTO = new BarberoDTO();
 	List<BarberoDTO> resultConsultaBarbero;
 	public String nombreFoto;
@@ -106,12 +105,7 @@ public class AdministracionBarberosVO implements Serializable{
 	public void setPtHorarioFin(Date ptHorarioFin) {
 		this.ptHorarioFin = ptHorarioFin;
 	}
-	public String[] getDias() {
-		return dias;
-	}
-	public void setDias(String[] dias) {
-		this.dias = dias;
-	}
+
 	public BarberoDTO getBarberoDTO() {
 		return barberoDTO;
 	}

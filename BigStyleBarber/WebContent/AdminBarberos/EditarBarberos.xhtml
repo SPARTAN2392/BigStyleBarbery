@@ -176,9 +176,9 @@
 										<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
 									</p:column>
 									<p:column colspan="4">
-										<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
+										<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.barberoSeleccionado.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
 										requiredMessage="#{msg.RegistroBarbero_Validacion_Dias}">
-									        <f:selectItems value="#{controladorAdminBarberos.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
+									        <f:selectItems value="#{utilerias.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
 									    </p:selectManyCheckbox>
 									    <p:message for="diasBoxes"/>
 									</p:column>
@@ -204,7 +204,7 @@
 						</p:row>						 
 					</p:panelGrid>
 					
-                
+                <p:commandButton binding="#{guardar}" value="Guardar" id="idGuardar" update="barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.editarBarbero}" styleClass="ui-priority-primary" />
         </h:form>
     </p:dialog>
                 

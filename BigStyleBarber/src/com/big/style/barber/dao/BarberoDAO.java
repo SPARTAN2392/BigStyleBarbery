@@ -1,30 +1,22 @@
 package com.big.style.barber.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
-import com.big.style.barber.servicio.ServicioTareaServicios;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
-import com.big.style.barber.utils.Utilerias;
-import com.sun.org.apache.bcel.internal.generic.IUSHR;
 
-public class BarberoDAO {
+public class BarberoDAO {	
 
-@SuppressWarnings("unchecked")
-public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios) {
+	@SuppressWarnings("unchecked")
+	public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios, String[] selectedDias) {
 	
-		String hql = generaBusqueda(poAdminBarberos, servicios);
+		String hql = generaBusqueda(poAdminBarberos, servicios, selectedDias);
 	
 		Map<String, Object> mapa = generarMapa(poAdminBarberos);
 		
@@ -37,7 +29,7 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos,
         return lista;
     }
 	
-	public String generaBusqueda(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios) {
+	public String generaBusqueda(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios, String[] selectedDias) {
 		String hql = RepositoriosConsultaHQL.BUSQUEDA_BARBERO_SELECT;
 		
 		if(poAdminBarberos.getPsNombre() != null && !poAdminBarberos.getPsNombre().equals("")) {
@@ -65,6 +57,38 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos,
 			}
 			idServicios = idServicios.substring(0, idServicios.length() - 1) + "))";
 			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SERVICIO + idServicios;
+		}
+		for(String dia:selectedDias) {
+			switch (dia) {
+				case "D":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_DOMINGO;
+					break;
+				}
+				case "L":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_LUNES;				
+					break;
+				}
+				case "Ma":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MARTES;
+					break;
+				}
+				case "Mi":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MIERCOLES;
+					break;
+				}
+				case "J":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_JUEVES;
+					break;
+				}
+				case "V":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_VIERNES;
+					break;
+				}
+				case "S":{
+					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SABADO;
+					break;
+				}
+			}
 		}
 		
 		return hql;
@@ -101,8 +125,11 @@ public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos,
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return null;
-		
+		return null;		
+	}
+	
+	public void editarBarbero(BarberoDTO poResultBarbero) {
+		GenericDAO.EditarObjecto(poResultBarbero);
 	}
 
 }

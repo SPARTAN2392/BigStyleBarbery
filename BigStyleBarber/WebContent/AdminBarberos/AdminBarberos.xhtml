@@ -8,6 +8,7 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     
     <ui:define name="content">
+    <link rel="stylesheet" type="text/css" href="../css/general.css"/>
         <h:form id="barberosForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
 				<p:panel header="Barberos">
@@ -107,9 +108,9 @@
 													<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
 												</p:column>
 												<p:column colspan="4">
-													<p:selectManyCheckbox id="diasBoxes" value="#{controladorRegistroBarberos.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
+													<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
 													requiredMessage="#{msg.RegistroBarbero_Validacion_Dias}">
-												        <f:selectItems value="#{controladorRegistroBarberos.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
+												        <f:selectItems value="#{utilerias.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
 												    </p:selectManyCheckbox>
 												    <p:message for="diasBoxes"/>
 												</p:column>
@@ -139,7 +140,7 @@
 					        	</f:facet>
 					        	
 					             <h:outputText value="Nombre:" />
-					            <h:outputText value="#{barbero.barberoRes.psNombreBarbero}" />
+					            <h:outputText value="#{barbero.barberoRes.psNombreBarbero} #{barbero.barberoRes.psApellidoPaterno} #{barbero.barberoRes.psApellidoMaterno}" />
 					 
 					            <h:outputText value="Sucursal:" />
 					            <h:outputText value="#{barbero.barberoRes.poSucursalFk.psNombreBarberia}"/>

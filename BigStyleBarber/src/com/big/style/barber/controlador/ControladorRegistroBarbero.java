@@ -18,14 +18,14 @@ import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
-import com.big.style.barber.servicio.ServicioRegistroBarbero;
+import com.big.style.barber.servicio.ServicioTareaBarbero;
 import com.big.style.barber.utils.MessageFactory;
 
 @ManagedBean(name = "controladorRegistroBarberos")
 @ViewScoped
 public class ControladorRegistroBarbero implements Serializable{
 
-	ServicioRegistroBarbero poServicioBarbero = new ServicioRegistroBarbero();
+	ServicioTareaBarbero poServicioBarbero = new ServicioTareaBarbero();
 	CatalogoDAO catalogosDAO = new CatalogoDAO();
 	List<SucursalDTO> catSucursal;
 	List<PuestoDTO> catPuesto;

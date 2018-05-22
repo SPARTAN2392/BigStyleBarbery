@@ -6,11 +6,55 @@ import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
+import com.big.style.barber.modelo.ResultadosBarberoVista;
 
-public class ServicioRegistroBarbero {
+public class ServicioTareaBarbero {
 	
 	BarberoDAO barberoDAO = new BarberoDAO();
 	ServicioTareaServicios poServicioTareaServicios = new ServicioTareaServicios();
+	
+	public void editarBarbero(ResultadosBarberoVista poResultadoVista) {
+		ajustarDiasEditar(poResultadoVista);
+		if(poResultadoVista.getNombreFoto() != null && !poResultadoVista.getNombreFoto().equals("")) {
+			poResultadoVista.getBarberoRes().setPoFoto(poResultadoVista.getFoto());
+		}
+		barberoDAO.editarBarbero(poResultadoVista.getBarberoRes());
+	}
+	
+	public void ajustarDiasEditar(ResultadosBarberoVista poResultVista) {
+		for(String dia:poResultVista.getSelectedDias()) {
+			switch (dia) {
+				case "D":{
+					poResultVista.getBarberoRes().setPiDiaDomingo(1);
+					break;
+				}
+				case "L":{
+					poResultVista.getBarberoRes().setPiDiaLunes(1);				
+					break;
+				}
+				case "Ma":{
+					poResultVista.getBarberoRes().setPiDiaMartes(1);
+					break;
+				}
+				case "Mi":{
+					poResultVista.getBarberoRes().setPiDiaMiercoles(1);
+					break;
+				}
+				case "J":{
+					poResultVista.getBarberoRes().setPiDiaJueves(1);
+					break;
+				}
+				case "V":{
+					poResultVista.getBarberoRes().setPiDiaViernes(1);
+					break;
+				}
+				case "S":{
+					poResultVista.getBarberoRes().setPiDiaSabado(1);
+					break;
+				}
+			}
+		}
+	}
 	
 	public void insertarBarbero(RegistroBarberosVO poRegistroBarbero, String[] dias, DualListModel<ServicioDTO> poDualListServicios) {		
 		BarberoDTO res = new BarberoDTO();

@@ -83,7 +83,7 @@ public class GenericDAO {
     }
 	
 	public static Object GuardarObjeto(Object poObject) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession(); 
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
 			Object insert = session.save(poObject);
@@ -95,4 +95,16 @@ public class GenericDAO {
 		}
 	}
 	
+	public static Object EditarObjecto(Object poObject) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Object edit = session.merge(poObject);
+			session.getTransaction().commit();
+			return edit;
+		}catch(Exception ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
 }

@@ -17,6 +17,7 @@ public class ResultadosBarberoVista{
 	List<ServicioDTO> servicioSource = new ArrayList<ServicioDTO>();;
 	List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
 	DualListModel<ServicioDTO> catServicio;	
+	private String[] selectedDias = new String[7];
 	
 	public List<ServicioDTO> getServicioSource() {
 		return servicioSource;
@@ -60,6 +61,12 @@ public class ResultadosBarberoVista{
 	}
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+	public String[] getSelectedDias() {
+		return selectedDias;
+	}
+	public void setSelectedDias(String[] selectedDias) {
+		this.selectedDias = selectedDias;
 	}
 	
 		
