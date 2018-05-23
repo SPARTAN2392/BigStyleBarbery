@@ -207,8 +207,8 @@
 							</p:column>
 						</p:row>						
 					</p:panelGrid>
-					<p:commandButton binding="#{guardar}" value="Insertar" id="idInsertar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
-					<p:commandButton value="Limpiar" id="idLimpiar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.limpiarCamposBarbero}" styleClass="ui-priority-primary" />
+					<p:commandButton binding="#{guardar}" value="#{msg.RegistroBarbero_Insertar}" icon="fa fa-plus" id="idInsertar" update="altaBarberosForm:campos" actionListener="#{controladorRegistroBarberos.registrarBarbero}" styleClass="ui-priority-primary" />
+					<p:commandButton value="#{msg.global_lbl_Limpiar}" icon="fa fa-refresh" id="idLimpiar" update="altaBarberosForm:campos, :growl" actionListener="#{controladorRegistroBarberos.limpiarCamposBarbero}" styleClass="ui-priority-primary" />
 				</p:panel>
                 
             </p:fieldset>

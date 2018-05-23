@@ -58,38 +58,41 @@ public class BarberoDAO {
 			idServicios = idServicios.substring(0, idServicios.length() - 1) + "))";
 			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SERVICIO + idServicios;
 		}
-		for(String dia:selectedDias) {
-			switch (dia) {
-				case "D":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_DOMINGO;
-					break;
-				}
-				case "L":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_LUNES;				
-					break;
-				}
-				case "Ma":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MARTES;
-					break;
-				}
-				case "Mi":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MIERCOLES;
-					break;
-				}
-				case "J":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_JUEVES;
-					break;
-				}
-				case "V":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_VIERNES;
-					break;
-				}
-				case "S":{
-					hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SABADO;
-					break;
+		if(selectedDias != null && selectedDias.length > 0) {
+			for(String dia:selectedDias) {
+				switch (dia) {
+					case "D":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_DOMINGO;
+						break;
+					}
+					case "L":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_LUNES;				
+						break;
+					}
+					case "Ma":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MARTES;
+						break;
+					}
+					case "Mi":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_MIERCOLES;
+						break;
+					}
+					case "J":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_JUEVES;
+						break;
+					}
+					case "V":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_VIERNES;
+						break;
+					}
+					case "S":{
+						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SABADO;
+						break;
+					}
 				}
 			}
 		}
+		
 		
 		return hql;
 	}

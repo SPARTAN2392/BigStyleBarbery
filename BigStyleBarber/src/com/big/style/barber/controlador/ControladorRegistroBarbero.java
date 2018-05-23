@@ -68,14 +68,12 @@ public class ControladorRegistroBarbero implements Serializable{
     }
 	
 	public void limpiarCamposBarbero() {
-		System.out.println("limpiar");
 		catServicio = new DualListModel<ServicioDTO>(servicioSource, servicioTarget);
 		registroBarberoVO = new RegistroBarberosVO();
 		selectedDias = new String[] {};
 	}		
 	
 	public void registrarBarbero() {
-		System.out.println("registrar");
 		poServicioBarbero.insertarBarbero(registroBarberoVO, selectedDias, catServicio);
 		limpiarCamposBarbero();
 		MessageFactory.addMessage(FacesMessage.SEVERITY_INFO, "global_msg_creado", "Barbero");

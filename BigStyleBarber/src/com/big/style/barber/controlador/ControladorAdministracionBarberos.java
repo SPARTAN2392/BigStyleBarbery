@@ -75,6 +75,12 @@ public class ControladorAdministracionBarberos implements Serializable{
 		barberoSeleccionado = new ResultadosBarberoVista();
 	}		
 	
+	public void limpiarBusquedaForm() {
+		barberoVO = new AdministracionBarberosVO();
+		barberoSeleccionado = new ResultadosBarberoVista();
+		selectedDias = new String[] {};
+	}
+	
 	public void editarBarbero() {
 		System.out.println("editar barbero");
 		servicioTareaBarbero.editarBarbero(barberoSeleccionado);

@@ -7,7 +7,8 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:func="http://bigstyle.com/funciones">
                 
-	<p:dialog id="EditarBarberoDlg" widgetVar="EditarBarberoDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ModificacionBarbero_Header}">
+	<p:dialog id="EditarBarberoDlg" widgetVar="EditarBarberoDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ModificacionBarbero_Header}" closable="false" >		
+		<script src="../js/actions.js"/>
         <h:form id="EditarBarberoForm" >
 
 					<p:panelGrid id="editarBarberoForm">
@@ -21,7 +22,7 @@
 										<p:column>
 											<p:inputText id="idNombre"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psNombreBarbero}"
-												title="Nombre" required="#{not empty param[guardar.clientId]}"
+												title="Nombre" required="true"
 												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Nombre)}" />
 											<p:message for="idNombre"/>
 										</p:column>
@@ -32,7 +33,7 @@
 										<p:column>
 											<p:inputText id="idAPaterno"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoPaterno}"
-												title="Apellido Paterno" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_APaterno)}"/>
+												title="Apellido Paterno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_APaterno)}"/>
 											<p:message for="idAPaterno"/>
 										</p:column>
 
@@ -42,7 +43,7 @@
 										<p:column>
 											<p:inputText id="idAMaterno"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoMaterno}"
-												title="Apellido Materno" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_AMaterno)}"/>
+												title="Apellido Materno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_AMaterno)}"/>
 											<p:message for="idAMaterno"/>
 										</p:column>
 									</p:row>
@@ -102,7 +103,7 @@
 												var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
 												itemValue="#{servicioCat}" 
 												converter="genericConverter"
-												required="#{not empty param[guardar.clientId]}"
+												required="true"
 												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Servicios)}"/>
 												<p:message for = "idServicios"/>
 										</p:column>
@@ -114,7 +115,7 @@
 										<p:column>
 											<p:inputTextarea id="idBiografia"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psBiografia}"
-												rows="10" cols="50" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Biografia)}"/>
+												rows="10" cols="50" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Biografia)}"/>
 												<p:message for="idBiografia"/>
 										</p:column>
 									</p:row>
@@ -129,7 +130,7 @@
 							<p:column>
 								<p:selectOneMenu id="idSucursal"
 									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.poSucursalFk.piIdSucursal}"
-									required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Sucursal)}">
+									required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Sucursal)}">
 									<f:selectItem itemLabel="#{msg.global_msg_ElijaOpcion}" itemValue="" />
 									<f:selectItems
 										value="#{controladorAdminBarberos.catSucursal}"
@@ -145,7 +146,7 @@
 										<pe:timePicker id="idHoraIni"
 											value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.ptHorarioInicio}"
 											mode="popup" widgetVar="popupTimeWidget"
-											label="Popup time picker" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioInicio)}"/>
+											label="Popup time picker" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioInicio)}"/>
 											<p:message for="idHoraIni"/>
 									</p:column>
 									<p:column>
@@ -153,7 +154,7 @@
 										<pe:timePicker id="idHorarioFin"
 											value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.ptHorarioFin}"
 											mode="popup" widgetVar="popupTimeWidget"
-											label="Popup time picker" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioFin)}"/>
+											label="Popup time picker" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioFin)}"/>
 											<p:message for="idHorarioFin"/>
 									</p:column>
 								</p:panelGrid>
@@ -176,7 +177,7 @@
 										<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
 									</p:column>
 									<p:column colspan="4">
-										<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.barberoSeleccionado.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
+										<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.barberoSeleccionado.selectedDias}" layout="grid" columns="7" required="true" 
 										requiredMessage="#{msg.RegistroBarbero_Validacion_Dias}">
 									        <f:selectItems value="#{utilerias.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
 									    </p:selectManyCheckbox>
@@ -193,7 +194,7 @@
 							<p:column>
 								<p:selectOneMenu id="idPuesto"
 									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.poPuestoFK.piIdPuesto}"
-									required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Puesto)}">
+									required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Puesto)}">
 									<f:selectItem itemLabel="#{msg.global_msg_ElijaOpcion}" itemValue="" />
 									<f:selectItems value="#{controladorAdminBarberos.catPuesto}"
 										var="puestoCat" itemLabel="#{puestoCat.psPuesto}"
@@ -201,13 +202,26 @@
 								</p:selectOneMenu>
 								<p:message for="idPuesto"/>
 							</p:column>
-						</p:row>						 
+							
+							<p:column>
+								<p:outputLabel value="#{msg.ModificacionBarbero_Estado}" for="idActivo" />
+							</p:column>
+							<p:column>
+								<p:selectOneMenu id="idActivo"
+									value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.piEstado}"
+									required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Puesto)}">
+									<f:selectItem itemLabel="#{msg.ModificacionBarbero_Activo}" itemValue="1" />
+									<f:selectItem itemLabel="#{msg.ModificacionBarbero_Inactivo}" itemValue="0" />
+								</p:selectOneMenu>
+							</p:column>
+						</p:row>
+											 
 					</p:panelGrid>
 					
-                <p:commandButton binding="#{guardar}" value="Guardar" id="idGuardar" update="barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.editarBarbero}" styleClass="ui-priority-primary" />
+                <p:commandButton binding="#{guardar}" value="Guardar" id="idGuardar" update="editarBarberoForm, barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.editarBarbero}" styleClass="ui-priority-primary"
+                	oncomplete="handleSubmit(args,'EditarBarberoDialog');" icon="fa fa-edit"/>
+                <p:commandButton value="#{msg.global_lbl_Cancelar}" oncomplete="PF('EditarBarberoDialog').hide();" immediate="true" icon="fa fa-close"/>
         </h:form>
     </p:dialog>
-                
-                
-                
+                                           
 </ui:composition>
