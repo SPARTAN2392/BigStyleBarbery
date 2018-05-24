@@ -12,19 +12,23 @@
         <h:form id="barberosForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
 				<p:panel header="Barberos" id = "camposBarberos">
-                	<p:panelGrid>
+                	<p:panelGrid styleClass="gridNoBorder">
                 		<p:row>
                 			<p:column>
 								<p:outputLabel value="Nombre" for="idNombre" />
 							</p:column>
 							<p:column>
-	                    		<p:inputText id="idNombre" value="#{controladorAdminBarberos.barberoVO.psNombre}" title="Nombre"/>
+	                    		<p:inputText id="idNombre" value="#{controladorAdminBarberos.barberoVO.psNombre}" title="Nombre">
+	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    		</p:inputText>
                     		</p:column>
                     		<p:column>
 	                    		<p:outputLabel value="Apellido Paterno" for="idAPaterno" />
 	                    	</p:column>
 	                    	<p:column>
-	                    		<p:inputText id="idAPaterno" value="#{controladorAdminBarberos.barberoVO.psAPaterno}" title="Apellido Paterno"/>
+	                    		<p:inputText id="idAPaterno" value="#{controladorAdminBarberos.barberoVO.psAPaterno}" title="Apellido Paterno">
+	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    		</p:inputText>	                    		
 	                    	</p:column>
                     	</p:row>
                     	
@@ -33,13 +37,17 @@
 	                    		<p:outputLabel value="Apellido Materno" for="idAMaterno" />
 	                    	</p:column>
 	                    	<p:column>
-	                    		<p:inputText id="idAMaterno" value="#{controladorAdminBarberos.barberoVO.psAMaterno}" title="Apellido Materno"/>
+	                    		<p:inputText id="idAMaterno" value="#{controladorAdminBarberos.barberoVO.psAMaterno}" title="Apellido Materno">
+	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    		</p:inputText>
 	                    	</p:column>
 	                    	<p:column>
 	                    		<p:outputLabel value="Edad" for="idEdad" />
 	                    	</p:column>
 	                    	<p:column>
-	                    		<p:inputText id="idEdad" value="#{controladorAdminBarberos.barberoVO.piEdad}" title="Edad"/>
+	                    		<p:inputText id="idEdad" value="#{controladorAdminBarberos.barberoVO.piEdad}" title="Edad">
+	                    			<p:keyFilter regEx="/[\d]/"/>
+	                    		</p:inputText>
 	                    	</p:column>
                     	</p:row>
                     	
@@ -122,13 +130,11 @@
                 		</p:row>
                 		                		        				        				
 				    </p:panelGrid>
-					
-					<p:commandButton value="#{msg.global_lbl_Buscar}" icon = "fa fa-search" id="idBuscar" update=":growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.consultaBarbero}" styleClass="ui-priority-primary" />
-					<p:commandButton value="#{msg.global_lbl_Limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":barberosForm:camposBarberos, :growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.limpiarBusquedaForm}" styleClass="ui-priority-primary" />
-                    	
-                    	<br />
-               			
-                    	
+				    <br />
+					<div align="center">
+						<p:commandButton value="#{msg.global_lbl_Buscar}" icon = "fa fa-search" id="idBuscar" update=":growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.consultaBarbero}" styleClass="ui-priority-primary"/>
+						<p:commandButton value="#{msg.global_lbl_Limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":barberosForm:camposBarberos, :growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.limpiarBusquedaForm}" styleClass="ui-priority-primary" />
+                    </div>               		                    	
                     	
 					</p:panel>
 								

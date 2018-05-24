@@ -11,7 +11,7 @@
 		<script src="../js/actions.js"/>
         <h:form id="EditarBarberoForm" >
 
-					<p:panelGrid id="editarBarberoForm">
+					<p:panelGrid id="editarBarberoForm" styleClass="gridNoBorder">
 						<p:row>
 							<p:column colspan="6">
 								<p:panelGrid>
@@ -23,7 +23,9 @@
 											<p:inputText id="idNombre"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psNombreBarbero}"
 												title="Nombre" required="true"
-												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Nombre)}" />
+												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Nombre)}">
+												<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    					</p:inputText>	
 											<p:message for="idNombre"/>
 										</p:column>
 
@@ -33,7 +35,9 @@
 										<p:column>
 											<p:inputText id="idAPaterno"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoPaterno}"
-												title="Apellido Paterno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_APaterno)}"/>
+												title="Apellido Paterno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_APaterno)}">
+												<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    					</p:inputText>
 											<p:message for="idAPaterno"/>
 										</p:column>
 
@@ -43,7 +47,9 @@
 										<p:column>
 											<p:inputText id="idAMaterno"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psApellidoMaterno}"
-												title="Apellido Materno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_AMaterno)}"/>
+												title="Apellido Materno" required="true" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_AMaterno)}">												
+												<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    					</p:inputText>
 											<p:message for="idAMaterno"/>
 										</p:column>
 									</p:row>
@@ -54,7 +60,9 @@
 										<p:column>
 											<p:inputText id="idEdad"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.piEdad}"
-												title="Edad" />
+												title="Edad" >
+												<p:keyFilter regEx="/[\d]/"/>
+	                    					</p:inputText>
 												<p:message for="idEdad"/>
 										</p:column>
 
@@ -64,7 +72,9 @@
 										<p:column>
 											<p:inputText id="idTelefono"
 												value="#{controladorAdminBarberos.barberoSeleccionado.barberoRes.psTelefono}"
-												title="Telefono" />
+												title="Telefono">
+												<p:keyFilter regEx="/[\d]/"/>
+	                    					</p:inputText>
 												<p:message for="idTelefono"/>
 										</p:column>
 										<p:column>
