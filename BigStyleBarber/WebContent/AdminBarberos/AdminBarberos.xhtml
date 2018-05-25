@@ -9,6 +9,7 @@
     
     <ui:define name="content">
     <link rel="stylesheet" type="text/css" href="../css/general.css"/>
+    <script src="../js/AdminBarbero.js"/>
         <h:form id="barberosForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
 				<p:panel header="Barberos" id = "camposBarberos">
@@ -30,6 +31,16 @@
 	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
 	                    		</p:inputText>	                    		
 	                    	</p:column>
+	                    	<p:column colspan="4" rowspan="4">
+								<h3 style="margin-top: 0"><p:outputLabel value="#{msg.RegistroBarbero_Servicios}" /></h3>
+								<p:pickList id="idServicios"
+									value="#{controladorAdminBarberos.catServicio}"
+									var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
+									itemValue="#{servicioCat}" 
+									converter="genericConverter"
+									/>
+									<p:message for = "idServicios"/>
+							</p:column>	  
                     	</p:row>
                     	
                     	<p:row>
@@ -51,64 +62,75 @@
 	                    	</p:column>
                     	</p:row>
                     	
+                    	<p:row>															
+	                    	<p:column>
+	                    		<p:outputLabel value="Sucursal" for="idSucursal" />
+	                    	</p:column>
+	                    	<p:column>
+		                    	<p:selectOneMenu id="idSucursal" value="#{controladorAdminBarberos.barberoVO.piSucursal}" >
+		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+		                    		<f:selectItems value="#{controladorAdminBarberos.catSucursal}" var="catalogo" itemLabel="#{catalogo.psNombreBarberia}" itemValue="#{catalogo.piIdSucursal}"/>
+		                		</p:selectOneMenu>
+		                	</p:column>		                	
+                			<p:column>
+		                		<p:outputLabel value="Puesto" for="idPuesto" />
+		                	</p:column>	
+		                	<p:column>
+		                    	<p:selectOneMenu id="idPuesto" value="#{controladorAdminBarberos.barberoVO.piPuesto}" >
+		                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
+		                    		<f:selectItems value="#{controladorAdminBarberos.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"/>
+		                		</p:selectOneMenu>
+                    		</p:column>
+                    	</p:row>
+                    	
+                    	<p:row>
+                    		<p:column colspan="2">
+								<p:panelGrid>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioEntrada} #{msg.RegistroBarbero_HorarioDe}" for="idHoraEntradaIni" />
+										<pe:timePicker id="idHoraEntradaIni"
+											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
+											mode="popup" widgetVar="entradaIniTimeWidget"
+											label="Popup time picker" onHourShow="tpEntradaInicioOnHourShowCallback" onMinuteShow="tpEntradaInicioOnMinuteShowCallback"/>
+											<p:message for="idHoraEntradaIni"/>
+									</p:column>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
+										<pe:timePicker id="idHoraEntradaFin"
+											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
+											mode="popup" widgetVar="entradaFinTimeWidget"
+											label="Popup time picker" />
+											<p:message for="idHoraEntradaFin" onHourShow="tpEntradaFinOnHourShowCallback" onMinuteShow="tpEntradaFinOnMinuteShowCallback"/>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+							<p:column colspan="2">
+								<p:panelGrid>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioSalida} #{msg.RegistroBarbero_HorarioDe}" for="idHoraSalidaIni" />
+										<pe:timePicker id="idHoraSalidaIni"
+											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
+											mode="popup" widgetVar="salidaIniTimeWidget"
+											label="Popup time picker" />
+											<p:message for="idHoraSalidaIni"/>
+									</p:column>
+									<p:column>
+										<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
+										<pe:timePicker id="idHoraSalidaFin"
+											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
+											mode="popup" widgetVar="salidaFinTimeWidget"
+											label="Popup time picker" />
+											<p:message for="idHoraSalidaFin"/>
+									</p:column>
+								</p:panelGrid>
+							</p:column>
+                    	</p:row>
+                    	
                     	<p:row>	        
                     		<p:column colspan="4">                    			
 								<p:panelGrid> 
-									<p:row>
-										<p:column colspan="4" rowspan="4">
-											<h3 style="margin-top: 0"><p:outputLabel value="#{msg.RegistroBarbero_Servicios}" /></h3>
-											<p:pickList id="idServicios"
-												value="#{controladorAdminBarberos.catServicio}"
-												var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
-												itemValue="#{servicioCat}" 
-												converter="genericConverter"
-												/>
-												<p:message for = "idServicios"/>
-										</p:column>	  					
-				                    	<p:column>
-				                    		<p:outputLabel value="Sucursal" for="idSucursal" />
-				                    	</p:column>
-				                    	<p:column>
-					                    	<p:selectOneMenu id="idSucursal" value="#{controladorAdminBarberos.barberoVO.piSucursal}" >
-					                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
-					                    		<f:selectItems value="#{controladorAdminBarberos.catSucursal}" var="catalogo" itemLabel="#{catalogo.psNombreBarberia}" itemValue="#{catalogo.piIdSucursal}"/>
-					                		</p:selectOneMenu>
-					                	</p:column>
-					                	
-									</p:row>
-									<p:row>
-			                			<p:column>
-					                		<p:outputLabel value="Puesto" for="idPuesto" />
-					                	</p:column>	
-					                	<p:column>
-					                    	<p:selectOneMenu id="idPuesto" value="#{controladorAdminBarberos.barberoVO.piPuesto}" >
-					                    		<f:selectItem itemLabel="-- Elija Opción --" itemValue="0" />
-					                    		<f:selectItems value="#{controladorAdminBarberos.catPuesto}" var="catalogo" itemLabel="#{catalogo.psPuesto}" itemValue="#{catalogo.piIdPuesto}"/>
-					                		</p:selectOneMenu>
-			                    		</p:column>
-			                    	</p:row>
-			                    	<p:row>
-			                    		<p:column colspan="2">
-											<p:panelGrid>
-												<p:column>
-													<p:outputLabel value="#{msg.RegistroBarbero_HorarioDe}" for="idHoraIni" />
-													<pe:timePicker id="idHoraIni"
-														value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
-														mode="popup" widgetVar="popupTimeWidget"
-														label="Popup time picker" />
-														<p:message for="idHoraIni"/>
-												</p:column>
-												<p:column>
-													<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
-													<pe:timePicker id="idHorarioFin"
-														value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
-														mode="popup" widgetVar="popupTimeWidget"
-														label="Popup time picker" />
-														<p:message for="idHorarioFin"/>
-												</p:column>
-											</p:panelGrid>
-										</p:column>
-			                    	</p:row>
+									
+			                    	
 			                    	<p:row>
 			                    		<p:column colspan="2">																
 											<p:panelGrid border="1">
