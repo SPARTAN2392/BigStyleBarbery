@@ -90,8 +90,10 @@
 										<p:outputLabel value="#{msg.RegistroBarbero_HorarioEntrada} #{msg.RegistroBarbero_HorarioDe}" for="idHoraEntradaIni" />
 										<pe:timePicker id="idHoraEntradaIni"
 											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
-											mode="popup" widgetVar="entradaIniTimeWidget"
-											label="Popup time picker" onHourShow="tpEntradaInicioOnHourShowCallback" onMinuteShow="tpEntradaInicioOnMinuteShowCallback"/>
+											mode="popup" widgetVar="entradaIniTimeWidget" 
+											label="Popup time picker" onClose = "asdf	">											
+											<p:ajax event="close" immediate="true" oncomplete="onClose" update="idHoraEntradaFin"/>
+										</pe:timePicker>
 											<p:message for="idHoraEntradaIni"/>
 									</p:column>
 									<p:column>

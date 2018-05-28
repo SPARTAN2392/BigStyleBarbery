@@ -3,6 +3,7 @@ package com.big.style.barber.controlador;
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -113,7 +114,7 @@ public class ControladorAdministracionBarberos implements Serializable{
 		System.out.println(event.getFile().getFileName());
 		barberoSeleccionado.setNombreFoto(event.getFile().getFileName());
 		barberoSeleccionado.setFoto(event.getFile().getContents());
-    }
+    }		
 	
 	public List<SucursalDTO> getCatSucursal() {
 		return catSucursal;

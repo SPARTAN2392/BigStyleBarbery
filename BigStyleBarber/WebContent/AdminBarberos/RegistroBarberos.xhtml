@@ -119,7 +119,7 @@
 													<p:outputLabel value="#{msg.RegistroBarbero_HorarioDe}" for="idHoraIni" />
 													<pe:timePicker id="idHoraIni"
 														value="#{controladorRegistroBarberos.registroBarberoVO.barberoDTO.ptHorarioInicio}"
-														mode="popup" widgetVar="popupTimeWidget"
+														mode="popup" widgetVar="popupTimeWidgetIni"
 														label="Popup time picker" required="#{not empty param[guardar.clientId]}" requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_HorarioInicio)}"/>
 														<p:message for="idHoraIni"/>
 												</p:column>
