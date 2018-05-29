@@ -1,5 +1,5 @@
 function onClose(){
-	console.log("log");
+	PF('entradaFinTimeWidget').setTime(PF('entradaIniTimeWidget').getTime());
 } 
 
 function tpEntradaFinOnHourShowCallback(hour) {  

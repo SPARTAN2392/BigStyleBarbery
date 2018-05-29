@@ -3,15 +3,16 @@ package com.big.style.barber.controlador;
 import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.extensions.event.CloseEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.DualListModel;
 
@@ -27,7 +28,7 @@ import com.big.style.barber.modelo.ResultadosBarberoVista;
 import com.big.style.barber.servicio.ServicioTareaBarbero;
 
 @ManagedBean(name = "controladorAdminBarberos")
-@ViewScoped
+@SessionScoped
 public class ControladorAdministracionBarberos implements Serializable{
 
 	/**
@@ -115,6 +116,12 @@ public class ControladorAdministracionBarberos implements Serializable{
 		barberoSeleccionado.setNombreFoto(event.getFile().getFileName());
 		barberoSeleccionado.setFoto(event.getFile().getContents());
     }		
+	
+	 public void closeListener(CloseEvent closeEvent) {  
+	      FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Close fired",  
+	               "Component id: " + closeEvent.getComponent().getId());  
+	      FacesContext.getCurrentInstance().addMessage(null, msg);  
+	   }  
 	
 	public List<SucursalDTO> getCatSucursal() {
 		return catSucursal;
