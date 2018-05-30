@@ -12,6 +12,7 @@
     <script src="../js/AdminBarbero.js"/>
         <h:form id="barberosForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
+				
 				<p:panel header="Barberos" id = "camposBarberos">
                 	<p:panelGrid styleClass="gridNoBorder">
                 		<p:row>
@@ -92,7 +93,7 @@
 											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
 											mode="popup" widgetVar="entradaIniTimeWidget" 
 											label="Popup time picker" >											
-											<p:ajax event="close" oncomplete="onClose()"/>
+											<p:ajax event="close" oncomplete="onCloseHoraEntrada()"/>
 										</pe:timePicker>
 											<p:message for="idHoraEntradaIni"/>
 									</p:column>
@@ -113,7 +114,9 @@
 										<pe:timePicker id="idHoraSalidaIni"
 											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
 											mode="popup" widgetVar="salidaIniTimeWidget"
-											label="Popup time picker" />
+											label="Popup time picker">
+											<p:ajax event="close" oncomplete="onCloseHoraSalida()"/>
+										</pe:timePicker>
 											<p:message for="idHoraSalidaIni"/>
 									</p:column>
 									<p:column>
@@ -121,7 +124,7 @@
 										<pe:timePicker id="idHoraSalidaFin"
 											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
 											mode="popup" widgetVar="salidaFinTimeWidget"
-											label="Popup time picker" />
+											label="Popup time picker"  onHourShow="tpSalidaFinOnHourShowCallback" onMinuteShow="tpSalidaFinOnMinuteShowCallback"/>
 											<p:message for="idHoraSalidaFin"/>
 									</p:column>
 								</p:panelGrid>
