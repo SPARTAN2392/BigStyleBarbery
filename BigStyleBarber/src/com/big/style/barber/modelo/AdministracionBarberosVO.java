@@ -1,12 +1,14 @@
 package com.big.style.barber.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.primefaces.model.StreamedContent;
 
 import com.big.style.barber.dominio.BarberoDTO;
+import com.big.style.barber.dominio.ServicioDTO;
 
 public class AdministracionBarberosVO implements Serializable{
 
@@ -17,16 +19,37 @@ public class AdministracionBarberosVO implements Serializable{
 	public Integer piServicio;
 	public Integer piSucursal;
 	public Integer piPuesto;
-	public Date ptHorarioIni;
-	public Date ptHorarioFin;	
+	public Date ptHorarioEntradaIni;
+	public Date ptHorarioEntradaFin;
+	public Date ptHorarioSalidaIni;
+	public Date ptHorarioSalidaFin;
 	public BarberoDTO barberoDTO = new BarberoDTO();
 	List<BarberoDTO> resultConsultaBarbero;
 	public String nombreFoto;
 	public byte[] foto;
+	private String[] selectedDias = new String[] {};
+	List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
 	
 	List<ResultadosBarberoVista> resultados;
 	
 	
+	
+	public String[] getSelectedDias() {
+		return selectedDias;
+	}
+
+	public void setSelectedDias(String[] selectedDias) {
+		this.selectedDias = selectedDias;
+	}
+
+	public List<ServicioDTO> getServicioTarget() {
+		return servicioTarget;
+	}
+
+	public void setServicioTarget(List<ServicioDTO> servicioTarget) {
+		this.servicioTarget = servicioTarget;
+	}
+
 	public String getNombreFoto() {
 		return nombreFoto;
 	}
@@ -93,17 +116,37 @@ public class AdministracionBarberosVO implements Serializable{
 	public void setPiPuesto(Integer piPuesto) {
 		this.piPuesto = piPuesto;
 	}
-	public Date getPtHorarioIni() {
-		return ptHorarioIni;
+
+	public Date getPtHorarioEntradaIni() {
+		return ptHorarioEntradaIni;
 	}
-	public void setPtHorarioIni(Date ptHorarioIni) {
-		this.ptHorarioIni = ptHorarioIni;
+
+	public void setPtHorarioEntradaIni(Date ptHorarioEntradaIni) {
+		this.ptHorarioEntradaIni = ptHorarioEntradaIni;
 	}
-	public Date getPtHorarioFin() {
-		return ptHorarioFin;
+
+	public Date getPtHorarioEntradaFin() {
+		return ptHorarioEntradaFin;
 	}
-	public void setPtHorarioFin(Date ptHorarioFin) {
-		this.ptHorarioFin = ptHorarioFin;
+
+	public void setPtHorarioEntradaFin(Date ptHorarioEntradaFin) {
+		this.ptHorarioEntradaFin = ptHorarioEntradaFin;
+	}
+
+	public Date getPtHorarioSalidaIni() {
+		return ptHorarioSalidaIni;
+	}
+
+	public void setPtHorarioSalidaIni(Date ptHorarioSalidaIni) {
+		this.ptHorarioSalidaIni = ptHorarioSalidaIni;
+	}
+
+	public Date getPtHorarioSalidaFin() {
+		return ptHorarioSalidaFin;
+	}
+
+	public void setPtHorarioSalidaFin(Date ptHorarioSalidaFin) {
+		this.ptHorarioSalidaFin = ptHorarioSalidaFin;
 	}
 
 	public BarberoDTO getBarberoDTO() {

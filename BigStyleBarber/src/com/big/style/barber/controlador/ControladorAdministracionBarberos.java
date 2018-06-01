@@ -26,6 +26,7 @@ import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.modelo.ResultadosBarberoVista;
 import com.big.style.barber.servicio.ServicioTareaBarbero;
+import com.big.style.barber.validators.ValidatorAdminBarbero;
 
 @ManagedBean(name = "controladorAdminBarberos")
 @SessionScoped
@@ -36,15 +37,17 @@ public class ControladorAdministracionBarberos implements Serializable{
 	 */
 	private static final long serialVersionUID = 6959301781722033481L;
 
+	ValidatorAdminBarbero validadorAdminBar = new ValidatorAdminBarbero();
+	
 	CatalogoDAO catalogosDAO = new CatalogoDAO();
 	List<SucursalDTO> catSucursal;
 	List<PuestoDTO> catPuesto;
 	
 	List<ServicioDTO> servicioSource;
-	List<ServicioDTO> servicioTarget;
+	
 	DualListModel<ServicioDTO> catServicio;
 	private List<String> dias;
-	private String[] selectedDias;
+	
 	
 	BarberoDAO barberoDAO = new BarberoDAO();
 	AdministracionBarberosVO barberoVO;
@@ -55,14 +58,17 @@ public class ControladorAdministracionBarberos implements Serializable{
 	
 	@PostConstruct
 	private void init() {		
+		barberoVO = new AdministracionBarberosVO();
+		barberoSeleccionado = new ResultadosBarberoVista();
+		
 		catSucursal = catalogosDAO.getCatSucursales();
 		catPuesto = catalogosDAO.getCatPuestos();
 		
 		servicioSource = new ArrayList<ServicioDTO>();
-	    servicioTarget = new ArrayList<ServicioDTO>();
+	    
 	    
 	    servicioSource = catalogosDAO.getCatServicios(); 
-	    catServicio = new DualListModel<ServicioDTO>(servicioSource, servicioTarget);
+	    catServicio = new DualListModel<ServicioDTO>(servicioSource, barberoVO.getServicioTarget());
 		
 	    dias = new ArrayList<String>();
         dias.add("D");
@@ -71,16 +77,12 @@ public class ControladorAdministracionBarberos implements Serializable{
         dias.add("Mi");
         dias.add("J");
         dias.add("V");
-        dias.add("S");
-	    
-		barberoVO = new AdministracionBarberosVO();
-		barberoSeleccionado = new ResultadosBarberoVista();
+        dias.add("S");	    		
 	}		
 	
 	public void limpiarBusquedaForm() {
 		barberoVO = new AdministracionBarberosVO();
-		barberoSeleccionado = new ResultadosBarberoVista();
-		selectedDias = new String[] {};
+		barberoSeleccionado = new ResultadosBarberoVista();		
 	}
 	
 	public void editarBarbero() {
@@ -94,20 +96,25 @@ public class ControladorAdministracionBarberos implements Serializable{
 	}
 	
 	public void consultarBarberos() {
-		barberoVO.setResultConsultaBarbero(barberoDAO.buscarBarberos(barberoVO, catServicio.getTarget(), selectedDias));
-		barberoVO.setResultados((new ArrayList<ResultadosBarberoVista>()));
-		for(BarberoDTO barbero : barberoVO.getResultConsultaBarbero()) {
-			ResultadosBarberoVista res = new ResultadosBarberoVista();
-			res.setBarberoRes(barbero);
-			if(barbero.getPoFoto() != null) {
-				res.setRenderFoto(new DefaultStreamedContent(new ByteArrayInputStream(barbero.getPoFoto())));
-			}else {
-				res.setRenderFoto(new DefaultStreamedContent(FacesContext.getCurrentInstance()
-				.getExternalContext()
-				.getResourceAsStream("images/FotoDefault.png")));
-			}
-			barberoVO.getResultados().add(res);
-		}	
+		if(validadorAdminBar.validate(barberoVO)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe introducir al menos un Filtro"));
+		}else {
+			barberoVO.setResultConsultaBarbero(barberoDAO.buscarBarberos(barberoVO, catServicio.getTarget()));
+			barberoVO.setResultados((new ArrayList<ResultadosBarberoVista>()));
+			for(BarberoDTO barbero : barberoVO.getResultConsultaBarbero()) {
+				ResultadosBarberoVista res = new ResultadosBarberoVista();
+				res.setBarberoRes(barbero);
+				if(barbero.getPoFoto() != null) {
+					res.setRenderFoto(new DefaultStreamedContent(new ByteArrayInputStream(barbero.getPoFoto())));
+				}else {
+					res.setRenderFoto(new DefaultStreamedContent(FacesContext.getCurrentInstance()
+					.getExternalContext()
+					.getResourceAsStream("images/FotoDefault.png")));
+				}
+				barberoVO.getResultados().add(res);
+			}	
+		}
+		
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) {
@@ -155,14 +162,6 @@ public class ControladorAdministracionBarberos implements Serializable{
 		this.servicioSource = servicioSource;
 	}
 
-	public List<ServicioDTO> getServicioTarget() {
-		return servicioTarget;
-	}
-
-	public void setServicioTarget(List<ServicioDTO> servicioTarget) {
-		this.servicioTarget = servicioTarget;
-	}
-
 	public DualListModel<ServicioDTO> getCatServicio() {
 		return catServicio;
 	}
@@ -177,14 +176,6 @@ public class ControladorAdministracionBarberos implements Serializable{
 
 	public void setDias(List<String> dias) {
 		this.dias = dias;
-	}
-
-	public String[] getSelectedDias() {
-		return selectedDias;
-	}
-
-	public void setSelectedDias(String[] selectedDias) {
-		this.selectedDias = selectedDias;
 	}
 
 	public ResultadosBarberoVista getBarberoSeleccionado() {

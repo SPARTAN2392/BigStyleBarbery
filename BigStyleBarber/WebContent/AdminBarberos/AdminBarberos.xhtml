@@ -12,7 +12,7 @@
     <script src="../js/AdminBarbero.js"/>
         <h:form id="barberosForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
-				
+				<p:messages id="messages" showDetail="true" closable="true"/>
 				<p:panel header="Barberos" id = "camposBarberos">
                 	<p:panelGrid styleClass="gridNoBorder">
                 		<p:row>
@@ -90,7 +90,7 @@
 									<p:column>
 										<p:outputLabel value="#{msg.RegistroBarbero_HorarioEntrada} #{msg.RegistroBarbero_HorarioDe}" for="idHoraEntradaIni" />
 										<pe:timePicker id="idHoraEntradaIni"
-											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
+											value="#{controladorAdminBarberos.barberoVO.ptHorarioEntradaIni}"
 											mode="popup" widgetVar="entradaIniTimeWidget" 
 											label="Popup time picker" >											
 											<p:ajax event="close" oncomplete="onCloseHoraEntrada()"/>
@@ -100,7 +100,7 @@
 									<p:column>
 										<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
 										<pe:timePicker id="idHoraEntradaFin"
-											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
+											value="#{controladorAdminBarberos.barberoVO.ptHorarioEntradaFin}"
 											mode="popup" widgetVar="entradaFinTimeWidget"
 											label="Popup time picker" onHourShow="tpEntradaFinOnHourShowCallback" onMinuteShow="tpEntradaFinOnMinuteShowCallback"/>
 											<p:message for="idHoraEntradaFin"/>
@@ -112,7 +112,7 @@
 									<p:column>
 										<p:outputLabel value="#{msg.RegistroBarbero_HorarioSalida} #{msg.RegistroBarbero_HorarioDe}" for="idHoraSalidaIni" />
 										<pe:timePicker id="idHoraSalidaIni"
-											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioInicio}"
+											value="#{controladorAdminBarberos.barberoVO.ptHorarioSalidaIni}"
 											mode="popup" widgetVar="salidaIniTimeWidget"
 											label="Popup time picker">
 											<p:ajax event="close" oncomplete="onCloseHoraSalida()"/>
@@ -122,7 +122,7 @@
 									<p:column>
 										<p:outputLabel value="#{msg.RegistroBarbero_HorarioHasta}" />
 										<pe:timePicker id="idHoraSalidaFin"
-											value="#{controladorAdminBarberos.barberoVO.barberoDTO.ptHorarioFin}"
+											value="#{controladorAdminBarberos.barberoVO.ptHorarioSalidaFin}"
 											mode="popup" widgetVar="salidaFinTimeWidget"
 											label="Popup time picker"  onHourShow="tpSalidaFinOnHourShowCallback" onMinuteShow="tpSalidaFinOnMinuteShowCallback"/>
 											<p:message for="idHoraSalidaFin"/>
@@ -143,7 +143,7 @@
 													<p:outputLabel value="#{msg.RegistroBarbero_Dias}"/>
 												</p:column>
 												<p:column colspan="4">
-													<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
+													<p:selectManyCheckbox id="diasBoxes" value="#{controladorAdminBarberos.barberoVO.selectedDias}" layout="grid" columns="7" required="#{not empty param[guardar.clientId]}" 
 													requiredMessage="#{msg.RegistroBarbero_Validacion_Dias}">
 												        <f:selectItems value="#{utilerias.dias}" var="dia" itemLabel="#{dia}" itemValue="#{dia}" />
 												    </p:selectManyCheckbox>
@@ -159,8 +159,8 @@
 				    </p:panelGrid>
 				    <br />
 					<div align="center">
-						<p:commandButton value="#{msg.global_lbl_Buscar}" icon = "fa fa-search" id="idBuscar" update=":growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.consultaBarbero}" styleClass="ui-priority-primary"/>
-						<p:commandButton value="#{msg.global_lbl_Limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":barberosForm:camposBarberos, :growl, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.limpiarBusquedaForm}" styleClass="ui-priority-primary" />
+						<p:commandButton value="#{msg.global_lbl_Buscar}" icon = "fa fa-search" id="idBuscar" update="messages, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.consultaBarbero}" styleClass="ui-priority-primary"/>
+						<p:commandButton value="#{msg.global_lbl_Limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":barberosForm:camposBarberos, messages, :barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.limpiarBusquedaForm}" styleClass="ui-priority-primary" />
                     </div>               		                    	
                     	
 					</p:panel>

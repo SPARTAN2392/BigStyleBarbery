@@ -14,9 +14,9 @@ import com.big.style.barber.utils.RepositoriosConsultaHQL;
 public class BarberoDAO {	
 
 	@SuppressWarnings("unchecked")
-	public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios, String[] selectedDias) {
+	public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios) {
 	
-		String hql = generaBusqueda(poAdminBarberos, servicios, selectedDias);
+		String hql = generaBusqueda(poAdminBarberos, servicios);
 	
 		Map<String, Object> mapa = generarMapa(poAdminBarberos);
 		
@@ -29,7 +29,7 @@ public class BarberoDAO {
         return lista;
     }
 	
-	public String generaBusqueda(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios, String[] selectedDias) {
+	public String generaBusqueda(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios) {
 		String hql = RepositoriosConsultaHQL.BUSQUEDA_BARBERO_SELECT;
 		
 		if(poAdminBarberos.getPsNombre() != null && !poAdminBarberos.getPsNombre().equals("")) {
@@ -50,6 +50,15 @@ public class BarberoDAO {
 		if(poAdminBarberos.getPiPuesto() != null && poAdminBarberos.getPiPuesto() != 0) {
 			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_PUESTO;
 		}
+		
+		if(poAdminBarberos.getPtHorarioEntradaIni() != null && poAdminBarberos.getPtHorarioEntradaFin() != null) {
+			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_HORARIO_ENTRADA;
+		}
+		
+		if(poAdminBarberos.getPtHorarioSalidaIni() != null && poAdminBarberos.getPtHorarioSalidaFin() != null) {
+			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_HORARIO_SALIDA;
+		}
+		
 		if(servicios != null && !servicios.isEmpty()) {
 			String idServicios = "";
 			for(ServicioDTO ser : servicios) {
@@ -58,8 +67,8 @@ public class BarberoDAO {
 			idServicios = idServicios.substring(0, idServicios.length() - 1) + "))";
 			hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_SERVICIO + idServicios;
 		}
-		if(selectedDias != null && selectedDias.length > 0) {
-			for(String dia:selectedDias) {
+		if(poAdminBarberos.getSelectedDias() != null && poAdminBarberos.getSelectedDias().length > 0) {
+			for(String dia:poAdminBarberos.getSelectedDias()) {
 				switch (dia) {
 					case "D":{
 						hql += RepositoriosConsultaHQL.BUSQUEDA_BARBERO_WHERE_DOMINGO;
@@ -117,6 +126,16 @@ public class BarberoDAO {
 		}
 		if(poAdminBarberos.getPiPuesto() != null && poAdminBarberos.getPiPuesto() != 0) {
 			mapa.put("piIdSucursal", poAdminBarberos.getPiPuesto());
+		}
+		
+		if(poAdminBarberos.getPtHorarioEntradaIni() != null && poAdminBarberos.getPtHorarioEntradaFin() != null) {
+			mapa.put("horaEntradaIni", poAdminBarberos.getPtHorarioEntradaIni());
+			mapa.put("horaEntradaFin", poAdminBarberos.getPtHorarioEntradaFin());
+		}
+		
+		if(poAdminBarberos.getPtHorarioSalidaIni() != null && poAdminBarberos.getPtHorarioSalidaFin() != null) {
+			mapa.put("horaSalidaIni", poAdminBarberos.getPtHorarioSalidaIni());
+			mapa.put("horaSalidaFin", poAdminBarberos.getPtHorarioSalidaFin());
 		}
 		
 		return mapa;

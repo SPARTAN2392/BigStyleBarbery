@@ -9,8 +9,8 @@ public interface RepositoriosConsultaHQL {
 	public static final String BUSQUEDA_BARBERO_WHERE_EDAD = " AND bar.piEdad = :piEdad";
 	public static final String BUSQUEDA_BARBERO_WHERE_SUCURSAL = " AND bar.poSucursalFk.piIdSucursal = :piIdSucursal";
 	public static final String BUSQUEDA_BARBERO_WHERE_PUESTO = " AND bar.poPuestoFK.piIdPuesto = :piIdPuesto";
-	public static final String BUSQUEDA_BARBERO_HORARIO_INI = " bar.";
-	public static final String BUSQUEDA_BARBERO_HORARIO_FIN = "";
+	public static final String BUSQUEDA_BARBERO_HORARIO_ENTRADA = " AND bar.ptHorarioInicio BETWEEN :horaEntradaIni AND :horaEntradaFin";
+	public static final String BUSQUEDA_BARBERO_HORARIO_SALIDA = " AND bar.ptHorarioSalida BETWEEN :horaSalidaIni AND :horaSalidaFin";
 	public static final String BUSQUEDA_BARBERO_WHERE_DOMINGO = " AND bar.piDiaDomingo = 1 ";
 	public static final String BUSQUEDA_BARBERO_WHERE_LUNES = " AND bar.piDiaLunes = 1";
 	public static final String BUSQUEDA_BARBERO_WHERE_MARTES = " AND bar.piDiaMartes = 1";
