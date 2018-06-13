@@ -30,6 +30,9 @@ public class SucursalDTO implements Serializable{
 	@Column(name = "estado")
 	public Integer piEstado;
 
+	@Column(name = "coordenadas")
+	public String psCoordenadas;
+	
 	public Integer getPiIdSucursal() {
 		return piIdSucursal;
 	}
@@ -76,6 +79,14 @@ public class SucursalDTO implements Serializable{
 
 	public void setPiEstado(Integer piEstado) {
 		this.piEstado = piEstado;
+	}
+
+	public String getPsCoordenadas() {
+		return psCoordenadas;
+	}
+
+	public void setPsCoordenadas(String psCoordenadas) {
+		this.psCoordenadas = psCoordenadas;
 	}
 	
 }
