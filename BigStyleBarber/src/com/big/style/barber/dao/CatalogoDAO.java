@@ -1,11 +1,13 @@
 package com.big.style.barber.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.big.style.barber.dominio.PuestoDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
+import com.big.style.barber.utils.Utilerias;
 
 @SuppressWarnings("unchecked")
 public class CatalogoDAO {
@@ -17,7 +19,7 @@ GenericDAO generico = new GenericDAO();
         List<SucursalDTO> lista = new ArrayList<SucursalDTO>();
         
         lista = (List<SucursalDTO>) GenericDAO.buscarTodos(SucursalDTO.class);
-        
+        Collections.sort(lista, Utilerias.comparatorSucursales);
         return lista;
     }
 	

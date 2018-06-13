@@ -2,12 +2,15 @@ package com.big.style.barber.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.util.Base64;
+
+import com.big.style.barber.dominio.SucursalDTO;
 
 @ManagedBean(name = "utilerias")
 @ViewScoped
@@ -37,4 +40,13 @@ public class Utilerias {
 		return dias;
 	}
 	
+	public static Comparator<? super SucursalDTO> comparatorSucursales = new Comparator<SucursalDTO>() {
+ 		@Override
+ 		public int compare(SucursalDTO o1,
+ 				SucursalDTO o2) {
+
+ 			return o1.getPsNombreBarberia().compareToIgnoreCase(
+ 					o2.getPsNombreBarberia());
+ 		}
+ 	};
 }

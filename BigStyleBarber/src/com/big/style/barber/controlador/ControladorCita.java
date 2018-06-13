@@ -32,6 +32,7 @@ public class ControladorCita implements Serializable{
 	private void init() {				
 		catSucursal = catalogosDAO.getCatSucursales();		
 		poCita = new CitaDTO();
+		poCita.setPoSucursal(catSucursal.get(0));
 	}
 
 	public List<SucursalDTO> getCatSucursal() {
