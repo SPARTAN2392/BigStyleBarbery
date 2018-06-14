@@ -19,7 +19,7 @@
                 		<p:row>
                 			<p:column>
 								<p:selectOneListbox  id="sucursalList" value="#{controladorCita.poCita.poSucursal}" var="item"  
-					                    	converter="sucursalConverter" style="width:300px">
+					                    	converter="sucursalConverter" style="width:300px" scrollHeight="400">
 								            <f:selectItems value="#{controladorCita.catSucursal}" var="sucursal" 
 								            itemLabel="#{sucursal.psNombreBarberia}" 						            
 								            itemValue="#{sucursal}"/>	
@@ -34,8 +34,9 @@
 								            
 								        </p:selectOneListbox>
 							</p:column>
-													
-							<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="HYBRID" style="width:100%;height:400px" />		  
+							<p:column style="width:100%">	
+								<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="HYBRID" style="width:100%;height:400px" />								 
+							</p:column>		  
                     	</p:row>
                     	
                     	
