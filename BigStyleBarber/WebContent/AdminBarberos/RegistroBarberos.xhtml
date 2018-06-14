@@ -166,7 +166,7 @@
 												value="#{controladorRegistroBarberos.catServicio}"
 												var="servicioCat" itemLabel="#{servicioCat.psNombreServicio}"
 												itemValue="#{servicioCat}" 
-												converter="genericConverter"
+												converter="servicioConverter"
 												required="#{not empty param[guardar.clientId]}"
 												requiredMessage="#{func:getMessageReq(msg.global_msg_Requerido,msg.RegistroBarbero_Servicios)}"/>
 												<p:message for = "idServicios"/>
