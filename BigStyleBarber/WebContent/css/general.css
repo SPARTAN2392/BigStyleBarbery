@@ -1,10 +1,6 @@
 @charset "ISO-8859-1";
 
-.gridNoBorder .ui-panelgrid>*>tr,
-.gridNoBorder .ui-panelgrid .ui-panelgrid-cell {
-    border: none !important;
-}
-
-.ui-fileupload-content{
-    display: none;
+.cabecerasSucursales{
+	font-weight: bold;
+	font-size: 1.1em;
 }

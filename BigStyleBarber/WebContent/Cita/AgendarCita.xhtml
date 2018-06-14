@@ -14,55 +14,34 @@
 				<p:messages id="messages" showDetail="true" closable="true"/>
 				<p:wizard flowListener="#{userWizard.onFlowProcess}">
 			        <p:tab id="sucursalTab" title="Sucursal">
-			            <p:panel header="Sucursal">			               
-			                <h:panelGrid columns="2">
-			                	<p:outputPanel id="customPanel" style="margin-bottom:10px">
-							        <p:selectOneRadio id="customRadio" value="#{controladorCita.poCita.poSucursal.piIdSucursal}" layout="custom">
-							        	<f:selectItems value="#{controladorCita.catSucursal}" var="sucursal" itemLabel="#{sucursal.psNombreBarberia}"
-							        	 itemValue="#{sucursal.psDireccion}"/>							            
-							        </p:selectOneRadio>
-							        <h:panelGrid columns="2" cellpadding="5">
-							 			<c:forEach items="#{controladorCita.catSucursal}" var="sucursalItem" varStatus = "status">
-							 				<p:radioButton id="opt#{status.index}" for="customRadio" itemIndex="#{status.index}" />
-							            	<h:outputLabel for="opt#{status.index}" value="#{sucursalItem.psNombreBarberia}" />
-							 			</c:forEach>
-							 		</h:panelGrid>
-							        <!-- <h:panelGrid columns="3" cellpadding="5">
-							            <p:radioButton id="opt1" for="customRadio" itemIndex="0" />
-							            <h:outputLabel for="opt1" value="Red" />
-							            <p:spinner />
-							 
-							            <p:radioButton id="opt2" for="customRadio" itemIndex="1" />
-							            <h:outputLabel for="opt2" value="Green" />
-							            <p:inputText />
-							 
-							            <p:radioButton id="opt3" for="customRadio" itemIndex="2" />
-							            <h:outputLabel for="opt3" value="Blue" />
-							            <p:calendar />
-							        </h:panelGrid> -->
-							    </p:outputPanel>
-							    <!-- 
-			                    <p:selectOneListbox  id="sucursalList" value="#{controladorCita.poCita.poSucursal}" var="item" style="width:100%" 
-			                    	converter="sucursalConverter">
-						            <f:selectItems value="#{controladorCita.catSucursal}" var="sucursal" 
-						            itemLabel="#{sucursal.psNombreBarberia}" 						            
-						            itemValue="#{sucursal}"/>	
-						            
-						            <p:column>
-						            	<p:panelGrid>
-						            		<p:row>						            
-							                	<h:outputText value="#{item.psNombreBarberia}" />
-							                </p:row>
-							                <p:row>
-							                	<h:outputText value="#{item.psDireccion}"/>
-							                </p:row>
-						                </p:panelGrid>
-						            </p:column>						            
-						            					            	
-						            <p:ajax update="mapa" />
-						        </p:selectOneListbox> -->
-						        <p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="HYBRID" style="width:100%;height:400px" />
-			                </h:panelGrid>
+			            <p:panel header="Elige la Sucursal">			        
+			            	<p:panelGrid styleClass="gridNoBorder">
+                		<p:row>
+                			<p:column>
+								<p:selectOneListbox  id="sucursalList" value="#{controladorCita.poCita.poSucursal}" var="item"  
+					                    	converter="sucursalConverter" style="width:300px">
+								            <f:selectItems value="#{controladorCita.catSucursal}" var="sucursal" 
+								            itemLabel="#{sucursal.psNombreBarberia}" 						            
+								            itemValue="#{sucursal}"/>	
+								            
+								            <p:column>
+								            	<h:panelGrid columns="1">
+								            		<p:outputLabel value="#{item.psNombreBarberia}" styleClass="cabecerasSucursales"/>
+								            		<p:outputLabel value="#{item.psDireccion}" />
+								            	</h:panelGrid>						            	
+								            </p:column>						            
+								            					            	
+								            
+								        </p:selectOneListbox>
+							</p:column>
+													
+							<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="HYBRID" style="width:100%;height:400px" />		  
+                    	</p:row>
+                    	
+                    	
+                		                		        				        				
+				    </p:panelGrid>
+			                
 			            </p:panel>
 			        </p:tab>
 				</p:wizard>
