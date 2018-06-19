@@ -11,7 +11,7 @@ import org.primefaces.model.DualListModel;
 import com.big.style.barber.dominio.ServicioDTO;
 
 @FacesConverter(value = "servicioConverter")
-public class ServicioConverter implements Converter {
+public class ConverterServicio implements Converter {
 	
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
 	    Object ret = null;

@@ -22,4 +22,7 @@ public interface RepositoriosConsultaHQL {
 
 	public static final String BUSQUEDA_SERVICIOS_BARBERO = "SELECT ser FROM ServicioDTO ser, ServicioBarberoDTO serBar WHERE"
 			+ " ser.piIdServicioPk = serBar.piIdServicioBarbero AND serBar.poBarbero.piIdBarbero = :piBarbero ";
+	
+	public static final String BUSQUEDA_BARBEROS_POR_SUCURSAL_SERVICIO = "FROM BarberoDTO bar WHERE bar.poSucursalFk.piIdSucursal = :idSucursal AND bar.piIdBarbero IN "
+			+ "(SELECT poBarbero FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk = :idServicio)"; 
 }

@@ -14,6 +14,21 @@ import com.big.style.barber.utils.RepositoriosConsultaHQL;
 public class BarberoDAO {	
 
 	@SuppressWarnings("unchecked")
+	public List<BarberoDTO> buscarBarberosSucursalServicio(Integer idSucursal, Integer idServicio){
+		List<BarberoDTO> lista = new ArrayList<BarberoDTO>();
+		
+		Map<String, Object> mapa = new HashMap<String, Object>();
+		
+		mapa.put("idSucursal", idSucursal);
+		mapa.put("idServicio", idServicio);
+		
+		lista = (List<BarberoDTO>) GenericDAO.buscarQuery(BarberoDTO.class, mapa, RepositoriosConsultaHQL.BUSQUEDA_BARBEROS_POR_SUCURSAL_SERVICIO);
+		
+		return lista;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<BarberoDTO> buscarBarberos(AdministracionBarberosVO poAdminBarberos, List<ServicioDTO> servicios) {
 	
 		String hql = generaBusqueda(poAdminBarberos, servicios);

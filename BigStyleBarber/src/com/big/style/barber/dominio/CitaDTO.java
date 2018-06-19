@@ -1,6 +1,7 @@
 package com.big.style.barber.dominio;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,6 +38,12 @@ public class CitaDTO implements Serializable{
 	@JoinColumn(name = "sucursal_fk")
 	public SucursalDTO poSucursal = new SucursalDTO();
 
+	@Column(name = "dia")
+	public Date ptDia;
+	
+	@Column(name = "hora")
+	public Date ptHora;
+	
 	public Integer getPiIdCita() {
 		return piIdCita;
 	}
@@ -67,6 +74,22 @@ public class CitaDTO implements Serializable{
 
 	public void setPoSucursal(SucursalDTO poSucursal) {
 		this.poSucursal = poSucursal;
+	}
+
+	public Date getPtDia() {
+		return ptDia;
+	}
+
+	public void setPtDia(Date ptDia) {
+		this.ptDia = ptDia;
+	}
+
+	public Date getPtHora() {
+		return ptHora;
+	}
+
+	public void setPtHora(Date ptHora) {
+		this.ptHora = ptHora;
 	}
 	
 }
