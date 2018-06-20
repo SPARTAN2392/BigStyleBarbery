@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.utils.ConstantesDominio;
 
 public class ServicioTareaCita {
@@ -15,7 +17,7 @@ public class ServicioTareaCita {
 
 	DateFormat df = new SimpleDateFormat("HH:mm a");
 	
-	public List<String> generarHorarios(Date horaApertura, Date horaCierre) {
+	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas) {
 		
 		List<String> resultado = new ArrayList<String>();
 		
@@ -23,11 +25,33 @@ public class ServicioTareaCita {
 		c.setTime(horaApertura);				
 				
 		boolean continua = true;
+		boolean compruebaContinuidad = false;
+		Integer duracionCita = 0;
 		
 		while(continua) {
 			long horApe = c.getTimeInMillis();
 			Date horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));			
 			c.setTime(horaDespuesDeSuma);
+			
+			if(compruebaContinuidad) {
+				Calendar horaCita = Calendar.getInstance();
+				horaCita.setTime(new Date(horApe + (duracionCita * ConstantesDominio.UN_MINUTO)));
+
+				if(c.before(horaCita)) {
+					duracionCita -= 45;
+					compruebaContinuidad = true;
+					continue;
+				}else {
+					compruebaContinuidad = false;
+				}
+			}
+			
+			if(citasOcupadas.containsKey(horaDespuesDeSuma)) {
+				duracionCita = citasOcupadas.get(horaDespuesDeSuma);
+				compruebaContinuidad = true;
+				continue;
+			}
+			
 			if(horaDespuesDeSuma.getHours() > horaCierre.getHours()) {
 				continua = false;
 			}else {
@@ -44,7 +68,7 @@ public class ServicioTareaCita {
 		Date apertura = new Date(2018, 5, 19, 8, 0);
 		Date cierre = new Date(2018, 5, 19, 16, 0);
 		
-		c.generarHorarios(apertura, cierre);
+		c.generarHorarios(apertura, cierre, null);
 	}
 	
 }

@@ -12,12 +12,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.map.MapModel;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
+import com.big.style.barber.dao.CitaDAO;
 import com.big.style.barber.dao.ServicioDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.CitaDTO;
@@ -42,6 +44,7 @@ public class ControladorCita implements Serializable{
 	List<BarberoDTO> listaBarbero;
 	CatalogoDAO catalogosDAO = new CatalogoDAO();
 	ServicioDAO servicioDAO = new ServicioDAO();
+	CitaDAO citaDAO = new CitaDAO();
 	BarberoDAO barberoDAO = new BarberoDAO();
 	CitaDTO poCita;
 	String diasTrabajoBarbero;
@@ -64,13 +67,15 @@ public class ControladorCita implements Serializable{
 			}
 			case "barberoTab":{
 				listaBarbero = barberoDAO.buscarBarberosSucursalServicio(poCita.getPoSucursal().piIdSucursal, poCita.getPoServicio().getPiIdServicioPk());
+				break;
 			}
 			case "calendarioTab":{
 				ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
 				ServicioTareaBarbero servicioTareaBarbero = new ServicioTareaBarbero();
-				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre());
+				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, getHoy()));
 				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
+				break;
 			}
 		}
 		return event.getNewStep();
@@ -117,9 +122,9 @@ public class ControladorCita implements Serializable{
 		this.listaBarbero = listaBarbero;
 	}
 
-	public Date getHoy() {
+	public Date getHoy() {		
 		Calendar c = Calendar.getInstance();
-		return c.getTime();
+		return DateUtils.truncate(c.getTime(), Calendar.DATE); 
 	}
 
 	public String getHorarioCita() {
