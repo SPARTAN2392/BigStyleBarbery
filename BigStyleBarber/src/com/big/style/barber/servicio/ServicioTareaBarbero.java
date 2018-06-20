@@ -13,6 +13,35 @@ public class ServicioTareaBarbero {
 	BarberoDAO barberoDAO = new BarberoDAO();
 	ServicioTareaServicios poServicioTareaServicios = new ServicioTareaServicios();
 	
+	public String obtenerDias(BarberoDTO barbero) {
+		String resultado = "";
+		if(barbero.getPiDiaDomingo() == null || barbero.getPiDiaDomingo() != 1) {
+			resultado +=  "0,";
+		}
+		if(barbero.getPiDiaLunes() == null || barbero.getPiDiaLunes() != 1) {
+			resultado += "1,";
+		}
+		if(barbero.getPiDiaMartes() == null || barbero.getPiDiaMartes() != 1) {
+			resultado += "2,";
+		}
+		if(barbero.getPiDiaMiercoles() == null || barbero.getPiDiaMiercoles() != 1) {
+			resultado += "3,";
+		}
+		if(barbero.getPiDiaJueves() == null || barbero.getPiDiaJueves() != 1) {
+			resultado += "4,";
+		}
+		if(barbero.getPiDiaViernes() == null || barbero.getPiDiaViernes() != 1) {
+			resultado += "5,";
+		}
+		if(barbero.getPiDiaSabado() == null || barbero.getPiDiaSabado() != 1) {
+			resultado += "6,";
+		}
+		
+		resultado = resultado.substring(0, resultado.length()-1);
+		
+		return resultado;
+	}
+	
 	public void editarBarbero(ResultadosBarberoVista poResultadoVista) {
 		ajustarDiasEditar(poResultadoVista);
 		if(poResultadoVista.getNombreFoto() != null && !poResultadoVista.getNombreFoto().equals("")) {

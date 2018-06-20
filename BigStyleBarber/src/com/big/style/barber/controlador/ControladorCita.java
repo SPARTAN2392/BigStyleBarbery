@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.model.map.MapModel;
 
@@ -22,6 +23,7 @@ import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
+import com.big.style.barber.servicio.ServicioTareaBarbero;
 import com.big.style.barber.servicio.ServicioTareaCita;
 
 @ManagedBean(name = "controladorCita")
@@ -42,6 +44,7 @@ public class ControladorCita implements Serializable{
 	ServicioDAO servicioDAO = new ServicioDAO();
 	BarberoDAO barberoDAO = new BarberoDAO();
 	CitaDTO poCita;
+	String diasTrabajoBarbero;
 	private MapModel simpleModel;
 	private String coordenadasMapaSel;
 	
@@ -64,7 +67,10 @@ public class ControladorCita implements Serializable{
 			}
 			case "calendarioTab":{
 				ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
+				ServicioTareaBarbero servicioTareaBarbero = new ServicioTareaBarbero();
 				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre());
+				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());
+				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
 			}
 		}
 		return event.getNewStep();
@@ -126,5 +132,15 @@ public class ControladorCita implements Serializable{
 			this.poCita.setPtHora(df.parse(horarioCita));
 		} catch (ParseException e) {
 		}
-	}		
+	}
+
+	public String getDiasTrabajoBarbero() {
+		return diasTrabajoBarbero;
+	}
+
+	public void setDiasTrabajoBarbero(String diasTrabajoBarbero) {
+		this.diasTrabajoBarbero = diasTrabajoBarbero;
+	}	
+	
+	
 }

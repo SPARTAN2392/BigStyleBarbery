@@ -9,8 +9,10 @@
     
     <ui:define name="content">        
     	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBGmnx2wIcNMKY0r5fqpF7UUOJwqeOwtf8" type="text/javascript"></script>
+    	<script src="../js/AgendarCita.js"/>
         <h:form id="agendarCitaForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
+				<h:inputHidden value="#{controladorCita.diasTrabajoBarbero}" id="diasTrabajo"/>
 				<p:messages id="messages" showDetail="true" closable="true"/>
 				<p:wizard flowListener="#{controladorCita.onFlowProcess}">
 			        <p:tab id="sucursalTab" title="Sucursal">
@@ -89,7 +91,8 @@
 			            	<h:panelGrid columns="2">
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel for="calendario" value="Dia:" />
-	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" mindate="#{controladorCita.hoy}"/>
+	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" 
+	        							mindate="#{controladorCita.hoy}" beforeShowDay="diasDeshabilitados"/>
 				            	</h:panelGrid>			            	
 				            	
 				            	<h:panelGrid columns="1">

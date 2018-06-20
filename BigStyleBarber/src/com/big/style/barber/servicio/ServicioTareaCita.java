@@ -26,8 +26,7 @@ public class ServicioTareaCita {
 		
 		while(continua) {
 			long horApe = c.getTimeInMillis();
-			Date horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));
-			System.out.println(df.format(horaDespuesDeSuma));
+			Date horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));			
 			c.setTime(horaDespuesDeSuma);
 			if(horaDespuesDeSuma.getHours() > horaCierre.getHours()) {
 				continua = false;
