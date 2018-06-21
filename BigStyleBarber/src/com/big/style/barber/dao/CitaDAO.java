@@ -32,4 +32,13 @@ public class CitaDAO {
 		return horarioDuracion;
 	}
 	
+	public Integer insertarCita(CitaDTO poCita) {
+		try {			
+			return (Integer)GenericDAO.GuardarObjeto(poCita);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;	
+	}
+	
 }

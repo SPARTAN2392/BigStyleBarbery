@@ -31,5 +31,6 @@
 	    <mapping class="com.big.style.barber.dominio.TipoServicioDTO"/>
 	    <mapping class="com.big.style.barber.dominio.ServicioBarberoDTO"/>
 	    <mapping class="com.big.style.barber.dominio.CitaDTO"/>
+	    <mapping class="com.big.style.barber.dominio.ClienteDTO"/>
 	</session-factory>
 </hibernate-configuration>

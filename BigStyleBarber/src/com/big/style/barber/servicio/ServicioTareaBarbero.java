@@ -37,7 +37,10 @@ public class ServicioTareaBarbero {
 			resultado += "6,";
 		}
 		
-		resultado = resultado.substring(0, resultado.length()-1);
+		if(!resultado.isEmpty()) {
+			resultado = resultado.substring(0, resultado.length()-1);
+		}
+		
 		
 		return resultado;
 	}

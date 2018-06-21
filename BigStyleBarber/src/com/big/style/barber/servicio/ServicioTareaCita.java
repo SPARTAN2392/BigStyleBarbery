@@ -8,14 +8,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.big.style.barber.dao.CitaDAO;
+import com.big.style.barber.dao.ClienteDAO;
 import com.big.style.barber.dominio.CitaDTO;
+import com.big.style.barber.dominio.ClienteDTO;
 import com.big.style.barber.utils.ConstantesDominio;
 
 public class ServicioTareaCita {
-	
-	
-
+		
 	DateFormat df = new SimpleDateFormat("HH:mm a");
+	ClienteDAO clienteDAO = new ClienteDAO();
+	CitaDAO citaDAO = new CitaDAO();
+	
+	public boolean insertarCita(CitaDTO poCita, ClienteDTO poCliente) {
+		Integer respuestaCliente = 0;
+		respuestaCliente = clienteDAO.insertarCliente(poCliente);
+		if(respuestaCliente != 0) {
+			poCliente.setPiIdCliente(respuestaCliente);
+			poCita.setPoCliente(poCliente);
+			citaDAO.insertarCita(poCita);
+		}
+		return false;
+	}
 	
 	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas) {
 		

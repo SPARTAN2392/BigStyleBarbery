@@ -101,7 +101,7 @@
 	        							<p:outputLabel  value="Mañana" />
 	        							<p:outputLabel  value="Tarde" />
 	        							
-	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.poCita.poBarbero}" style="width:300px" scrollHeight="400" >
+	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" >
 								            <f:selectItems value="#{controladorCita.horarios}" var="horario" 
 								            itemLabel="#{horario}" 						            
 								            itemValue="#{horario}" />	
@@ -111,6 +111,47 @@
 	        						</h:panelGrid>
 				            	</h:panelGrid>
 				            </h:panelGrid>
+			            </p:panel>
+			        </p:tab>
+			        <p:tab id="clienteTab" title="Datos de Cliente">
+			            <p:panel header="Datos para confimación">
+			            	<h:panelGrid columns="4">
+			            		<p:outputLabel for="idNombreCliente" value="Nombre" />
+			            		<p:inputText id="idNombreCliente" value="#{controladorCita.poCliente.psNombreCliente}" title="Nombre">
+	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
+	                    		</p:inputText>
+	                    		
+	                    		<p:outputLabel for="idCorreoCliente" value="Correo" />			            		
+	                    		<p:column>
+		                    		<p:inputText id="idCorreoCliente"
+													value="#{controladorCita.poCliente.psCorreoCliente}" >
+													<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{empty param[guardar.clientId]}"/>
+												</p:inputText>
+									<p:message for="idCorreoCliente"/>
+								</p:column>
+								
+								<p:outputLabel for="idTelefono" value="Teléfono" />
+								<p:column>
+									<p:inputText id="idTelefono"
+										value="#{controladorCita.poCliente.psTelefonoCliente}"
+										title="Telefono" >											
+										<p:keyFilter regEx="/[\d]/"/>
+									</p:inputText>
+										<p:message for="idTelefono"/>
+								</p:column>
+								
+								<p:outputLabel for="idAlias" value="Alias" />
+								<p:column>
+		                    		<p:inputText id="idAlias"
+													value="#{controladorCita.poCliente.psAliasCliente}" >
+										<p:keyFilter regEx="/[a-z_ ]/i"/>													
+									</p:inputText>									
+								</p:column>
+								
+								<p:outputLabel for="idMembresia" value="Membresía" />
+								<p:selectBooleanCheckbox id="idMembresia" value="#{controladorCita.poCliente.piMembresiaCliente}" />																																
+			            	</h:panelGrid>
+			            	<p:commandButton value="Agendar" actionListener="#{controladorCita.agendar}" process="@this"/>
 			            </p:panel>
 			        </p:tab>
 				</p:wizard>

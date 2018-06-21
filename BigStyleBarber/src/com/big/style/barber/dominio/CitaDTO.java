@@ -44,6 +44,10 @@ public class CitaDTO implements Serializable{
 	@Column(name = "hora")
 	public Date ptHora;
 	
+	@ManyToOne
+	@JoinColumn(name = "cliente_fk")
+	public ClienteDTO poCliente = new ClienteDTO();
+	
 	public Integer getPiIdCita() {
 		return piIdCita;
 	}
@@ -90,6 +94,14 @@ public class CitaDTO implements Serializable{
 
 	public void setPtHora(Date ptHora) {
 		this.ptHora = ptHora;
+	}
+
+	public ClienteDTO getPoCliente() {
+		return poCliente;
+	}
+
+	public void setPoCliente(ClienteDTO poCliente) {
+		this.poCliente = poCliente;
 	}
 	
 }

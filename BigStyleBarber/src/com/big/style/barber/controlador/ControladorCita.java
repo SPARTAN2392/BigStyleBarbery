@@ -23,6 +23,7 @@ import com.big.style.barber.dao.CitaDAO;
 import com.big.style.barber.dao.ServicioDAO;
 import com.big.style.barber.dominio.BarberoDTO;
 import com.big.style.barber.dominio.CitaDTO;
+import com.big.style.barber.dominio.ClienteDTO;
 import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.servicio.ServicioTareaBarbero;
@@ -47,9 +48,11 @@ public class ControladorCita implements Serializable{
 	CitaDAO citaDAO = new CitaDAO();
 	BarberoDAO barberoDAO = new BarberoDAO();
 	CitaDTO poCita;
+	ClienteDTO poCliente;
 	String diasTrabajoBarbero;
 	private MapModel simpleModel;
 	private String coordenadasMapaSel;
+	ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
 	
 	@PostConstruct
 	private void init() {		
@@ -69,18 +72,25 @@ public class ControladorCita implements Serializable{
 				listaBarbero = barberoDAO.buscarBarberosSucursalServicio(poCita.getPoSucursal().piIdSucursal, poCita.getPoServicio().getPiIdServicioPk());
 				break;
 			}
-			case "calendarioTab":{
-				ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
+			case "calendarioTab":{				
 				ServicioTareaBarbero servicioTareaBarbero = new ServicioTareaBarbero();
 				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, getHoy()));
 				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
 				break;
 			}
+			case "clienteTab":{
+				poCliente = new ClienteDTO();
+				break;
+			}
 		}
 		return event.getNewStep();
 
     }
+	
+	public void agendar() {
+		servicioTareaCita.insertarCita(poCita, poCliente);
+	}
 	
 	public List<String> getHorarios() {
 		return horarios;
@@ -145,7 +155,13 @@ public class ControladorCita implements Serializable{
 
 	public void setDiasTrabajoBarbero(String diasTrabajoBarbero) {
 		this.diasTrabajoBarbero = diasTrabajoBarbero;
+	}
+
+	public ClienteDTO getPoCliente() {
+		return poCliente;
+	}
+
+	public void setPoCliente(ClienteDTO poCliente) {
+		this.poCliente = poCliente;
 	}	
-	
-	
 }
