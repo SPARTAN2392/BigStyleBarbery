@@ -19,9 +19,16 @@ public class ServicioTareaCita {
 	DateFormat df = new SimpleDateFormat("HH:mm a");
 	ClienteDAO clienteDAO = new ClienteDAO();
 	CitaDAO citaDAO = new CitaDAO();
+	Date fechaMinima;
+	
+	public Date generarFechaMinima() {
+		
+		return null;
+	}
 	
 	public boolean insertarCita(CitaDTO poCita, ClienteDTO poCliente) {
 		Integer respuestaCliente = 0;
+		poCliente.setPiEstadoCliente(1);
 		respuestaCliente = clienteDAO.insertarCliente(poCliente);
 		if(respuestaCliente != 0) {
 			poCliente.setPiIdCliente(respuestaCliente);
@@ -31,7 +38,7 @@ public class ServicioTareaCita {
 		return false;
 	}
 	
-	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas) {
+	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas, String diasTrabajo) {
 		
 		List<String> resultado = new ArrayList<String>();
 		
@@ -76,13 +83,5 @@ public class ServicioTareaCita {
 		return resultado;
 	}
 	
-	public static void main(String[] args) {
-		ServicioTareaCita c = new ServicioTareaCita();
-		
-		Date apertura = new Date(2018, 5, 19, 8, 0);
-		Date cierre = new Date(2018, 5, 19, 16, 0);
-		
-		c.generarHorarios(apertura, cierre, null);
-	}
 	
 }

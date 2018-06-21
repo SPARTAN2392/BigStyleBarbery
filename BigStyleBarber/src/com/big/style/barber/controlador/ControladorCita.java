@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.lang3.time.DateUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.MapModel;
 
 import com.big.style.barber.dao.BarberoDAO;
@@ -50,15 +53,16 @@ public class ControladorCita implements Serializable{
 	CitaDTO poCita;
 	ClienteDTO poCliente;
 	String diasTrabajoBarbero;
+	boolean membresiaCliente;
 	private MapModel simpleModel;
 	private String coordenadasMapaSel;
 	ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
 	
 	@PostConstruct
 	private void init() {		
-		System.out.println("init");
 		catSucursal = catalogosDAO.getCatSucursales();		
 		poCita = new CitaDTO();
+		poCliente = new ClienteDTO();
 	}
 	
 	public String onFlowProcess(FlowEvent event) {
@@ -74,19 +78,74 @@ public class ControladorCita implements Serializable{
 			}
 			case "calendarioTab":{				
 				ServicioTareaBarbero servicioTareaBarbero = new ServicioTareaBarbero();
+				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());				
+				
+				
 				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, getHoy()));
-				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());
+				if(horarios.isEmpty()) {
+					servicioTareaCita.generarFechaMinima();
+				}else {
+					
+				}
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
-				break;
-			}
-			case "clienteTab":{
-				poCliente = new ClienteDTO();
 				break;
 			}
 		}
 		return event.getNewStep();
 
     }
+	
+	public void generarFechaMinimaYHorarios(String diasTrabajo) {
+		Calendar util = Calendar.getInstance();		
+		List<String> diasList = new ArrayList<String>();
+		for(String a : diasTrabajo.split(",")) {
+			diasList.add(a);
+		}
+		int diaHoy = util.getTime().getDay();
+		if(!diasList.contains(String.valueOf(diaHoy))) {
+			int diferenciaDias = 0;
+			int diaProx = -1;
+			
+			if(diasList.size() > 1) {
+				for(String dia : diasList) {
+					int ref = Integer.parseInt(dia);
+					diferenciaDias =  ref - diaHoy;
+					if(diferenciaDias >= 0) {
+						System.out.println("break");
+						diaProx = ref;
+						break;
+					}
+				}
+				if(diaProx == -1) {
+					System.out.println("-1");
+					diaProx = Integer.parseInt(diasList.get(0));
+				}
+			}else {
+				diferenciaDias =  Integer.parseInt(diasList.get(0)) - diaHoy;
+				diaProx = Integer.parseInt(diasList.get(0));
+			}
+			
+			System.out.println(diaProx + " " + diferenciaDias);
+			
+			if(diferenciaDias > 0) {
+				util.add(Calendar.DATE, diferenciaDias);
+			}else {
+				util.add(Calendar.DATE, 7 +(diferenciaDias));				
+			}
+		}
+		System.out.println(util.getTime());
+	}
+	
+	public static void main(String[] args) {
+		ControladorCita c = new ControladorCita();
+		String diasTrabajo = "0,3";
+		c.generarFechaMinimaYHorarios(diasTrabajo);
+	}
+	
+	public void cambioDia(SelectEvent event) {
+		Date date = (Date) event.getObject();
+		horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, date));
+	}
 	
 	public void agendar() {
 		servicioTareaCita.insertarCita(poCita, poCliente);
@@ -163,5 +222,15 @@ public class ControladorCita implements Serializable{
 
 	public void setPoCliente(ClienteDTO poCliente) {
 		this.poCliente = poCliente;
+	}
+
+	public boolean isMembresiaCliente() {
+		return membresiaCliente;
+	}
+
+	public void setMembresiaCliente(boolean membresiaCliente) {
+		this.poCliente.setPiMembresiaCliente((membresiaCliente)?1:0);
+		this.membresiaCliente = membresiaCliente;
 	}	
+	
 }

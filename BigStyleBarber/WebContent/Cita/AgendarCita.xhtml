@@ -92,14 +92,14 @@
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel for="calendario" value="Dia:" />
 	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" 
-	        							mindate="#{controladorCita.hoy}" beforeShowDay="diasDeshabilitados"/>
+	        							mindate="#{controladorCita.hoy}" beforeShowDay="diasDeshabilitados">
+	        							<p:ajax event="dateSelect" listener="#{controladorCita.cambioDia}" update="horarioList" />
+	        						</p:calendar>
 				            	</h:panelGrid>			            	
 				            	
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel value="Horario Disponible para el " />
-	        						<h:panelGrid columns="2">
-	        							<p:outputLabel  value="Mañana" />
-	        							<p:outputLabel  value="Tarde" />
+	        						<h:panelGrid columns="1">	        							
 	        							
 	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" >
 								            <f:selectItems value="#{controladorCita.horarios}" var="horario" 
@@ -113,9 +113,9 @@
 				            </h:panelGrid>
 			            </p:panel>
 			        </p:tab>
-			        <p:tab id="clienteTab" title="Datos de Cliente">
-			            <p:panel header="Datos para confimación">
-			            	<h:panelGrid columns="4">
+			        <p:tab id="clienteTab" title="Contacto">
+			            <p:panel header="Datos de Contacto">
+			            	<h:panelGrid columns="4" columnClasses="label, value">
 			            		<p:outputLabel for="idNombreCliente" value="Nombre" />
 			            		<p:inputText id="idNombreCliente" value="#{controladorCita.poCliente.psNombreCliente}" title="Nombre">
 	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
@@ -148,8 +148,46 @@
 									</p:inputText>									
 								</p:column>
 								
-								<p:outputLabel for="idMembresia" value="Membresía" />
-								<p:selectBooleanCheckbox id="idMembresia" value="#{controladorCita.poCliente.piMembresiaCliente}" />																																
+								<p:outputLabel  value="Membresía" />
+								<p:selectBooleanCheckbox id="idMembresia" value="#{controladorCita.membresiaCliente}" />																																
+			            	</h:panelGrid>
+			            	
+			            </p:panel>			            
+			        </p:tab>
+			        <p:tab id="confirmacionTab" title="Confirmación">
+		            	<p:panel header="Confima tu cita">
+			            	<h:panelGrid columns="2" columnClasses="label, value">
+			            		<p:outputLabel  value="Sucursal" />
+			            		<p:outputLabel  value="#{controladorCita.poCita.poSucursal.psNombreBarberia}" />				            		
+			            		
+			            		<p:outputLabel  value="Servicio" />
+			            		<p:outputLabel  value="#{controladorCita.poCita.poServicio.psNombreServicio}" />
+			            		
+			            		<p:outputLabel  value="Barbero" />
+			            		<p:outputLabel  value="#{controladorCita.poCita.poBarbero.psNombreBarbero} #{controladorCita.poCita.poBarbero.psApellidoPaterno} #{controladorCita.poCita.poBarbero.psApellidoMaterno}" />
+			            		
+			            		<p:outputLabel  value="Dia" />
+			            		<p:outputLabel  value="#{controladorCita.poCita.ptDia}" />
+			            		
+			            		<p:outputLabel  value="Hora" />
+			            		<p:outputLabel  value="#{controladorCita.poCita.ptHora}" />
+			            	</h:panelGrid>
+			            	
+			            	<h:panelGrid columns="2" columnClasses="label, value">
+			            		<p:outputLabel  value="Nombre Contacto" />
+			            		<p:outputLabel  value="#{controladorCita.poCliente.psNombreCliente}" />
+			            		
+			            		<p:outputLabel  value="Correo" />
+			            		<p:outputLabel  value="#{controladorCita.poCliente.psCorreoCliente}" />
+			            		
+			            		<p:outputLabel  value="Teléfono" />
+			            		<p:outputLabel  value="#{controladorCita.poCliente.psTelefonoCliente}" />
+			            		
+			            		<p:outputLabel  value="Alías" />
+			            		<p:outputLabel  value="#{controladorCita.poCliente.psAliasCliente}" />
+			            		
+			            		<p:outputLabel  value="Membresía" />
+			            		<p:outputLabel  value="#{controladorCita.poCliente.piMembresiaCliente}" />
 			            	</h:panelGrid>
 			            	<p:commandButton value="Agendar" actionListener="#{controladorCita.agendar}" process="@this"/>
 			            </p:panel>
