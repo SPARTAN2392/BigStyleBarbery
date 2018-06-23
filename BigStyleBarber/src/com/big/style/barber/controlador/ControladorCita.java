@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -100,45 +99,64 @@ public class ControladorCita implements Serializable{
 		List<String> diasList = new ArrayList<String>();
 		for(String a : diasTrabajo.split(",")) {
 			diasList.add(a);
-		}
+		}		
 		int diaHoy = util.getTime().getDay();
-		if(!diasList.contains(String.valueOf(diaHoy))) {
-			int diferenciaDias = 0;
-			int diaProx = -1;
-			
-			if(diasList.size() > 1) {
-				for(String dia : diasList) {
-					int ref = Integer.parseInt(dia);
-					diferenciaDias =  ref - diaHoy;
-					if(diferenciaDias >= 0) {
-						System.out.println("break");
-						diaProx = ref;
-						break;
+		
+		horarios = new ArrayList<String>();
+		servicioTareaCita = new ServicioTareaCita();
+		
+		while(horarios.isEmpty()) {			
+				if(!diasList.contains(String.valueOf(diaHoy))) {
+					int diferenciaDias = 0;
+					int diaProx = -1;
+					
+					if(diasList.size() > 1) {
+						int indexDia = diasList.indexOf(String.valueOf(diaHoy)); 
+						if(indexDia == diasList.size() - 1)
+							indexDia = 0;
+						else 
+							indexDia += 1;
+						diaProx = Integer.parseInt(diasList.get(indexDia));		
+						diferenciaDias = diaProx - diaHoy;						
+					}else {
+						diferenciaDias =  Integer.parseInt(diasList.get(0)) - diaHoy;
+						diaProx = Integer.parseInt(diasList.get(0));
+					}
+					
+					System.out.println(diaProx + " " + diferenciaDias);
+					
+					if(diferenciaDias > 0) {
+						util.add(Calendar.DATE, diferenciaDias);
+					}else {
+						util.add(Calendar.DATE, 7 +(diferenciaDias));				
 					}
 				}
-				if(diaProx == -1) {
-					System.out.println("-1");
-					diaProx = Integer.parseInt(diasList.get(0));
+				
+//				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, util.getTime()));
+				DateFormat df = new SimpleDateFormat("HH:mm:ss");
+				try {
+					poCita = new CitaDTO();
+					BarberoDTO poBarbero = new BarberoDTO();
+					poBarbero.setPiIdBarbero(9);
+					poCita.setPoBarbero(poBarbero);
+					SucursalDTO poSucursal = new SucursalDTO();
+					poSucursal.setPiIdSucursal(1);
+					poCita.setPoSucursal(poSucursal);
+					horarios = servicioTareaCita.generarHorarios(df.parse("08:00:00"), df.parse("16:00:00"), citaDAO.buscarCitasDia(poCita, DateUtils.truncate(util.getTime(), Calendar.DATE)));
+					System.out.println(util.getTime());		
+					diaHoy = util.getTime().getDay();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			}else {
-				diferenciaDias =  Integer.parseInt(diasList.get(0)) - diaHoy;
-				diaProx = Integer.parseInt(diasList.get(0));
-			}
-			
-			System.out.println(diaProx + " " + diferenciaDias);
-			
-			if(diferenciaDias > 0) {
-				util.add(Calendar.DATE, diferenciaDias);
-			}else {
-				util.add(Calendar.DATE, 7 +(diferenciaDias));				
-			}
 		}
-		System.out.println(util.getTime());
+		
+		
 	}
 	
 	public static void main(String[] args) {
 		ControladorCita c = new ControladorCita();
-		String diasTrabajo = "0,3";
+		String diasTrabajo = "3,4";
 		c.generarFechaMinimaYHorarios(diasTrabajo);
 	}
 	

@@ -15,25 +15,25 @@ public class ServicioTareaBarbero {
 	
 	public String obtenerDias(BarberoDTO barbero) {
 		String resultado = "";
-		if(barbero.getPiDiaDomingo() == 1) {
+		if(barbero.getPiDiaDomingo() != null && barbero.getPiDiaDomingo() == 1) {
 			resultado +=  "0,";
 		}
-		if(barbero.getPiDiaLunes() == 1) {
+		if(barbero.getPiDiaLunes() != null && barbero.getPiDiaLunes() == 1) {
 			resultado += "1,";
 		}
-		if(barbero.getPiDiaMartes() == 1) {
+		if(barbero.getPiDiaMartes()!= null && barbero.getPiDiaMartes() == 1) {
 			resultado += "2,";
 		}
-		if(barbero.getPiDiaMiercoles() == 1) {
+		if(barbero.getPiDiaMiercoles() != null && barbero.getPiDiaMiercoles() == 1) {
 			resultado += "3,";
 		}
-		if(barbero.getPiDiaJueves() == 1) {
+		if(barbero.getPiDiaJueves() != null && barbero.getPiDiaJueves() == 1) {
 			resultado += "4,";
 		}
-		if(barbero.getPiDiaViernes() == 1) {
+		if(barbero.getPiDiaViernes() != null && barbero.getPiDiaViernes() == 1) {
 			resultado += "5,";
 		}
-		if(barbero.getPiDiaSabado() == 1) {
+		if(barbero.getPiDiaSabado() != null && barbero.getPiDiaSabado() == 1) {
 			resultado += "6,";
 		}
 		

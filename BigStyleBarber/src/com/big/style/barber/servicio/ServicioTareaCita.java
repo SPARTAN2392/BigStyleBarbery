@@ -38,7 +38,7 @@ public class ServicioTareaCita {
 		return false;
 	}
 	
-	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas, String diasTrabajo) {
+	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas) {
 		
 		List<String> resultado = new ArrayList<String>();
 		
@@ -48,11 +48,10 @@ public class ServicioTareaCita {
 		boolean continua = true;
 		boolean compruebaContinuidad = false;
 		Integer duracionCita = 0;
+		Date horaDespuesDeSuma = horaApertura;	
 		
 		while(continua) {
-			long horApe = c.getTimeInMillis();
-			Date horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));			
-			c.setTime(horaDespuesDeSuma);
+			long horApe = c.getTimeInMillis();			
 			
 			if(compruebaContinuidad) {
 				Calendar horaCita = Calendar.getInstance();
@@ -65,19 +64,21 @@ public class ServicioTareaCita {
 				}else {
 					compruebaContinuidad = false;
 				}
-			}
+			}						
 			
 			if(citasOcupadas.containsKey(horaDespuesDeSuma)) {
 				duracionCita = citasOcupadas.get(horaDespuesDeSuma);
 				compruebaContinuidad = true;
 				continue;
-			}
-			
-			if(horaDespuesDeSuma.getHours() > horaCierre.getHours()) {
+			}					
+			if(horaDespuesDeSuma.getHours() >= horaCierre.getHours()) {
 				continua = false;
 			}else {
 				resultado.add(df.format(horaDespuesDeSuma));
 			}
+			
+			horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));			
+			c.setTime(horaDespuesDeSuma);
 		}		
 		
 		return resultado;
