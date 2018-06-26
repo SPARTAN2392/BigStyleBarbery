@@ -56,6 +56,7 @@ public class ControladorCita implements Serializable{
 	private MapModel simpleModel;
 	private String coordenadasMapaSel;
 	ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
+	Date fechaMinima;	
 	
 	@PostConstruct
 	private void init() {		
@@ -75,17 +76,14 @@ public class ControladorCita implements Serializable{
 				listaBarbero = barberoDAO.buscarBarberosSucursalServicio(poCita.getPoSucursal().piIdSucursal, poCita.getPoServicio().getPiIdServicioPk());
 				break;
 			}
-			case "calendarioTab":{				
+			case "calendarioTab":{		
+				fechaMinima = new Date();
 				ServicioTareaBarbero servicioTareaBarbero = new ServicioTareaBarbero();
 				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());				
 				
-				
-				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, getHoy()));
-				if(horarios.isEmpty()) {
-					servicioTareaCita.generarFechaMinima();
-				}else {
-					
-				}
+				generarFechaMinimaYHorarios(diasTrabajoBarbero);
+				System.out.println(fechaMinima);
+				System.out.println(horarios);
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
 				break;
 			}
@@ -96,68 +94,50 @@ public class ControladorCita implements Serializable{
 	
 	public void generarFechaMinimaYHorarios(String diasTrabajo) {
 		Calendar util = Calendar.getInstance();		
+		Date dateUtil = DateUtils.truncate(util.getTime(), Calendar.DATE);
 		List<String> diasList = new ArrayList<String>();
 		for(String a : diasTrabajo.split(",")) {
 			diasList.add(a);
 		}		
-		int diaHoy = util.getTime().getDay();
+		int diaHoy = dateUtil.getDay();
 		
 		horarios = new ArrayList<String>();
 		servicioTareaCita = new ServicioTareaCita();
+		if(diasList.contains(String.valueOf(diaHoy))) {
+			fechaMinima = DateUtils.truncate(dateUtil, Calendar.DATE);
+			horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, fechaMinima));
+		}
 		
-		while(horarios.isEmpty()) {			
-				if(!diasList.contains(String.valueOf(diaHoy))) {
-					int diferenciaDias = 0;
-					int diaProx = -1;
-					
-					if(diasList.size() > 1) {
-						int indexDia = diasList.indexOf(String.valueOf(diaHoy)); 
-						if(indexDia == diasList.size() - 1)
-							indexDia = 0;
-						else 
-							indexDia += 1;
-						diaProx = Integer.parseInt(diasList.get(indexDia));		
-						diferenciaDias = diaProx - diaHoy;						
-					}else {
-						diferenciaDias =  Integer.parseInt(diasList.get(0)) - diaHoy;
-						diaProx = Integer.parseInt(diasList.get(0));
-					}
-					
-					System.out.println(diaProx + " " + diferenciaDias);
-					
-					if(diferenciaDias > 0) {
-						util.add(Calendar.DATE, diferenciaDias);
-					}else {
-						util.add(Calendar.DATE, 7 +(diferenciaDias));				
-					}
+		int indexDia = diasList.indexOf(String.valueOf(diaHoy)); 
+		
+		while(horarios.isEmpty()) {							
+				int diferenciaDias = 0;
+				int diaProx = -1;
+				
+				if(diasList.size() > 1) {					
+					if(indexDia == diasList.size() - 1)
+						indexDia = 0;
+					else 
+						indexDia += 1;
+					diaProx = Integer.parseInt(diasList.get(indexDia));		
+					diferenciaDias = diaProx - diaHoy;						
+				}else {
+					diferenciaDias =  Integer.parseInt(diasList.get(0)) - diaHoy;
+					diaProx = Integer.parseInt(diasList.get(0));
+				}				
+				
+				if(diferenciaDias > 0) {
+					util.add(Calendar.DATE, diferenciaDias);
+				}else {
+					util.add(Calendar.DATE, 7 +(diferenciaDias));				
 				}
 				
-//				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, util.getTime()));
-				DateFormat df = new SimpleDateFormat("HH:mm:ss");
-				try {
-					poCita = new CitaDTO();
-					BarberoDTO poBarbero = new BarberoDTO();
-					poBarbero.setPiIdBarbero(9);
-					poCita.setPoBarbero(poBarbero);
-					SucursalDTO poSucursal = new SucursalDTO();
-					poSucursal.setPiIdSucursal(1);
-					poCita.setPoSucursal(poSucursal);
-					horarios = servicioTareaCita.generarHorarios(df.parse("08:00:00"), df.parse("16:00:00"), citaDAO.buscarCitasDia(poCita, DateUtils.truncate(util.getTime(), Calendar.DATE)));
-					System.out.println(util.getTime());		
-					diaHoy = util.getTime().getDay();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				fechaMinima = DateUtils.truncate(util.getTime(), Calendar.DATE);
+				diaHoy = fechaMinima.getDay();
+				horarios = servicioTareaCita.generarHorarios(poCita.getPoSucursal().getPtHorarioApertura(), poCita.getPoSucursal().getPtHorarioCierre(), citaDAO.buscarCitasDia(poCita, fechaMinima));				
 		}
 		
 		
-	}
-	
-	public static void main(String[] args) {
-		ControladorCita c = new ControladorCita();
-		String diasTrabajo = "3,4";
-		c.generarFechaMinimaYHorarios(diasTrabajo);
 	}
 	
 	public void cambioDia(SelectEvent event) {
@@ -209,9 +189,8 @@ public class ControladorCita implements Serializable{
 		this.listaBarbero = listaBarbero;
 	}
 
-	public Date getHoy() {		
-		Calendar c = Calendar.getInstance();
-		return DateUtils.truncate(c.getTime(), Calendar.DATE); 
+	public Date getFechaMinima() {
+		return fechaMinima;
 	}
 
 	public String getHorarioCita() {

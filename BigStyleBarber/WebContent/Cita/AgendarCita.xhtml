@@ -38,7 +38,7 @@
 								        </p:selectOneListbox>
 									</p:column>
 									<p:column style="width:100%">	
-										<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="HYBRID" style="width:100%;height:400px" />								 
+										<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="15" type="ROADMAP" style="width:100%;height:400px" />								 
 									</p:column>		  
 		                    	</p:row>                    	                    	                		                		        				        			
 				    		</p:panelGrid>
@@ -92,7 +92,7 @@
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel for="calendario" value="Dia:" />
 	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" 
-	        							mindate="#{controladorCita.hoy}" beforeShowDay="diasDeshabilitados">
+	        							mindate="#{controladorCita.fechaMinima}" beforeShowDay="diasDeshabilitados">
 	        							<p:ajax event="dateSelect" listener="#{controladorCita.cambioDia}" update="horarioList" />
 	        						</p:calendar>
 				            	</h:panelGrid>			            	

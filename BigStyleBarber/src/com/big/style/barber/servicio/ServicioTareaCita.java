@@ -63,6 +63,8 @@ public class ServicioTareaCita {
 					continue;
 				}else {
 					compruebaContinuidad = false;
+					horaDespuesDeSuma = new Date(horApe + ((citasOcupadas.get(horaDespuesDeSuma)) * ConstantesDominio.UN_MINUTO));
+					citasOcupadas.remove(horaDespuesDeSuma);										
 				}
 			}						
 			
@@ -71,13 +73,14 @@ public class ServicioTareaCita {
 				compruebaContinuidad = true;
 				continue;
 			}					
-			if(horaDespuesDeSuma.getHours() >= horaCierre.getHours()) {
+			if(horaDespuesDeSuma.getTime() >= horaCierre.getTime()) {
 				continua = false;
-			}else {
+			}else {				
 				resultado.add(df.format(horaDespuesDeSuma));
+				horaDespuesDeSuma = new Date(horaDespuesDeSuma.getTime() + (45 * ConstantesDominio.UN_MINUTO));
 			}
 			
-			horaDespuesDeSuma = new Date(horApe + (45 * ConstantesDominio.UN_MINUTO));			
+						
 			c.setTime(horaDespuesDeSuma);
 		}		
 		
