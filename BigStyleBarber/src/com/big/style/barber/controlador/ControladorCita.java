@@ -17,7 +17,10 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FlowEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import com.big.style.barber.dao.BarberoDAO;
 import com.big.style.barber.dao.CatalogoDAO;
@@ -54,15 +57,23 @@ public class ControladorCita implements Serializable{
 	String diasTrabajoBarbero;
 	boolean membresiaCliente;
 	private MapModel simpleModel;
-	private String coordenadasMapaSel;
 	ServicioTareaCita servicioTareaCita = new ServicioTareaCita();
 	Date fechaMinima;	
+	
 	
 	@PostConstruct
 	private void init() {		
 		catSucursal = catalogosDAO.getCatSucursales();		
 		poCita = new CitaDTO();
 		poCliente = new ClienteDTO();
+		simpleModel = new DefaultMapModel();
+	}
+	
+	public void cambioSucursal() {
+		simpleModel = new DefaultMapModel();
+		String[] coordenadasDefault =poCita.getPoSucursal().getPsCoordenadas().split(",");
+		LatLng marcadorCoordenada = new LatLng(Double.parseDouble(coordenadasDefault[0]), Double.parseDouble(coordenadasDefault[1]));
+		simpleModel.addOverlay(new Marker(marcadorCoordenada, poCita.getPoSucursal().getPsNombreBarberia()));
 	}
 	
 	public String onFlowProcess(FlowEvent event) {
@@ -228,6 +239,9 @@ public class ControladorCita implements Serializable{
 	public void setMembresiaCliente(boolean membresiaCliente) {
 		this.poCliente.setPiMembresiaCliente((membresiaCliente)?1:0);
 		this.membresiaCliente = membresiaCliente;
+	}
+
+	public MapModel getSimpleModel() {
+		return simpleModel;
 	}	
-	
 }
