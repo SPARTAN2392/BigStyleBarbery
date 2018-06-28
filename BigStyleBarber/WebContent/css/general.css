@@ -4,3 +4,61 @@
 	font-weight: bold;
 	font-size: 1.1em;
 }
+
+.listasCitaHorario.ui-selectonelistbox.ui-state-highlight{
+	background-color: rgb(0,0,0);
+}
+
+.listasCitaHorario.ui-selectonelistbox{
+	padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(192, 192, 192);
+}
+
+.listasCitaHorario .ui-selectlistbox-item{
+	padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    
+    border-top-color: rgb(134, 130, 130);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(134, 130, 130);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(134, 130, 130);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(134, 130, 130);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(255, 255, 255);
+} 

@@ -21,7 +21,7 @@
 		                		<p:row>
 		                			<p:column>
 										<p:selectOneListbox  id="sucursalList" value="#{controladorCita.poCita.poSucursal}" var="item"  
-							                    	converter="sucursalConverter" style="width:300px" scrollHeight="400" >
+							                    	converter="sucursalConverter" style="width:300px" scrollHeight="400" required="true">
 								            <f:selectItems value="#{controladorCita.catSucursal}" var="sucursal" 
 								            itemLabel="#{sucursal.psNombreBarberia}" 						            
 								            itemValue="#{sucursal}" />	
@@ -47,11 +47,10 @@
 			            </p:panel>
 			        </p:tab>
 			        
-			        <c:set var="counter" value="0" />
 			        <p:tab id="servicioTab" title="Servicio">
 			            <p:panel header="Elige el Servicio">			            	
 			            	<p:selectOneListbox  id="servicioList" value="#{controladorCita.poCita.poServicio}" var="item"  
-				                    	converter="servicioListConverter" style="width:300px" scrollHeight="400" >
+				                    	converter="servicioListConverter" style="width:300px" scrollHeight="400" required="true">
 					            <f:selectItems value="#{controladorCita.listaServicio}" var="servicio" 
 					            itemLabel="#{servicio.psNombreServicio}" 						            
 					            itemValue="#{servicio}">
@@ -60,23 +59,11 @@
 					            
 					            
 					            <p:column id="column">
-					            <c:set var="counter" value="${counter+1}" />
-					            <p:outputLabel id="counters" value="${counter}"/>
 					            	<h:panelGrid columns="2"> 
 					            		<p:outputLabel value="#{item.psNombreServicio}" styleClass="cabecerasListas"/> <p:outputLabel/>
 					            		<p:outputLabel value="#{item.piTiempo} mins" />  <p:outputLabel value="$#{item.piCosto}" />
+					            		<p:outputLabel value="#{item.psDescripcion}"/>
 					            		
-					            		<c:set var="idAccTab" value="${[item]}" />
-										<c:forEach items="${idServ}" var="it" varStatus="loop">
-											<tr><td><h:outputText id="table_#{loop.index}_name" value="#{it}" /></td></tr>
-										
-							            		
-										</c:forEach>
-										<p:accordionPanel id="idAcc_${counter}">
-									        <p:tab  title="#{item.psNombreServicio}">
-									            <h:outputText value="#{item.psDescripcion}"/>
-									        </p:tab>
-									    </p:accordionPanel>
 					            	</h:panelGrid>						            	
 					            </p:column>						            					            					            						           					            
 					            
@@ -87,7 +74,7 @@
 			        <p:tab id="barberoTab" title="Barbero">
 			            <p:panel header="Elige el Barbero">
 			            	<p:selectOneListbox  id="barberoList" value="#{controladorCita.poCita.poBarbero}" var="item"  
-				                    	converter="barberoListConverter" style="width:300px" scrollHeight="400" >
+				                    	converter="barberoListConverter" style="width:300px" scrollHeight="400" required="true">
 					            <f:selectItems value="#{controladorCita.listaBarbero}" var="barbero" 
 					            itemLabel="#{barbero.psNombreBarbero} #{barbero.psApellidoPaterno} #{barbero.psApellidoMaterno}" 						            
 					            itemValue="#{barbero}" />	
@@ -111,7 +98,7 @@
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel for="calendario" value="Dia:" />
 	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" 
-	        							mindate="#{controladorCita.fechaMinima}" beforeShowDay="diasDeshabilitados">
+	        							mindate="#{controladorCita.fechaMinima}" beforeShowDay="diasDeshabilitados" required="true">
 	        							<p:ajax event="dateSelect" listener="#{controladorCita.cambioDia}" update="horarioList" />
 	        						</p:calendar>
 				            	</h:panelGrid>			            	
@@ -120,7 +107,8 @@
 				            		<p:outputLabel value="Horario Disponible para el " />
 	        						<h:panelGrid columns="1">	        							
 	        							
-	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" >
+	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" 
+	        								styleClass="listasCitaHorario" required="true">
 								            <f:selectItems value="#{controladorCita.horarios}" var="horario" 
 								            itemLabel="#{horario}" 						            
 								            itemValue="#{horario}" />	
@@ -136,13 +124,13 @@
 			            <p:panel header="Datos de Contacto">
 			            	<h:panelGrid columns="4" columnClasses="label, value">
 			            		<p:outputLabel for="idNombreCliente" value="Nombre" />
-			            		<p:inputText id="idNombreCliente" value="#{controladorCita.poCliente.psNombreCliente}" title="Nombre">
+			            		<p:inputText id="idNombreCliente" value="#{controladorCita.poCliente.psNombreCliente}" title="Nombre" required="true">
 	                    			<p:keyFilter regEx="/[a-z_ ]/i"/>
 	                    		</p:inputText>
 	                    		
 	                    		<p:outputLabel for="idCorreoCliente" value="Correo" />			            		
 	                    		<p:column>
-		                    		<p:inputText id="idCorreoCliente"
+		                    		<p:inputText id="idCorreoCliente" required="true"
 													value="#{controladorCita.poCliente.psCorreoCliente}" >
 													<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{empty param[guardar.clientId]}"/>
 												</p:inputText>
@@ -151,7 +139,7 @@
 								
 								<p:outputLabel for="idTelefono" value="Teléfono" />
 								<p:column>
-									<p:inputText id="idTelefono"
+									<p:inputText id="idTelefono" required="true"
 										value="#{controladorCita.poCliente.psTelefonoCliente}"
 										title="Telefono" >											
 										<p:keyFilter regEx="/[\d]/"/>
@@ -161,7 +149,7 @@
 								
 								<p:outputLabel for="idAlias" value="Alias" />
 								<p:column>
-		                    		<p:inputText id="idAlias"
+		                    		<p:inputText id="idAlias" required="true"
 													value="#{controladorCita.poCliente.psAliasCliente}" >
 										<p:keyFilter regEx="/[a-z_ ]/i"/>													
 									</p:inputText>									
