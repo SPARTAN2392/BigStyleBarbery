@@ -7,11 +7,11 @@ public class ValidatorAdminBarbero {
 	public boolean validate(AdministracionBarberosVO adminBarberoVO) {
 		
 		if(
-			(adminBarberoVO.getBarberoDTO().getPsNombreBarbero() == null || adminBarberoVO.getBarberoDTO().getPsNombreBarbero().isEmpty()) &&			
-			(adminBarberoVO.getBarberoDTO().getPsApellidoPaterno() == null || adminBarberoVO.getBarberoDTO().getPsApellidoPaterno().isEmpty()) &&
-			(adminBarberoVO.getBarberoDTO().getPsApellidoMaterno() == null || adminBarberoVO.getBarberoDTO().getPsApellidoMaterno().isEmpty()) &&
+			(adminBarberoVO.getPsNombre() == null || adminBarberoVO.getPsNombre().isEmpty()) &&			
+			(adminBarberoVO.getPsAPaterno() == null || adminBarberoVO.getPsAPaterno().isEmpty()) &&
+			(adminBarberoVO.getPsAMaterno() == null || adminBarberoVO.getPsAMaterno().isEmpty()) &&
 			(adminBarberoVO.getPiSucursal() == null || adminBarberoVO.getPiSucursal() == 0) &&
-			(adminBarberoVO.getBarberoDTO().getPiEdad() == null || adminBarberoVO.getBarberoDTO().getPiEdad().equals(0)) &&
+			(adminBarberoVO.getPiEdad() == null || adminBarberoVO.getPiEdad().equals(0)) &&
 			(adminBarberoVO.getPiPuesto() == null || adminBarberoVO.getPiPuesto() == 0) &&
 			adminBarberoVO.getPtHorarioEntradaIni() == null &&
 			adminBarberoVO.getPtHorarioEntradaFin() == null &&
