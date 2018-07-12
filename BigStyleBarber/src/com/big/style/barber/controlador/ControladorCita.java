@@ -74,6 +74,7 @@ public class ControladorCita implements Serializable{
 		String[] coordenadasDefault =poCita.getPoSucursal().getPsCoordenadas().split(",");
 		LatLng marcadorCoordenada = new LatLng(Double.parseDouble(coordenadasDefault[0]), Double.parseDouble(coordenadasDefault[1]));
 		simpleModel.addOverlay(new Marker(marcadorCoordenada, poCita.getPoSucursal().getPsNombreBarberia()));
+		System.out.println("coordenadas " + poCita.getPoSucursal().getPsCoordenadas());
 	}
 	
 	public String onFlowProcess(FlowEvent event) {

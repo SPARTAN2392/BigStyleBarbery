@@ -1,8 +1,10 @@
 @charset "ISO-8859-1";
 
 .gridNoBorder .ui-panelgrid>*>tr,
-.gridNoBorder .ui-panelgrid .ui-panelgrid-cell {
-    border: none !important;
+.gridNoBorder .ui-panelgrid .ui-panelgrid-cell,
+.gridNoBorder.ui-panelgrid>*>tr,
+.gridNoBorder.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
 }
 
 .ui-fileupload-content{

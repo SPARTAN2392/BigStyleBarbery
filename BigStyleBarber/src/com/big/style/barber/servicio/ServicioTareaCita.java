@@ -26,13 +26,21 @@ public class ServicioTareaCita {
 		return null;
 	}
 	
-	public boolean insertarCita(CitaDTO poCita, ClienteDTO poCliente) {
+	public boolean insertarCita(CitaDTO poCita, ClienteDTO poCliente) {				
+		
 		Integer respuestaCliente = 0;
-		poCliente.setPiEstadoCliente(1);
-		respuestaCliente = clienteDAO.insertarCliente(poCliente);
+		
+		if(!clienteDAO.buscarClientePorEmail(poCliente.getPsCorreoCliente()).isEmpty()) {			
+			poCliente.setPiEstadoCliente(1);
+			respuestaCliente = clienteDAO.insertarCliente(poCliente);
+		}else {
+			respuestaCliente = 1;
+		}
+				
 		if(respuestaCliente != 0) {
 			poCliente.setPiIdCliente(respuestaCliente);
 			poCita.setPoCliente(poCliente);
+			poCita.setEstado(1);
 			citaDAO.insertarCita(poCita);
 		}
 		return false;

@@ -168,16 +168,28 @@
 					
 			</p:fieldset>			
 				<p:carousel id = "carrouselBarbero" value="#{controladorAdminBarberos.barberoVO.resultados}" headerText="Resultados" var="barbero" itemStyle="text-align:center" responsive="true">
-       						<h:panelGrid columns="2" style="width:100%;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">   
+       						<h:panelGrid style="width:100%;margin:10px 0px" >   
        							<f:facet name="header">    							       							     						
      								<p:graphicImage value="#{barbero.renderFoto}" stream="false" height="225px" width="225px"/>     												                	
 					        	</f:facet>
 					        	
-					             <h:outputText value="Nombre:" />
-					            <h:outputText value="#{barbero.barberoRes.psNombreBarbero} #{barbero.barberoRes.psApellidoPaterno} #{barbero.barberoRes.psApellidoMaterno}" />
-					 
-					            <h:outputText value="Sucursal:" />
-					            <h:outputText value="#{barbero.barberoRes.poSucursalFk.psNombreBarberia}"/>
+					        	<p:row>			
+					        		<p:column>
+					        			<h:outputText value="Nombre: " />
+					        		</p:column>		        	
+						        	<p:column>						        		
+						            	<h:outputText value="#{barbero.barberoRes.psNombreBarbero} #{barbero.barberoRes.psApellidoPaterno} #{barbero.barberoRes.psApellidoMaterno}" />
+						        	</p:column>					            
+					            </p:row>
+					            
+					            <p:row>
+					            	<p:column>
+					            		<h:outputText value="Sucursal: " />
+					            	</p:column>
+						 			<p:column>						 				
+						           		<h:outputText value="#{barbero.barberoRes.poSucursalFk.psNombreBarberia}"/>
+						 			</p:column>
+					            </p:row>
 					            
 					            <f:facet name="footer">
 					                <p:commandButton oncomplete="PF('EditarBarberoDialog').show()" icon="fa fa-edit" update = ":EditarBarberoForm">

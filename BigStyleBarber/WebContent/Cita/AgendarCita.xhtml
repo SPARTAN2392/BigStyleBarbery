@@ -17,7 +17,7 @@
 				<p:wizard flowListener="#{controladorCita.onFlowProcess}">
 			        <p:tab id="sucursalTab" title="Sucursal">
 			            <p:panel header="Elige la Sucursal">			        
-			            	<p:panelGrid styleClass="gridNoBorder">
+			            	<p:panelGrid styleClass="gridNoBorder" id="panelSucursal">
 		                		<p:row>
 		                			<p:column>
 										<p:selectOneListbox  id="sucursalList" value="#{controladorCita.poCita.poSucursal}" var="item"  
@@ -33,14 +33,18 @@
 								            	</h:panelGrid>						            	
 								            </p:column>						            
 								            					            	
-								            <p:ajax listener="#{controladorCita.cambioSucursal}" update="mapa"/>
+								            <p:ajax listener="#{controladorCita.cambioSucursal}" update="panelSucursal"/>
 								            
 								        </p:selectOneListbox>
 									</p:column>
 									<p:column style="width:100%">	
 										<p:gmap id = "mapa" center="#{controladorCita.poCita.poSucursal.psCoordenadas}" zoom="16" type="ROADMAP" style="width:100%;height:400px" 
-										model="#{controladorCita.simpleModel}"/>								 
-									</p:column>		  
+										model="#{controladorCita.simpleModel}" rendered="#{controladorCita.poCita.poSucursal.psCoordenadas != null}"/>
+										<div align="center">
+											<p:graphicImage url="/images/Barberia_2.jpg" width="500px"
+												height="400px" rendered="#{controladorCita.poCita.poSucursal.psCoordenadas == null}"/>
+										</div>							 
+									</p:column>
 		                    	</p:row>                    	                    	                		                		        				        			
 				    		</p:panelGrid>
 			                
@@ -174,10 +178,14 @@
 			            		<p:outputLabel  value="#{controladorCita.poCita.poBarbero.psNombreBarbero} #{controladorCita.poCita.poBarbero.psApellidoPaterno} #{controladorCita.poCita.poBarbero.psApellidoMaterno}" />
 			            		
 			            		<p:outputLabel  value="Dia" />
-			            		<p:outputLabel  value="#{controladorCita.poCita.ptDia}" />
+			            		<h:outputText value="#{controladorCita.poCita.ptDia}">
+			            			<f:convertDateTime pattern="hh:mm a"/>
+			            		</h:outputText>
 			            		
 			            		<p:outputLabel  value="Hora" />
-			            		<p:outputLabel  value="#{controladorCita.poCita.ptHora}" />
+			            		<h:outputText  value="#{controladorCita.poCita.ptHora}">
+			            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			            		</h:outputText>
 			            	</h:panelGrid>
 			            	
 			            	<h:panelGrid columns="2" columnClasses="label, value">

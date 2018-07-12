@@ -1,10 +1,13 @@
 package com.big.style.barber.validators;
 
+import java.util.List;
+
+import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
 
 public class ValidatorAdminBarbero {
 
-	public boolean validate(AdministracionBarberosVO adminBarberoVO) {
+	public boolean validate(AdministracionBarberosVO adminBarberoVO, List<ServicioDTO> servicio) {
 		
 		if(
 			(adminBarberoVO.getPsNombre() == null || adminBarberoVO.getPsNombre().isEmpty()) &&			
@@ -17,7 +20,8 @@ public class ValidatorAdminBarbero {
 			adminBarberoVO.getPtHorarioEntradaFin() == null &&
 			adminBarberoVO.getPtHorarioSalidaIni() == null &&
 			adminBarberoVO.getPtHorarioSalidaFin() == null &&
-			adminBarberoVO.getSelectedDias().length == 0
+			adminBarberoVO.getSelectedDias().length == 0 &&
+			servicio.size() == 0
 				) {
 			return true;
 		}

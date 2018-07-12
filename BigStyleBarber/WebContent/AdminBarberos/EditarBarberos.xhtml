@@ -227,10 +227,11 @@
 						</p:row>
 											 
 					</p:panelGrid>
-					
-                <p:commandButton binding="#{guardar}" value="Guardar" id="idGuardar" update="editarBarberoForm, barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.editarBarbero}" styleClass="ui-priority-primary"
-                	oncomplete="handleSubmit(args,'EditarBarberoDialog');" icon="fa fa-edit"/>
-                <p:commandButton value="#{msg.global_lbl_Cancelar}" oncomplete="PF('EditarBarberoDialog').hide();" immediate="true" icon="fa fa-close"/>
+					<div align="center">
+		                <p:commandButton binding="#{guardar}" value="Guardar" id="idGuardar" update="editarBarberoForm, barberosForm:carrouselBarbero" actionListener="#{controladorAdminBarberos.editarBarbero}" styleClass="ui-priority-primary"
+		                	oncomplete="handleSubmit(args,'EditarBarberoDialog');" icon="fa fa-edit"/>
+		                <p:commandButton value="#{msg.global_lbl_Cancelar}" oncomplete="PF('EditarBarberoDialog').hide();" immediate="true" icon="fa fa-close"/>
+		           	</div>
         </h:form>
     </p:dialog>
                                            

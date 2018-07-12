@@ -8,7 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
@@ -29,7 +29,7 @@ import com.big.style.barber.servicio.ServicioTareaBarbero;
 import com.big.style.barber.validators.ValidatorAdminBarbero;
 
 @ManagedBean(name = "controladorAdminBarberos")
-@SessionScoped
+@ViewScoped
 public class ControladorAdministracionBarberos implements Serializable{
 
 	/**
@@ -82,7 +82,8 @@ public class ControladorAdministracionBarberos implements Serializable{
 	
 	public void limpiarBusquedaForm() {
 		barberoVO = new AdministracionBarberosVO();
-		barberoSeleccionado = new ResultadosBarberoVista();		
+		barberoSeleccionado = new ResultadosBarberoVista();	
+		catServicio = new DualListModel<ServicioDTO>(servicioSource, barberoVO.getServicioTarget());
 	}
 	
 	public void editarBarbero() {
@@ -96,7 +97,7 @@ public class ControladorAdministracionBarberos implements Serializable{
 	}
 	
 	public void consultarBarberos() {
-		if(validadorAdminBar.validate(barberoVO)) {
+		if(validadorAdminBar.validate(barberoVO,catServicio.getTarget())) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe introducir al menos un Filtro"));
 		}else {
 			barberoVO.setResultConsultaBarbero(barberoDAO.buscarBarberos(barberoVO, catServicio.getTarget()));

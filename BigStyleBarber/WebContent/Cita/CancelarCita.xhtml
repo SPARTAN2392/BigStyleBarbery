@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/plantilla/layout.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:define name="content">
+    	<link rel="stylesheet" type="text/css" href="../css/gridPanelBorders.css"/>
+        <h:form id="cancelarCitaForm" >
+			<p:fieldset style="margin-bottom:20px;height:95%  ">
+				<p:messages id="messages" showDetail="true" closable="true"/>
+				<p:panel header="Cancelar Cita" id = "camposCancelarCita">
+					<p:panelGrid styleClass="gridNoBorder">
+						<p:row>
+							<p:column>
+								<p:outputLabel value="Alias" for="idAlias"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="idAlias" value="#{controladorCancelCita.poCita.poCliente.psAliasCliente}"/>
+							</p:column>
+							<p:column>
+								<p:outputLabel value="Email" for="idEmail"/>
+							</p:column>
+							<p:column>
+								<p:inputText id="idEmail"
+									value="#{controladorCancelCita.poCita.poCliente.psCorreoCliente}" >
+									<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{not empty param[limpiar.clientId]}"/>
+								</p:inputText>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column colspan="4">
+								<div align="center">
+									<p:commandButton value="#{msg.global_lbl_Buscar}" binding="#{buscar}" icon = "fa fa-search" id="idBuscar" update="messages, :cancelarCitaForm:carrouselCitas" actionListener="#{controladorCancelCita.consultaCitas}" styleClass="ui-priority-primary"/>
+									<p:commandButton value="#{msg.global_lbl_Limpiar}" binding="#{limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":cancelarCitaForm:camposCancelarCita, messages, :cancelarCitaForm:carrouselCitas" actionListener="#{controladorCancelCita.limpiarPantalla}" styleClass="ui-priority-primary" />
+								</div>
+							</p:column>
+						</p:row>
+					</p:panelGrid>									
+				</p:panel>
+			</p:fieldset>
+			<p:carousel id = "carrouselCitas" value="#{controladorCancelCita.resultados}" headerText="Resultados" var="cita" itemStyle="text-align:center" responsive="true">
+					<h:panelGrid style="width:100%;margin:10px 0px" >   
+						
+		        	<p:row>			
+		        		<p:column>
+		        			<h:outputText value="Sucursal: " />
+		        		</p:column>		        	
+			        	<p:column>						        		
+			            	<h:outputText value="#{cita.poSucursal.psNombreBarberia}" />
+			        	</p:column>					            
+		            </p:row>
+		            
+		            <p:row>
+		            	<p:column>
+		            		<h:outputText value="Servicio: " />
+		            	</p:column>
+			 			<p:column>						 				
+			           		<h:outputText value="#{cita.poServicio.psNombreServicio}"/>
+			 			</p:column>
+		            </p:row>
+		            
+		            <p:row>
+		            	<p:column>
+		            		<h:outputText value="Dia: " />
+		            	</p:column>
+			 			<p:column>						 				
+			           		<h:outputText value="#{cita.ptDia}">
+			           			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			           		</h:outputText>
+			 			</p:column>
+		            </p:row>
+		            
+		            <p:row>
+		            	<p:column>
+		            		<h:outputText value="Hora: " />
+		            	</p:column>
+			 			<p:column>						 				
+			           		<h:outputText value="#{cita.ptHora}">
+			           			<f:convertDateTime pattern="hh:mm a"/>
+			           		</h:outputText>
+			           		
+			 			</p:column>
+		            </p:row>
+		            
+		            <p:row>
+		            	<p:column>
+		            		<h:outputText value="Barbero: " />
+		            	</p:column>
+			 			<p:column>						 				
+			           		<h:outputText value="#{cita.poBarbero.psNombreBarbero} #{cita.poBarbero.psApellidoPaterno} #{cita.poBarbero.psApellidoMaterno}"/>
+			 			</p:column>
+		            </p:row>
+		            
+		            <f:facet name="footer">
+		                <p:commandButton action="#{controladorCancelCita.cancelarCita}" icon="fa fa-times-circle" update = "cancelarCitaForm:messages, cancelarCitaForm:carrouselCitas">
+		                	<f:setPropertyActionListener value="#{cita}" target="#{controladorCancelCita.citaSelectEliminar}" />
+		                	<p:confirm header="Confirmacion" message="¿Estás seguro de cancelar la Cita?" icon="ui-icon-alert" />
+		                </p:commandButton>		                
+		            </f:facet>
+		        </h:panelGrid>
+		 
+		 	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		    </p:confirmDialog>
+		     
+		    </p:carousel>
+		</h:form>
+	</ui:define>
+</ui:composition>

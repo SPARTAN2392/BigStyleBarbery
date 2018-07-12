@@ -15,7 +15,7 @@
     <h:body>        
         <div id="top">
             <div id="menu_top" class="top_menu">
-                <p:tabMenu activeIndex="#{param.i}">
+                <!-- <p:tabMenu activeIndex="#{param.i}">
 					<p:menuitem value="NOSOTROS" outcome="/nosotros" icon="ui-icon-star"
 						id="idNosotros">
 						<f:param name="i" value="0" />
@@ -36,7 +36,36 @@
 						id="idContacto">
 						<f:param name="i" value="0" />
 					</p:menuitem>
-				</p:tabMenu>
+				</p:tabMenu> -->
+				<p:menubar>
+					<p:menuitem value="NOSOTROS" outcome="/nosotros" icon="ui-icon-star"/>
+					<p:menuitem value="SERVICIOS" outcome="/servicios"
+						icon="ui-icon-document"/>
+					<p:menuitem value="GALERIA" outcome="/index" icon="ui-icon-star"/>
+					<p:submenu label="CITAS" icon="fa fa-clock-o">
+						<p:menuitem value="Agendar" outcome="/Cita/AgendarCita" icon="fa fa-plus-circle"/>
+						<p:menuitem value="Cancelar" outcome="/Cita/CancelarCita" icon="fa fa-times-circle"/>						
+					</p:submenu>
+					<p:menuitem value="CONTACTO" outcome="/index" icon="ui-icon-person"
+						id="idContacto">
+					</p:menuitem>
+					<p:submenu label="ADMINISTRACIÓN" icon="fa fa-wrench">
+						<p:submenu label="Servicios" icon="fa fa-check-square-o">
+							<p:menuitem value="Registro" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-plus-square-o"/>
+							<p:menuitem value="Búsqueda" outcome="/AdminBarberos/AdminBarberos" icon="fa fa-search"/>
+							<p:menuitem value="Modificación" outcome="/AdminBarberos/AdminBarberos" icon="fa fa-edit"/>
+						</p:submenu>
+						<p:submenu label="Barbero" icon="fa fa-user">
+							<p:menuitem value="Registro Barbero" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-user-plus"/>
+							<p:menuitem value="Administración Barberos" outcome="/AdminBarberos/AdminBarberos" icon="fa fa-edit"/>
+						</p:submenu>	
+						<p:menuitem value="Carga de Imágenes" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-upload"/>
+						<p:menuitem value="Promoción" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-gift"/>
+						<p:menuitem value="Contacto" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-wechat"/>
+						<p:menuitem value="Consulta de Citas" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-pencil-square"/>
+						<p:menuitem value="Corte del Día" outcome="/AdminBarberos/RegistroBarberos" icon="fa fa-money"/>
+					</p:submenu>
+				</p:menubar>
             </div>
         </div>
         <div>

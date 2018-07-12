@@ -1,5 +1,6 @@
 package com.big.style.barber.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,12 @@ import com.big.style.barber.dominio.ServicioDTO;
 import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
 
-public class ServicioBarberoDAO {
+public class ServicioBarberoDAO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2499250153956518756L;
 
 	public void insertarServicioBarbero(ServicioBarberoDTO poServicioBarbero) {				
 			try {

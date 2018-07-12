@@ -1,5 +1,6 @@
 package com.big.style.barber.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,7 +10,12 @@ import java.util.Map;
 import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
 
-public class CitaDAO {
+public class CitaDAO extends GenericDAO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4259233269178038043L;
 
 	@SuppressWarnings("unchecked")
 	public Map<Date,Integer> buscarCitasDia(CitaDTO poCita, Date dia){
@@ -30,6 +36,29 @@ public class CitaDAO {
 		}
 		
 		return horarioDuracion;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CitaDTO> buscarCitasAliasMail(CitaDTO poCita){
+		List<CitaDTO> lista = new ArrayList<CitaDTO>();
+		
+		String query = RepositoriosConsultaHQL.BUSQUEDA_CITAS_CANCELAR;
+		Map<String, Object> mapa = new HashMap<String, Object>();
+		
+		if(poCita.getPoCliente().getPsAliasCliente() != null && !poCita.getPoCliente().getPsAliasCliente().equals("")) {
+			query += RepositoriosConsultaHQL.BUSQUEDA_CITAS_ALIAS;
+			mapa.put("alias", poCita.getPoCliente().getPsAliasCliente());
+		}
+		if(poCita.getPoCliente().getPsCorreoCliente() != null && !poCita.getPoCliente().getPsCorreoCliente().equals("")) {
+			query += RepositoriosConsultaHQL.BUSQUEDA_CITAS_MAIL;
+			mapa.put("mail", poCita.getPoCliente().getPsCorreoCliente());
+		}				
+		
+		
+		
+		lista = (List<CitaDTO>) GenericDAO.buscarQuery(CitaDTO.class, mapa, query);
+
+		return lista;
 	}
 	
 	public Integer insertarCita(CitaDTO poCita) {

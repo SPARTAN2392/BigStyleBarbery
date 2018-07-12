@@ -1,5 +1,6 @@
 package com.big.style.barber.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,12 @@ import com.big.style.barber.modelo.AdministracionBarberosVO;
 import com.big.style.barber.modelo.RegistroBarberosVO;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
 
-public class BarberoDAO {	
+public class BarberoDAO implements Serializable{	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5039346566599925953L;
 
 	@SuppressWarnings("unchecked")
 	public List<BarberoDTO> buscarBarberosSucursalServicio(Integer idSucursal, Integer idServicio){
@@ -166,7 +172,7 @@ public class BarberoDAO {
 	}
 	
 	public void editarBarbero(BarberoDTO poResultBarbero) {
-		GenericDAO.EditarObjecto(poResultBarbero);
+		GenericDAO.EditarObjeto(poResultBarbero);
 	}
 
 }

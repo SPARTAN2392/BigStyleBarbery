@@ -1,5 +1,6 @@
 package com.big.style.barber.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,8 +11,12 @@ import com.big.style.barber.dominio.SucursalDTO;
 import com.big.style.barber.utils.Utilerias;
 
 @SuppressWarnings("unchecked")
-public class CatalogoDAO {
+public class CatalogoDAO implements Serializable{
 
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7153299073152215388L;
 GenericDAO generico = new GenericDAO();
 	
 	public List<SucursalDTO> getCatSucursales() {

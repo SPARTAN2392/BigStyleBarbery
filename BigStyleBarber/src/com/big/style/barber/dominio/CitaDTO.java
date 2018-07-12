@@ -48,6 +48,9 @@ public class CitaDTO implements Serializable{
 	@JoinColumn(name = "cliente_fk")
 	public ClienteDTO poCliente = new ClienteDTO();
 	
+	@Column(name = "estado")
+	public Integer estado;
+	
 	public Integer getPiIdCita() {
 		return piIdCita;
 	}
@@ -102,6 +105,14 @@ public class CitaDTO implements Serializable{
 
 	public void setPoCliente(ClienteDTO poCliente) {
 		this.poCliente = poCliente;
+	}
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
 	}
 	
 }

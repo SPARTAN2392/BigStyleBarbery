@@ -95,7 +95,7 @@ public class GenericDAO {
 		}
 	}
 	
-	public static Object EditarObjecto(Object poObject) {
+	public static Object EditarObjeto(Object poObject) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();

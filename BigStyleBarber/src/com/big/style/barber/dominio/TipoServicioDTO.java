@@ -11,6 +11,11 @@ import javax.persistence.Table;
 @Table(name = "bs_tipo_servicio_cat")
 public class TipoServicioDTO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5032983422322386794L;
+
 	@Id
 	@Column(name = "id_tipo_servicio_pk")
 	public Integer píIdTipoServicioPk;
