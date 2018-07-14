@@ -16,7 +16,7 @@ public class ResultadosBarberoVista{
 	public byte[] foto;
 	List<ServicioDTO> servicioSource = new ArrayList<ServicioDTO>();;
 	List<ServicioDTO> servicioTarget = new ArrayList<ServicioDTO>();
-	DualListModel<ServicioDTO> catServicio;	
+	public DualListModel<ServicioDTO> catServicio;	
 	private String[] selectedDias = new String[7];
 	
 	public List<ServicioDTO> getServicioSource() {

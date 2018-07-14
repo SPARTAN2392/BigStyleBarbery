@@ -21,7 +21,9 @@ public interface RepositoriosConsultaHQL {
 	public static final String BUSQUEDA_BARBERO_WHERE_SERVICIO = " AND bar.piIdBarbero IN (SELECT serBar.poBarbero FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk IN (";
 
 	public static final String BUSQUEDA_SERVICIOS_BARBERO = "SELECT ser FROM ServicioDTO ser, ServicioBarberoDTO serBar WHERE"
-			+ " ser.piIdServicioPk = serBar.piIdServicioBarbero AND serBar.poBarbero.piIdBarbero = :piBarbero ";
+			+ " ser.piIdServicioPk = serBar.poServicio.piIdServicioPk AND serBar.poBarbero.piIdBarbero = :piBarbero ";
+	
+	public static final String BUSQUEDA_SERVICIOS_BARBERO_ELIMINAR = "SELECT serBar FROM ServicioBarberoDTO serBar WHERE serBar.poBarbero.piIdBarbero = :piBarbero ";
 	
 	public static final String BUSQUEDA_BARBEROS_POR_SUCURSAL_SERVICIO = "FROM BarberoDTO bar WHERE bar.poSucursalFk.piIdSucursal = :idSucursal AND bar.piIdBarbero IN "
 			+ "(SELECT poBarbero FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk = :idServicio)"; 

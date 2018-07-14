@@ -23,6 +23,12 @@ public class ServicioTareaServicios {
 		}
 	}
 
+	public void eliminarServicios(Integer idBarbero) {
+		for(ServicioBarberoDTO servicio:poSerServicioBarbero.buscarServiciosBarberoEliminar(idBarbero)) {
+			poSerServicioBarbero.eliminarServicio(servicio);
+		}
+	}
+	
 	public void setPoSerServicioBarbero(ServicioBarberoDAO poSerServicioBarbero) {
 		this.poSerServicioBarbero = poSerServicioBarbero;
 	}

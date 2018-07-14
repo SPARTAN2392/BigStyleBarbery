@@ -107,4 +107,16 @@ public class GenericDAO {
 			throw ex;
 		}
 	}
+	
+	public static void EliminarObjeto(Object poObject) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {			
+			session.beginTransaction();
+			session.delete(poObject);
+			session.getTransaction().commit();
+		}catch(Exception ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+	}
 }

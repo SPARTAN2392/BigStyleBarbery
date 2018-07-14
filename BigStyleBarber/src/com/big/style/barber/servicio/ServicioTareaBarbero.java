@@ -50,6 +50,8 @@ public class ServicioTareaBarbero {
 		if(poResultadoVista.getNombreFoto() != null && !poResultadoVista.getNombreFoto().equals("")) {
 			poResultadoVista.getBarberoRes().setPoFoto(poResultadoVista.getFoto());
 		}
+		poServicioTareaServicios.eliminarServicios(poResultadoVista.getBarberoRes().getPiIdBarbero());
+		poServicioTareaServicios.insertarServicios(poResultadoVista.catServicio, poResultadoVista.getBarberoRes());
 		barberoDAO.editarBarbero(poResultadoVista.getBarberoRes());
 	}
 	
