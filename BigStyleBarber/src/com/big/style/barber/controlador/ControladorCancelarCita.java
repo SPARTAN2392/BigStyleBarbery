@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import com.big.style.barber.dao.CitaDAO;
 import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.utils.MessageFactory;
+import com.big.style.barber.validators.ValidatorCancelarCita;
 
 @ManagedBean(name="controladorCancelCita")
 @ViewScoped
@@ -26,6 +27,7 @@ public class ControladorCancelarCita implements Serializable{
 	CitaDTO poCita;
 	CitaDTO citaSelectEliminar;
 	List<CitaDTO> resultados;
+	ValidatorCancelarCita validador = new ValidatorCancelarCita();
 	
 	@PostConstruct
 	public void init() {
@@ -49,7 +51,11 @@ public class ControladorCancelarCita implements Serializable{
 	}
 	
 	public void consultaCitas() {
-		resultados = citaDAO.buscarCitasAliasMail(poCita);
+		if(validador.validate(poCita)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe introducir al menos un Filtro"));
+		}else {
+			resultados = citaDAO.buscarCitasAliasMail(poCita);
+		}				
 	}
 	
 	public CitaDTO getPoCita() {

@@ -18,7 +18,7 @@ public interface RepositoriosConsultaHQL {
 	public static final String BUSQUEDA_BARBERO_WHERE_JUEVES = " AND bar.piDiaJueves = 1";
 	public static final String BUSQUEDA_BARBERO_WHERE_VIERNES = " AND bar.piDiaViernes = 1";
 	public static final String BUSQUEDA_BARBERO_WHERE_SABADO = " AND bar.piDiaSabado = 1";
-	public static final String BUSQUEDA_BARBERO_WHERE_SERVICIO = " AND bar.piIdBarbero IN (FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk IN (";
+	public static final String BUSQUEDA_BARBERO_WHERE_SERVICIO = " AND bar.piIdBarbero IN (SELECT serBar.poBarbero FROM ServicioBarberoDTO serBar WHERE serBar.poServicio.piIdServicioPk IN (";
 
 	public static final String BUSQUEDA_SERVICIOS_BARBERO = "SELECT ser FROM ServicioDTO ser, ServicioBarberoDTO serBar WHERE"
 			+ " ser.piIdServicioPk = serBar.piIdServicioBarbero AND serBar.poBarbero.piIdBarbero = :piBarbero ";
@@ -30,7 +30,7 @@ public interface RepositoriosConsultaHQL {
 												+ " AND cita.poSucursal.piIdSucursal = :idSucursal"
 												+ " AND cita.ptDia = :dia";
 	
-	public static final String BUSQUEDA_CLIENTES = "SELECT cliente FROM ClienteDTO WHERE cliente.psCorreoCliente = :emailCliente";
+	public static final String BUSQUEDA_CLIENTES = "FROM ClienteDTO cliente WHERE cliente.psCorreoCliente = :emailCliente";
 	
 	public static final String BUSQUEDA_CITAS_CANCELAR = "SELECT cita FROM CitaDTO cita WHERE cita.estado = 1 ";
 	public static final String BUSQUEDA_CITAS_ALIAS = " AND cita.poCliente.psAliasCliente = :alias ";

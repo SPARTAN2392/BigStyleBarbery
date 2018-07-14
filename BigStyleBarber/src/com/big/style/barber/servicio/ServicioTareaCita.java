@@ -30,7 +30,7 @@ public class ServicioTareaCita {
 		
 		Integer respuestaCliente = 0;
 		
-		if(!clienteDAO.buscarClientePorEmail(poCliente.getPsCorreoCliente()).isEmpty()) {			
+		if(clienteDAO.buscarClientePorEmail(poCliente.getPsCorreoCliente()).isEmpty()) {			
 			poCliente.setPiEstadoCliente(1);
 			respuestaCliente = clienteDAO.insertarCliente(poCliente);
 		}else {

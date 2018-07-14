@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DualListModel;
@@ -22,7 +23,7 @@ import com.big.style.barber.servicio.ServicioTareaBarbero;
 import com.big.style.barber.utils.MessageFactory;
 
 @ManagedBean(name = "controladorRegistroBarberos")
-@SessionScoped
+@ViewScoped
 public class ControladorRegistroBarbero implements Serializable{
 
 	ServicioTareaBarbero poServicioBarbero = new ServicioTareaBarbero();

@@ -188,12 +188,24 @@ public class ControladorAdministracionBarberos implements Serializable{
 		List<ServicioDTO> serTarSel = new ArrayList<ServicioDTO>();
 		
 		for(ServicioDTO serSour : servicioSource) {
-			for(ServicioDTO serTar :barberoSeleccionado.getServicioTarget()) {
-				if(serSour.getPiIdServicioPk() != serTar.getPiIdServicioPk()) {
-					serTarSel.add(serSour);
-				}
+			if(!barberoSeleccionado.getServicioTarget().contains(serSour)) {
+				serTarSel.add(serSour);
 			}
 		}
+		
+//		for(ServicioDTO serTar :barberoSeleccionado.getServicioTarget()) {
+//			if(!servicioSource.contains(serTar)) {
+//				serTarSel.add(serTar);
+//			}
+//		}
+		
+//		for(ServicioDTO serSour : servicioSource) {
+//			for(ServicioDTO serTar :barberoSeleccionado.getServicioTarget()) {
+//				if(serSour.getPiIdServicioPk() != serTar.getPiIdServicioPk()) {
+//					serTarSel.add(serSour);
+//				}
+//			}
+//		}
 		barberoSeleccionado.setServicioSource(serTarSel);
 		if(barberoSeleccionado.getBarberoRes().getPiDiaDomingo() != null && barberoSeleccionado.getBarberoRes().getPiDiaDomingo() == 1) {
 			barberoSeleccionado.getSelectedDias()[0] = "D";

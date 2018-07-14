@@ -10,8 +10,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.primefaces.context.RequestContext;
@@ -99,6 +103,16 @@ public class ControladorCita implements Serializable{
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");
 				break;
 			}
+			case "clienteTab":{
+				System.out.println("fecha " + poCita.getPtDia());
+				System.out.println("hora " + poCita.getPtHora());
+				break;
+			}
+			case "confirmacionTab":{
+				System.out.println("fecha " + poCita.getPtDia());
+				System.out.println("hora " + poCita.getPtHora());
+				break;
+			}
 		}
 		return event.getNewStep();
 
@@ -159,6 +173,7 @@ public class ControladorCita implements Serializable{
 	
 	public void agendar() {
 		servicioTareaCita.insertarCita(poCita, poCliente);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Cita Agendada Exitosamente"));
 	}
 	
 	public List<String> getHorarios() {

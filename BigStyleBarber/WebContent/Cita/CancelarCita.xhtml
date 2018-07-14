@@ -10,7 +10,7 @@
     	<link rel="stylesheet" type="text/css" href="../css/gridPanelBorders.css"/>
         <h:form id="cancelarCitaForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
-				<p:messages id="messages" showDetail="true" closable="true"/>
+				<p:messages id="messages" showDetail="true" closable="true" rendered="#{empty param [buscar.clientId] and empty param [limpiar.clientId]}"/>
 				<p:panel header="Cancelar Cita" id = "camposCancelarCita">
 					<p:panelGrid styleClass="gridNoBorder">
 						<p:row>
@@ -24,16 +24,17 @@
 								<p:outputLabel value="Email" for="idEmail"/>
 							</p:column>
 							<p:column>
-								<p:inputText id="idEmail"
+								<p:inputText id="idEmail" validatorMessage="Introduce un correo Válido"
 									value="#{controladorCancelCita.poCita.poCliente.psCorreoCliente}" >
-									<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{not empty param[limpiar.clientId]}"/>
+									<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" disabled="#{not empty param[buscar.clientId]}"/>
 								</p:inputText>
+								<p:message for="idEmail" />
 							</p:column>
 						</p:row>
 						<p:row>
 							<p:column colspan="4">
 								<div align="center">
-									<p:commandButton value="#{msg.global_lbl_Buscar}" binding="#{buscar}" icon = "fa fa-search" id="idBuscar" update="messages, :cancelarCitaForm:carrouselCitas" actionListener="#{controladorCancelCita.consultaCitas}" styleClass="ui-priority-primary"/>
+									<p:commandButton value="#{msg.global_lbl_Buscar}" binding="#{buscar}" icon = "fa fa-search" id="idBuscar" update="messages, :cancelarCitaForm:carrouselCitas, :cancelarCitaForm:camposCancelarCita" actionListener="#{controladorCancelCita.consultaCitas}" styleClass="ui-priority-primary"/>
 									<p:commandButton value="#{msg.global_lbl_Limpiar}" binding="#{limpiar}" icon = "fa fa-refresh" id="idLimpiar" update=":cancelarCitaForm:camposCancelarCita, messages, :cancelarCitaForm:carrouselCitas" actionListener="#{controladorCancelCita.limpiarPantalla}" styleClass="ui-priority-primary" />
 								</div>
 							</p:column>
@@ -79,7 +80,7 @@
 		            	</p:column>
 			 			<p:column>						 				
 			           		<h:outputText value="#{cita.ptHora}">
-			           			<f:convertDateTime pattern="hh:mm a"/>
+			           			<f:convertDateTime pattern="HH:mm a"/>
 			           		</h:outputText>
 			           		
 			 			</p:column>

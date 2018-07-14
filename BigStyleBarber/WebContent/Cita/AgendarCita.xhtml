@@ -8,7 +8,7 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
     
     <ui:define name="content">        
-    	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBGmnx2wIcNMKY0r5fqpF7UUOJwqeOwtf8" type="text/javascript"></script>
+    	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBGmnx2wIcNMKY0r5fqpF7UUOJwqeOwtf8" type="text/javascript"/>
     	<script src="../js/AgendarCita.js"/>
         <h:form id="agendarCitaForm" >
 			<p:fieldset style="margin-bottom:20px;height:95%  ">
@@ -111,7 +111,7 @@
 				            		<p:outputLabel value="Horario Disponible para el " />
 	        						<h:panelGrid columns="1">	        							
 	        							
-	        							<p:selectOneListbox  id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" 
+	        							<p:selectOneListbox id="horarioList" value="#{controladorCita.horarioCita}" style="width:300px" scrollHeight="400" 
 	        								styleClass="listasCitaHorario" required="true">
 								            <f:selectItems value="#{controladorCita.horarios}" var="horario" 
 								            itemLabel="#{horario}" 						            
@@ -179,12 +179,12 @@
 			            		
 			            		<p:outputLabel  value="Dia" />
 			            		<h:outputText value="#{controladorCita.poCita.ptDia}">
-			            			<f:convertDateTime pattern="hh:mm a"/>
+			            			<f:convertDateTime pattern="dd/MM/yyyy"/>
 			            		</h:outputText>
 			            		
 			            		<p:outputLabel  value="Hora" />
 			            		<h:outputText  value="#{controladorCita.poCita.ptHora}">
-			            			<f:convertDateTime pattern="dd/MM/yyyy"/>
+			            			<f:convertDateTime pattern="HH:mm a"/>
 			            		</h:outputText>
 			            	</h:panelGrid>
 			            	
@@ -204,7 +204,7 @@
 			            		<p:outputLabel  value="Membresía" />
 			            		<p:outputLabel  value="#{controladorCita.poCliente.piMembresiaCliente}" />
 			            	</h:panelGrid>
-			            	<p:commandButton value="Agendar" actionListener="#{controladorCita.agendar}" process="@this"/>
+			            	<p:commandButton value="Agendar" actionListener="#{controladorCita.agendar}" process="@this" update="messages"/>
 			            </p:panel>
 			        </p:tab>
 				</p:wizard>

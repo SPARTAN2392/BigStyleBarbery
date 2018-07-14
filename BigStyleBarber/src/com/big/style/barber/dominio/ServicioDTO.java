@@ -108,6 +108,31 @@ public class ServicioDTO implements Serializable{
 	public void setPoSucursalFk(SucursalDTO poSucursalFk) {
 		this.poSucursalFk = poSucursalFk;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((piIdServicioPk == null) ? 0 : piIdServicioPk.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServicioDTO other = (ServicioDTO) obj;
+		if (piIdServicioPk == null) {
+			if (other.piIdServicioPk != null)
+				return false;
+		} else if (!piIdServicioPk.equals(other.piIdServicioPk))
+			return false;
+		return true;
+	}
 	
 	
 	
