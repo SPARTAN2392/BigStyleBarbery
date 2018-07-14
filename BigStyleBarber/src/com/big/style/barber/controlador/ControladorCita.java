@@ -98,6 +98,7 @@ public class ControladorCita implements Serializable{
 				diasTrabajoBarbero = servicioTareaBarbero.obtenerDias(poCita.getPoBarbero());				
 				
 				generarFechaMinimaYHorarios(diasTrabajoBarbero);
+				poCita.setPtDia(fechaMinima);
 				System.out.println(fechaMinima);
 				System.out.println(horarios);
 				RequestContext.getCurrentInstance().update("agendarCitaForm:diasTrabajo");

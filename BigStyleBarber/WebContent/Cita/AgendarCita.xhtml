@@ -102,7 +102,7 @@
 				            	<h:panelGrid columns="1">
 				            		<p:outputLabel for="calendario" value="Dia:" />
 	        						<p:calendar id="calendario" value="#{controladorCita.poCita.ptDia}" mode="inline" 
-	        							mindate="#{controladorCita.fechaMinima}" beforeShowDay="diasDeshabilitados" required="true">
+	        							mindate="#{controladorCita.fechaMinima}" beforeShowDay="diasDeshabilitados" >
 	        							<p:ajax event="dateSelect" listener="#{controladorCita.cambioDia}" update="horarioList" />
 	        						</p:calendar>
 				            	</h:panelGrid>			            	
