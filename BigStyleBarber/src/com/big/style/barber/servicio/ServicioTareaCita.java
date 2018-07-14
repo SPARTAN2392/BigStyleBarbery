@@ -49,9 +49,11 @@ public class ServicioTareaCita {
 	public List<String> generarHorarios(Date horaApertura, Date horaCierre, Map<Date,Integer> citasOcupadas) {
 		
 		List<String> resultado = new ArrayList<String>();
-		
 		Calendar c = Calendar.getInstance();
-		c.setTime(horaApertura);				
+		c.set(Calendar.HOUR_OF_DAY, horaApertura.getHours());
+		c.set(Calendar.MINUTE, horaApertura.getMinutes());
+		
+		System.out.println(c.getTime());
 				
 		boolean continua = true;
 		boolean compruebaContinuidad = false;

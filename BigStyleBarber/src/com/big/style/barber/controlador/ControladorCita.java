@@ -227,8 +227,13 @@ public class ControladorCita implements Serializable{
 
 	public void setHorarioCita(String horarioCita) {
 		DateFormat df = new SimpleDateFormat("HH:mm a");
+		Calendar c = Calendar.getInstance();
 		try {
-			this.poCita.setPtHora(df.parse(horarioCita));
+			Date f = df.parse(horarioCita);
+			c.set(Calendar.HOUR_OF_DAY, f.getHours());
+			c.set(Calendar.MINUTE, f.getMinutes());
+			c.set(Calendar.SECOND,0);
+			this.poCita.setPtHora(c.getTime());
 		} catch (ParseException e) {
 		}
 	}
