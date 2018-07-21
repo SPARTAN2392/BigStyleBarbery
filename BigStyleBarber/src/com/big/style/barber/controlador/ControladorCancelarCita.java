@@ -9,9 +9,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 
+import com.big.style.barber.Mail.EmailSender;
 import com.big.style.barber.dao.CitaDAO;
 import com.big.style.barber.dominio.CitaDTO;
+import com.big.style.barber.servicio.ServicioHTMLTemplate;
+import com.big.style.barber.utils.MailEvent;
 import com.big.style.barber.utils.MessageFactory;
 import com.big.style.barber.validators.ValidatorCancelarCita;
 
@@ -39,6 +43,16 @@ public class ControladorCancelarCita implements Serializable{
 	public void cancelarCita() {
 		citaSelectEliminar.setEstado(0);
 		CitaDAO.EditarObjeto(citaSelectEliminar);
+		MailEvent event = new MailEvent();
+		event.setDireccionDestino(citaSelectEliminar.getPoCliente().getPsCorreoCliente());
+		event.setAsunto("Cita Cancelada");
+		ServicioHTMLTemplate serHtml = new ServicioHTMLTemplate();
+		event.setCuerpoMensaje(serHtml.generarHTMLCancelarCita(citaSelectEliminar));
+		try {
+			EmailSender.generateAndSendEmail(event);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
 		consultaCitas();
 		poCita = new CitaDTO();
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Cita Cancelada Exitosamente"));

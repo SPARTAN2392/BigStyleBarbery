@@ -21,7 +21,8 @@ public class ConverterServicioList implements Converter{
             try {
             	SelectOneListbox object = (SelectOneListbox)uic;     
             	UISelectItems a = (UISelectItems)object.getChildren().get(0);
-            	List<ServicioDTO> servicios = (List<ServicioDTO>)a.getValue();
+            	@SuppressWarnings("unchecked")
+				List<ServicioDTO> servicios = (List<ServicioDTO>)a.getValue();
             	ServicioDTO resultado = null;
             	for(ServicioDTO servicio: servicios) {
             		if(servicio.getPiIdServicioPk().equals(Integer.valueOf(value))) {

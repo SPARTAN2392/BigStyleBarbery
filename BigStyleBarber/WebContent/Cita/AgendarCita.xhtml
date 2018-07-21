@@ -202,13 +202,14 @@
 			            		<p:outputLabel  value="#{controladorCita.poCliente.psAliasCliente}" />
 			            		
 			            		<p:outputLabel  value="Membresía" />
-			            		<p:outputLabel  value="#{controladorCita.poCliente.piMembresiaCliente}" />
+			            		<p:outputLabel  value="#{(controladorCita.poCliente.piMembresiaCliente eq 1)?'Sí':'No'}" />
 			            	</h:panelGrid>
 			            	<p:commandButton value="Agendar" actionListener="#{controladorCita.agendar}" process="@this" update="messages"/>
 			            </p:panel>
 			        </p:tab>
 				</p:wizard>
 			</p:fieldset>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

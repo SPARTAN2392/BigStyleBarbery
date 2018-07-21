@@ -8,21 +8,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
+import com.big.style.barber.Mail.EmailSender;
 import com.big.style.barber.dao.CitaDAO;
 import com.big.style.barber.dao.ClienteDAO;
 import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.dominio.ClienteDTO;
 import com.big.style.barber.utils.ConstantesDominio;
+import com.big.style.barber.utils.MailEvent;
 
+@Stateless
 public class ServicioTareaCita {
 		
 	DateFormat df = new SimpleDateFormat("HH:mm a");
 	ClienteDAO clienteDAO = new ClienteDAO();
 	CitaDAO citaDAO = new CitaDAO();
-	Date fechaMinima;
+	Date fechaMinima;		
 	
-	public Date generarFechaMinima() {
-		
+	public Date generarFechaMinima() {		
 		return null;
 	}
 	
@@ -43,6 +49,23 @@ public class ServicioTareaCita {
 			poCita.setEstado(1);
 			citaDAO.insertarCita(poCita);
 		}
+		
+		MailEvent event = new MailEvent();
+		ServicioHTMLTemplate htmlSer = new ServicioHTMLTemplate();
+		event.setDireccionDestino(poCliente.getPsCorreoCliente());
+		event.setAsunto("Correo Cita");
+		event.setCuerpoMensaje(htmlSer.generarHTMLAgendarCita(poCita));
+		
+		try {
+			EmailSender.generateAndSendEmail(event);
+		} catch (AddressException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
 		return false;
 	}
 	

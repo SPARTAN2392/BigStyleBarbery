@@ -37,4 +37,6 @@ public interface RepositoriosConsultaHQL {
 	public static final String BUSQUEDA_CITAS_CANCELAR = "SELECT cita FROM CitaDTO cita WHERE cita.estado = 1 ";
 	public static final String BUSQUEDA_CITAS_ALIAS = " AND cita.poCliente.psAliasCliente = :alias ";
 	public static final String BUSQUEDA_CITAS_MAIL = " AND cita.poCliente.psCorreoCliente = :mail ";
+	
+	public static final String BUSQUEDA_PARAMETRO = "FROM ParametroDTO para WHERE para.psClaveParametro = :claveParametro";
 }
