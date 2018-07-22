@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
@@ -20,7 +19,6 @@ import com.big.style.barber.dominio.ClienteDTO;
 import com.big.style.barber.utils.ConstantesDominio;
 import com.big.style.barber.utils.MailEvent;
 
-@Stateless
 public class ServicioTareaCita {
 		
 	DateFormat df = new SimpleDateFormat("HH:mm a");

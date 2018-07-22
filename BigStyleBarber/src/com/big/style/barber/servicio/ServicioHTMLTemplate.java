@@ -24,6 +24,22 @@ public class ServicioHTMLTemplate {
 		return html;
 	}
 	
+	public String generarHTMLRecordatorioCita(CitaDTO poCita) {
+		
+		DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat hora = new SimpleDateFormat("HH:mm a");
+		
+		String html = ConstantesDominio.templateMailRecordatorioCita;
+		
+		html = html.replace("SucursalCita", poCita.getPoSucursal().getPsNombreBarberia());
+		html = html.replace("BarberoCita", poCita.getPoBarbero().getPsNombreBarbero() + " " + poCita.getPoBarbero().getPsApellidoPaterno() + " " + poCita.getPoBarbero().getPsApellidoMaterno());
+		html = html.replace("ServicioCita", poCita.getPoServicio().getPsNombreServicio());
+		html = html.replace("DiaCita", dia.format(poCita.getPtDia()));
+		html = html.replace("HorarioCita", hora.format(poCita.getPtHora()));
+						
+		return html;
+	}
+	
 	public String generarHTMLCancelarCita(CitaDTO poCita) {
 		
 		DateFormat dia = new SimpleDateFormat("dd/MM/yyyy");

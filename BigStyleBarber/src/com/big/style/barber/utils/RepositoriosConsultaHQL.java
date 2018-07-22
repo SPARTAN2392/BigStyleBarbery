@@ -34,6 +34,8 @@ public interface RepositoriosConsultaHQL {
 	
 	public static final String BUSQUEDA_CLIENTES = "FROM ClienteDTO cliente WHERE cliente.psCorreoCliente = :emailCliente";
 	
+	public static final String BUSQUEDA_CITAS_RECORDATORIO = "SELECT cita FROM CitaDTO cita WHERE cita.estado = 1 AND cita.ptDia = :dia";
+	
 	public static final String BUSQUEDA_CITAS_CANCELAR = "SELECT cita FROM CitaDTO cita WHERE cita.estado = 1 ";
 	public static final String BUSQUEDA_CITAS_ALIAS = " AND cita.poCliente.psAliasCliente = :alias ";
 	public static final String BUSQUEDA_CITAS_MAIL = " AND cita.poCliente.psCorreoCliente = :mail ";

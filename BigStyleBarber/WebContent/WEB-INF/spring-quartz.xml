@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+            
+            <bean id="cronCorreoRecordatorio" class="com.big.style.barber.planificador.PlanificadorCorreosRecodatorio" />
+                      
+            <bean id="correosRecordatorioJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                <property name="targetObject" ref="cronCorreoRecordatorio" />
+                <property name="targetMethod" value="monitorCorreoRecordatorio" />
+            </bean>
+            
+             <bean id="correosRecordatorioTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+                <property name="jobDetail" ref="correosRecordatorioJobDetail" />
+                <property name="cronExpression" value="0 0 8 * * ?" />                
+            </bean>  
+            
+            <!-- <bean id="correosRecordatorioTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+                <property name="jobDetail" ref="correosRecordatorioJobDetail" />
+                <property name="repeatInterval" value="86400000" />
+                <property name="startDelay" value="1000" />                
+            </bean>   -->                   
+
+            <!-- scheduler factory bean to bind,the executing code and time intervals together -->
+            <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+                <property name="jobDetails">
+                    <list>
+                   	<ref bean="correosRecordatorioJobDetail" /> 
+                    </list>
+                </property>
+                <property name="triggers">
+                    <list>
+                     <ref bean="correosRecordatorioTrigger" />
+                    </list>
+                </property>
+            </bean>
+
+</beans>

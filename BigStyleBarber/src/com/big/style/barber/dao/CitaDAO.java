@@ -2,10 +2,13 @@ package com.big.style.barber.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.time.DateUtils;
 
 import com.big.style.barber.dominio.CitaDTO;
 import com.big.style.barber.utils.RepositoriosConsultaHQL;
@@ -17,6 +20,20 @@ public class CitaDAO extends GenericDAO implements Serializable{
 	 */
 	private static final long serialVersionUID = -4259233269178038043L;
 
+	@SuppressWarnings("unchecked")
+	public List<CitaDTO> buscarCitasRecordatorio(Date dia){
+		Date diaT = DateUtils.truncate(dia, Calendar.DATE);
+		List<CitaDTO> lista = new ArrayList<CitaDTO>();
+		
+		Map<String, Object> mapa = new HashMap<String, Object>();
+		
+		mapa.put("dia", diaT);
+		
+		lista = (List<CitaDTO>) GenericDAO.buscarQuery(CitaDTO.class, mapa, RepositoriosConsultaHQL.BUSQUEDA_CITAS_RECORDATORIO);
+		
+		return lista;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Map<Date,Integer> buscarCitasDia(CitaDTO poCita, Date dia){
 		List<CitaDTO> lista = new ArrayList<CitaDTO>();
