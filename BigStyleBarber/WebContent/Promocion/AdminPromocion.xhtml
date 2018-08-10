@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/plantilla/layout.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+    <ui:define name="content">      
+    	<link rel="stylesheet" type="text/css" href="../css/gridPanelBorders.css"/>      	
+        <h:form id="altaServicioForm" >
+			<p:fieldset style="margin-bottom:20px;height:95%  ">			
+				<p:panel header="Administración Promoción" id = "camposAdminPromo">
+					<p:panelGrid styleClass="gridNoBorder" id="panelAdminPromo">
+						<p:row>
+							<p:column>
+								<p:outputLabel value="Promoción"/>								
+							</p:column>
+							<p:column>
+								<p:inputText value="#{controladorAdminPromo.poPromo.psDescripcionCorta}"/>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:outputLabel value="Descripción"/>								
+							</p:column>
+							<p:column>
+								<p:inputTextarea value="#{controladorAdminPromo.poPromo.psDescripcion}"/>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column colspan="4">
+								<div align="center">
+									<p:commandButton value="#{msg.global_lbl_Insertar}" binding="#{insertar}" icon = "fa fa-plus" id="idInsertar" actionListener="#{controladorAdminPromo.agregarPromo}" styleClass="ui-priority-primary" />
+									<p:commandButton value="#{msg.global_lbl_Limpiar}" binding="#{limpiar}" icon = "fa fa-refresh" id="idLimpiar" actionListener="#{controladorAdminPromo.limpiarPantalla}" update="altaServicioForm:camposAdminPromo" styleClass="ui-priority-primary" />
+								</div>
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+					
+					<br />
+					<br />
+					
+					<p:dataTable id="tablaPromos" value="#{controladorAdminPromo.promoList}" var="promo" editable="true">
+		   				<p:ajax event="rowEdit" listener="#{controladorAdminPromo.editarPromo}" update="altaServicioForm:tablaPromos"/>
+		   				<p:column headerText="Descripcion Corta">
+		   					<p:cellEditor>
+		   						<f:facet name="output"><h:outputText value="#{promo.psDescripcionCorta}"/></f:facet>
+		   						<f:facet name="input"><p:inputText value="#{promo.psDescripcionCorta}" style="width:100%"/></f:facet>
+		   					</p:cellEditor>
+		   				</p:column>
+		   				<p:column headerText="Descripcion">
+		   					<p:cellEditor>
+		   						<f:facet name="output"><h:outputText value="#{promo.psDescripcion}"/></f:facet>
+		   						<f:facet name="input"><p:inputTextarea value="#{promo.psDescripcion}" style="width:100%"/></f:facet>
+		   					</p:cellEditor>
+		   				</p:column>
+		   				<p:column headerText="Estado">
+		   					<p:cellEditor>
+		   						<f:facet name="output"><h:outputText value="#{(promo.piEstado) eq 1?'Activo':'Inactivo'}" /></f:facet>
+		   						<f:facet name="input">
+		   							<p:selectOneMenu value="#{promo.piEstado}" style="width:100%">
+		   								<f:selectItem itemLabel="Activo" itemValue="1"/>   							
+		   								<f:selectItem itemLabel="Inactivo" itemValue="0"/>
+		   							</p:selectOneMenu>
+		   							
+		   						</f:facet>
+		   					</p:cellEditor>
+		   				</p:column>
+		   				<p:column style="width:32px" exportable="false">
+		   					<p:rowEditor />
+		   				</p:column>		   				
+		   			</p:dataTable>
+				</p:panel>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
